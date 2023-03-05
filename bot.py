@@ -29,19 +29,7 @@ procesos = 0 #numero de procesos activos en el bot
 
 #Acceso de Uso
 def comprobacion_de_user(username):
-    if username in Config or username in boss:pass		
-	if exists('downloads/'+str(username)+'/'):pass
-	else:os.makedirs('downloads/'+str(username)+'/')	
-	try:Urls[username]
-	except:Urls[username] = []
-	try:Config[username]
-	except:Config[username] = {"username":"","password":"","repoid":"","host":""}
-	try:id_de_ms[username]
-	except:id_de_ms[username] = {"msg":"","proc":""}
-	try:root[username]
-	except:root[username] = {"actual_root":f"downloads/{str(username)}"}
-	try:downlist[username]
-	except:downlist[username] = []
+    if username in Config or username in boss:pass
     else:
 	return False
 
