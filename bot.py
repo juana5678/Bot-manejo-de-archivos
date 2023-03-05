@@ -30,8 +30,7 @@ procesos = 0 #numero de procesos activos en el bot
 #Acceso de Uso
 def comprobacion_de_user(username):
     if username in Config or username in boss:pass
-    else:
-	return False
+    else:return False
 
 #Conf User
 async def send_config():
