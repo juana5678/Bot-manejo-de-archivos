@@ -5,7 +5,7 @@ from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, 
 
 api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
-bot_token = "6100249098:AAHdbHttgxKZz6EQtKONp_2c6fcJ4IBWvRc"
+bot_token = "6281846554:AAEQ97AM-d289ADS-bhJdAEpBvnHhF2crYY"
 #Channel_Id = chanel_id
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
@@ -31,7 +31,7 @@ async def info(client: Client, message: Message):
 	username = message.from_user.username
 	send = message.reply
 	try:await get_messages()
-	except:await send_config()
+	except:await client.send_config()
 	if comprobacion_de_user(username) == False:
 		await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
 		return
