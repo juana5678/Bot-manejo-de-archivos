@@ -29,8 +29,8 @@ procesos = 0 #numero de procesos activos en el bot
 async def uclv(client: Client, message: Message):
 	username = message.from_user.username
 	send = message.reply
-	try:await Client.get_messages()
-	except:await send_config()
+	#try:await Client.get_messages(chat_id, 12345)
+	#except:await send_config()
 	if comprobacion_de_user(username) == False:
 		await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
 		return
