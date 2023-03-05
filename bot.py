@@ -46,7 +46,7 @@ def acceso(username):
          try:downlist[username]
          except:downlist[username] = []
      else:
-         await message.reply('No Posee Acceso al BoT 🤖'
+          await message.reply('No Posee Acceso al BoT 🤖'
      return False
 #Conf User
 async def send_config():
