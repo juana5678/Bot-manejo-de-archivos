@@ -89,24 +89,24 @@ async def uvs_ltu(client, message):
 
 #Descargas de Archivos 
 @bot.on_message(filters.command("down", prefixes="/") & filters.private)
-async def download_archive(client: Client, message: Message):
+async def download_archive(client, message):
     global procesos
     username = message.from_user.username
     send = message.reply
     try:await get_messages()
     except:await send_config()
-    if comprobacion_de_user(username) == False:
+    if acceso(username) == False:
 	await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
 	return
     else:pass
     procesos = procesos_activos(username) 
-    if comp != False:
-		await send(procesos)
-		return
+    if procesos != False:
+	await send(procesos)
+	return
     else:pass
     total_procesos = total_de_procesos()
     if total_procesos != False:
-	await send(total_proc)
+	await send(total_procesos)
 	return
     else:pass
     procesos += 1
@@ -130,8 +130,8 @@ async def download_archive(client: Client, message: Message):
 	else:pass
 	    if "[400 MESSAGE_ID_INVALID]" in str(ex): pass		
 	    else:
-	    await bot.send_message(username,ex)	
-	    return	
+	        await bot.send_message(username,ex)	
+	        return	
     if count == len(downlist[username]):
 	if procesos > 0:
             procesos -= 1
