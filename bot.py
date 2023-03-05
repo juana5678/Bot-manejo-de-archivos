@@ -104,11 +104,11 @@ async def download_archive(client, message):
     await bot.send_message(Channel_Id,f'**@{username} Envio un #archivo:**\n**Filename:** {filename}\n**Size:** {sizeof_fmt(filesize)}')	
     start = time()		
     await msg.edit(f"𝑷𝒓𝒆𝒑𝒂𝒓𝒂𝒏𝒅𝒐 𝑫𝒆𝒔𝒄𝒂𝒓𝒈𝒂\n\n`{filename}`")
-    try:
-        a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
-        if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
-	    await msg.edit("𝑫𝒆𝒔𝒄𝒂𝒓𝒈𝒂 𝒆𝒙𝒊𝒕𝒐𝒔𝒂")
-	    return
+  #  try:
+     #   a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
+     #   if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
+	#    await msg.edit("𝑫𝒆𝒔𝒄𝒂𝒓𝒈𝒂 𝒆𝒙𝒊𝒕𝒐𝒔𝒂")
+	  #  return
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
