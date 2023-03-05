@@ -90,14 +90,13 @@ async def uvs_ltu(client, message):
 #Descargas de Archivos 
 @bot.on_message(filters.command("down", prefixes="/") & filters.private)
 async def download_archive(client, message):
-    global procesos
     username = message.from_user.username
     send = message.reply
     try:await get_messages()
     except:await send_config()
     if acceso(username) == False:
-	await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
-	return
+        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
+        return
     else:pass
     procesos = procesos_activos(username) 
     if procesos != False:
