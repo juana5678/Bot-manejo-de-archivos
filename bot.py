@@ -30,8 +30,8 @@ root = {} #directorio actual
 downlist = {} #lista de archivos descargados
 procesos = 0 #numero de procesos activos en el bot
 
-#Acceso de Uso
-def comprobacion_de_user(username):
+#Acceso de Uso al BoT
+def acceso(username):
      if username in Config or username in boss:
          if exists('downloads/'+str(username)+'/'):pass
          else:os.makedirs('downloads/'+str(username)+'/')	
@@ -46,7 +46,7 @@ def comprobacion_de_user(username):
          try:downlist[username]
          except:downlist[username] = []
      else:return False
-
+     await message.reply('No Posee Acceso al BoT 🤖'
 #Conf User
 async def send_config():
     try:await bot.edit_message_text(Channel_Id,message_id=3,text=dumps(Configs,indent=4))
@@ -59,8 +59,8 @@ async def start(client, message):
     send = message.reply
     try:await get_messages()
     except:await send_config()
-    if comprobacion_de_user(username) == False:
-        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+    if acceso(username) == False:
+      #  await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
         return
     else:pass
     await send("Tines Acceso ")
