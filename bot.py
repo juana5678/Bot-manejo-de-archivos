@@ -31,14 +31,14 @@ async def uclv(client: Client, message: Message):
 	send = message.reply
 	#try:await Client.get_messages(chat_id, 12345)
 	#except:await send_config()
-	if comprobacion_de_user(username) == False:
-		await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
-		return
-	else:pass
+	#if comprobacion_de_user(username) == False:
+		#await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+		#return
+	#else:pass
 	Configs[username]["m"] = "u"
 	Configs[username]["a"] = "c"
 	Configs[username]["z"] = 399
-	await send_config()
+	#await send_config()
 	await send("✅ 𝑫𝒐𝒏𝒆")
 
 
