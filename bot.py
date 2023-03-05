@@ -39,19 +39,19 @@ async def start(client: Client, message: Message):
 	username = message.from_user.username
 	send = message.reply
 	try:await get_messages()
-	except:await send_config()
+	#except:await send_config()
 	if comprobacion_de_user(username) == False:
 		await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
 		return
 	else:pass
-	zipps = str(Configs[username]["z"])
-	auto = Configs[username]["t"]
+	#zipps = str(Configs[username]["z"])
+	#auto = Configs[username]["t"]
 	#total = shutil.disk_usage(os.getcwd())[0]
 	#used = shutil.disk_usage(os.getcwd())[1]
 	#free = shutil.disk_usage(os.getcwd())[2]	
 	#uname = platform.uname()
 	#svmem = psutil.virtual_memory()
-	a = await client.send_message(username,'**Por Favor Espere...**')
+	#a = await client.send_message(username,'**Por Favor Espere...**')
         #msg = f"Hola☺️⚡🤖\n"
 	msg = f"**ADM BoT 🤖@Stvz20🤖**\n"
 	#msg += f"➣𝘡𝘪𝘱𝘴 𝘤𝘰𝘯𝘧𝘪𝘨𝘶𝘳𝘢𝘥𝘰𝘴 𝘢: **{zipps}MB**\n"	    
@@ -70,7 +70,7 @@ async def start(client: Client, message: Message):
 		mode = "➣𝘜𝘤𝘭𝘷 ➥ **Directs Links (Procfile)**\n"
 	else:
 		mode = "**☁️ Enlaces de Descaga Directa ☁️**\n"
-	msg += "**Bienvenido A este Maravilloso Sistema de Descaga, De Ante mano Gracias por utilizar Nuestros Servicios❤️**\n"
+	#msg += "**Bienvenido A este Maravilloso Sistema de Descaga, De Ante mano Gracias por utilizar Nuestros Servicios❤️**\n"
 	#msg += f"➣𝘚𝘺𝘴𝘵𝘦𝘮: **{uname.system}**\n"
 	#msg += f"➣𝘔𝘢𝘤𝘩𝘪𝘯𝘦: **{uname.machine}**\n\n"
 	#msg += "**📈Info CPU📈**\n"
@@ -82,10 +82,10 @@ async def start(client: Client, message: Message):
 	#msg += f"**⚙️Libre: {sizeof_fmt(svmem.available)}**\n"
 	#msg += f"** Usado: {sizeof_fmt(svmem.used)}**\n"
 	#msg += f"**Memoria RAM Usada: **{sizeof_fmt(svmem.percent)}%**\n\n"
-	msg += f"**Usa el Comando:\n/uvs > Para usar La Nube uvs.ltu\n/gtm > Para Usar La Nube GTM**\n"
+	#msg += f"**Usa el Comando:\n/uvs > Para usar La Nube uvs.ltu\n/gtm > Para Usar La Nube GTM**\n"
 	#msg += f"➣𝘛𝘰𝘵𝘢𝘭 𝘴𝘵𝘰𝘳𝘢𝘨𝘦: **{sizeof_fmt(used)}** / **{sizeof_fmt(total)}**\n"
 	#msg += f"➣𝘍𝘳𝘦𝘦 𝘴𝘵𝘰𝘳𝘢𝘨𝘦: **{sizeof_fmt(free)}**\n\n"
-        msg += "**Joder Tío, Esto funciona**"
+        msg = f"**Joder Tío, Esto funciona**\n"
 	msg += mode
 	await a.edit(msg)
 
