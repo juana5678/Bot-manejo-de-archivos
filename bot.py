@@ -45,8 +45,9 @@ def acceso(username):
          except:root[username] = {"actual_root":f"downloads/{str(username)}"}
          try:downlist[username]
          except:downlist[username] = []
-     else:return False
-     await message.reply('No Posee Acceso al BoT 🤖'
+     else:
+         await message.reply('No Posee Acceso al BoT 🤖'
+         return False
 #Conf User
 async def send_config():
     try:await bot.edit_message_text(Channel_Id,message_id=3,text=dumps(Configs,indent=4))
