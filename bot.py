@@ -7,6 +7,8 @@ import shutil
 import asyncio
 from os import mkdir
 from os import unlink
+import platform
+
 
 #BoT Configuration Variables
 api_id = 9910861
@@ -44,11 +46,11 @@ async def start(client: Client, message: Message):
 	else:pass
 	zipps = str(Configs[username]["z"])
 	auto = Configs[username]["t"]
-	total = shutil.disk_usage(os.getcwd())[0]
-	used = shutil.disk_usage(os.getcwd())[1]
-	free = shutil.disk_usage(os.getcwd())[2]	
-	uname = platform.uname()
-	svmem = psutil.virtual_memory()
+	#total = shutil.disk_usage(os.getcwd())[0]
+	#used = shutil.disk_usage(os.getcwd())[1]
+	#free = shutil.disk_usage(os.getcwd())[2]	
+	#uname = platform.uname()
+	#svmem = psutil.virtual_memory()
 	a = await client.send_message(username,'**Por Favor Espere...**')
         #msg = f"Hola☺️⚡🤖\n"
 	msg = f"**ADM BoT 🤖@Stvz20🤖**\n"
