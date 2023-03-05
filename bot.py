@@ -1,4 +1,4 @@
-from pyrogram import Client , filters
+from pyrogram import Client , filters , Client.get_messages()
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
 #Datos
