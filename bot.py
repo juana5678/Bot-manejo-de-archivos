@@ -32,7 +32,6 @@ procesos = 0 #numero de procesos activos en el bot
 
 #Acceso de Uso
 def comprobacion_de_user(username):
-     username = message.from_user.username
      if username in Config or username in boss:
          if exists('downloads/'+str(username)+'/'):pass
          else:os.makedirs('downloads/'+str(username)+'/')	
