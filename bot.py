@@ -3,6 +3,10 @@ import os
 from pyrogram import Client , filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from os.path import exists
+import shutil
+import asyncio
+from os import mkdir
+from os import unlink
 
 #BoT Configuration Variables
 api_id = 9910861
@@ -29,7 +33,7 @@ procesos = 0 #numero de procesos activos en el bot
 
 #inicio
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
-async def info(client: Client, message: Message):
+async def start(client: Client, message: Message):
 	username = message.from_user.username
 	send = message.reply
 	try:await get_messages()
