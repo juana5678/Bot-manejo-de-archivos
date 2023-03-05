@@ -39,7 +39,7 @@ async def start(client: Client, message: Message):
 	username = message.from_user.username
 	send = message.reply
 	try:await get_messages()
-	#except:await send_config()
+	except:await send_config()
 	if comprobacion_de_user(username) == False:
 		await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
 		return
