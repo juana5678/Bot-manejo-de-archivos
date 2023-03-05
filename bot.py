@@ -6,7 +6,7 @@ from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, 
 api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
 bot_token = "6281846554:AAEQ97AM-d289ADS-bhJdAEpBvnHhF2crYY"
-#Channel_Id = chanel_id
+Channel_Id = -1001804018431
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
 Configs = {"uclv":'',"gtm":"","uvs":"","ltu":"a816210ff41853b689c154bad264da8e", 
@@ -30,8 +30,8 @@ procesos = 0 #numero de procesos activos en el bot
 async def info(client: Client, message: Message):
 	username = message.from_user.username
 	send = message.reply
-	try:await bot.get_messages()
-	except:await bot.send_config()
+	try:await get_messages()
+	except:await send_config()
 	if comprobacion_de_user(username) == False:
 		await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
 		return
@@ -79,7 +79,17 @@ async def info(client: Client, message: Message):
 	#msg += f"➣𝘍𝘳𝘦𝘦 𝘴𝘵𝘰𝘳𝘢𝘨𝘦: **{sizeof_fmt(free)}**\n\n"
 	msg += mode
 	await a.edit(msg)
-			
+
+#Funciones BoT
+async def get_messages():
+	msg = await bot.get_messages(Channel_Id,message_ids=3)
+	Configs.update(loads(msg.text))
+async def send_config():
+	try:
+		await bot.edit_message_text(Channel_Id,message_id=3,text=dumps(Configs,indent=4))
+	except:
+		pass
+
 
 print("started")
 bot.start()
