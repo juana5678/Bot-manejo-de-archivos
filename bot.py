@@ -136,21 +136,21 @@ async def download_archive(client, message):
 	if procesos > 0:
             procesos -= 1
 	else:pass
-	    await msg.edit("𝑻𝒐𝒅𝒐𝒔 𝒍𝒐𝒔 𝒂𝒓𝒄𝒉𝒊𝒗𝒐𝒔 𝒉𝒂𝒏 𝒔𝒊𝒅𝒐 𝒅𝒆𝒔𝒄𝒂𝒓𝒈𝒂𝒅𝒐𝒔")
-            downlist[username] = []
-	    count = 0
-            msg = files_formatter(str(root[username]["actual_root"]),username)
-            await limite_msg(msg[0],username)
-            return
+	await msg.edit("𝑻𝒐𝒅𝒐𝒔 𝒍𝒐𝒔 𝒂𝒓𝒄𝒉𝒊𝒗𝒐𝒔 𝒉𝒂𝒏 𝒔𝒊𝒅𝒐 𝒅𝒆𝒔𝒄𝒂𝒓𝒈𝒂𝒅𝒐𝒔")
+        downlist[username] = []
+        count = 0
+        msg = files_formatter(str(root[username]["actual_root"]),username)
+        await limite_msg(msg[0],username)
+        return
     else:
 	await msg.edit("**Error**")
 	if procesos > 0:
 	    procesos -= 1
 	else:pass
-            msg = files_formatter(str(root[username]["actual_root"]),username)
-	    await limite_msg(msg[0],username)
-	    downlist[username] = []
-	    return
+        msg = files_formatter(str(root[username]["actual_root"]),username)
+	await limite_msg(msg[0],username)
+        downlist[username] = []
+        return
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
