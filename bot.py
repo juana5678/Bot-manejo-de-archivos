@@ -27,10 +27,24 @@ root = {} #directorio actual
 downlist = {} #lista de archivos descargados
 procesos = 0 #numero de procesos activos en el bot
 
+#Acceso de Uso
+async def send_config():
+    try:
+	   await bot.edit_message_text(Channel_Id,message_id=3,text=dumps(Configs,indent=4))
+    except:
+	   pass
 #inicio
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
-    await message.reply("A Presionado el Botón ⏭️")
+    username = message.from_user.username
+    send = message.reply
+   # try:await get_messages()
+    except:await send_config()
+    if comprobacion_de_user(username) == False:
+            await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+	    return
+    else:pass
+    await send("Tines Acceso ")
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
