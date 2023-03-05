@@ -98,18 +98,6 @@ async def download_archive(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    procesos = procesos_activos(username) 
-    if procesos != False:
-	await send(procesos)
-	return
-    else:pass
-    total_procesos = total_de_procesos()
-    if total_procesos != False:
-	await send(total_procesos)
-	return
-    else:pass
-    procesos += 1
-    msg = await send("𝑹𝒆𝒄𝒐𝒑𝒊𝒍𝒂𝒏𝒅𝒐 𝒊𝒏𝒇𝒐𝒓𝒎𝒂𝒄𝒊ó𝒏")
     count = 0
     for i in downlist[username]:
 	filesize = int(str(i).split('"file_size":')[1].split(",")[0])
@@ -121,35 +109,8 @@ async def download_archive(client, message):
 	try:
             a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
 	    if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
-	    await msg.edit("𝑫𝒆𝒔𝒄𝒂𝒓𝒈𝒂 𝒆𝒙𝒊𝒕𝒐𝒔𝒂")
-	    count +=1
-	except Exception as ex:
-	if procesos > 0:
-	    procesos -= 1
-	else:pass
-	    if "[400 MESSAGE_ID_INVALID]" in str(ex): pass		
-	    else:
-	        await bot.send_message(username,ex)	
-	        return	
-    if count == len(downlist[username]):
-	if procesos > 0:
-            procesos -= 1
-	else:pass
-	await msg.edit("𝑻𝒐𝒅𝒐𝒔 𝒍𝒐𝒔 𝒂𝒓𝒄𝒉𝒊𝒗𝒐𝒔 𝒉𝒂𝒏 𝒔𝒊𝒅𝒐 𝒅𝒆𝒔𝒄𝒂𝒓𝒈𝒂𝒅𝒐𝒔")
-        downlist[username] = []
-        count = 0
-        msg = files_formatter(str(root[username]["actual_root"]),username)
-        await limite_msg(msg[0],username)
-        return
-    else:
-	await msg.edit("**Error**")
-	if procesos > 0:
-	    procesos -= 1
-	else:pass
-        msg = files_formatter(str(root[username]["actual_root"]),username)
-	await limite_msg(msg[0],username)
-        downlist[username] = []
-        return
+	        await msg.edit("𝑫𝒆𝒔𝒄𝒂𝒓𝒈𝒂 𝒆𝒙𝒊𝒕𝒐𝒔𝒂")
+	        return
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
