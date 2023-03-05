@@ -85,9 +85,10 @@ async def start(client: Client, message: Message):
 	#msg += f"**Usa el Comando:\n/uvs > Para usar La Nube uvs.ltu\n/gtm > Para Usar La Nube GTM**\n"
 	#msg += f"➣𝘛𝘰𝘵𝘢𝘭 𝘴𝘵𝘰𝘳𝘢𝘨𝘦: **{sizeof_fmt(used)}** / **{sizeof_fmt(total)}**\n"
 	#msg += f"➣𝘍𝘳𝘦𝘦 𝘴𝘵𝘰𝘳𝘢𝘨𝘦: **{sizeof_fmt(free)}**\n\n"
-        msg = f"**Joder Tío, Esto funciona**\n"
-	msg += mode
-	await a.edit(msg)
+       # msg = f"**Joder Tío, Esto funciona**\n"
+	#msg += mode
+	#await a.edit(msg)
+        await client.send("⛔ yes")
 
 #Funciones BoT
 async def get_messages():
