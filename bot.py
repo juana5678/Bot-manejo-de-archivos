@@ -83,5 +83,5 @@ async def info(client: Client, message: Message):
 
 print("started")
 bot.start()
-client.send_message(5416296262,'**BoT Iniciado**')
+bot.send_message(5416296262,'**BoT Iniciado**')
 bot.loop.run_forever()
