@@ -1,4 +1,4 @@
-from pyrogram import Client , filters , Client.get_messages()
+from pyrogram import Client , filters 
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
 #Datos
@@ -29,7 +29,7 @@ procesos = 0 #numero de procesos activos en el bot
 async def uclv(client: Client, message: Message):
 	username = message.from_user.username
 	send = message.reply
-	try:await get_messages()
+	try:await Client.get_messages()
 	except:await send_config()
 	if comprobacion_de_user(username) == False:
 		await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
