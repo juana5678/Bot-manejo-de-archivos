@@ -63,7 +63,28 @@ async def start(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    await send("Tines Acceso ")
+    msg = 'Hola'+Username
+    if Configs[username]["a"] == "l":
+        mode = "**Subida hacía uvs.ltu**\n"
+    msg += mode
+    await send(msg)
+
+#Comfiguracion de Nubes
+@bot.on_message(filters.command("start", prefixes="/") & filters.private)
+async def start(client, message):
+    username = message.from_user.username
+    send = message.reply
+    try:await get_messages()
+    except:await send_config()
+    if acceso(username) == False:
+        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
+        return
+    else:pass
+    Configs[username]["m"] = "u"
+    Configs[username]["a"] = "l"
+    Configs[username]["z"] = 19
+    await send_config()
+    await send("**Nube ☁️ uvs.ltu Configurada**")
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
