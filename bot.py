@@ -28,15 +28,34 @@ downlist = {} #lista de archivos descargados
 procesos = 0 #numero de procesos activos en el bot
 
 #Acceso de Uso
+def comprobacion_de_user(username):
+    if username in Config or username in boss:			
+	if exists('downloads/'+str(username)+'/'):pass
+	else:os.makedirs('downloads/'+str(username)+'/')	
+	try:Urls[username]
+	except:Urls[username] = []
+	try:Config[username]
+	except:Config[username] = {"username":"","password":"","repoid":"","host":""}
+	try:id_de_ms[username]
+	except:id_de_ms[username] = {"msg":"","proc":""}
+	try:root[username]
+	except:root[username] = {"actual_root":f"downloads/{str(username)}"}
+	try:downlist[username]
+	except:downlist[username] = []
+    else:
+	return False
+
+#Conf User
 async def send_config():
     try:await bot.edit_message_text(Channel_Id,message_id=3,text=dumps(Configs,indent=4))
     except:pass
+
 #inicio
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
     username = message.from_user.username
     send = message.reply
-   # try:await get_messages()
+    try:await get_messages()
     except:await send_config()
     if comprobacion_de_user(username) == False:
             await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
