@@ -1,3 +1,8 @@
+from move_profile import move_to_profile
+from delete_profile import delete_to_profile
+from moodle_client import MoodleClient2
+from client_nex import Client as moodle
+from moodle import delete
 import shutil
 import asyncio
 import tgcrypto
