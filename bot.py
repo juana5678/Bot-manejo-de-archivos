@@ -1,7 +1,45 @@
-from pyrogram import Client, filters
+import shutil
+import asyncio
+import tgcrypto
+import aiohttp
+import aiohttp_socks
+import yt_dlp
+import os
+import aiohttp
+import re
+import requests
+import json
+import psutil
+import platform
+import pymegatools
+from pyrogram import Client , filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
+from json import loads,dumps
+from pathlib import Path
+from os.path import exists
+from os import mkdir
+from os import unlink
+from os import unlink
+from time import sleep
+from time import localtime
+from time import time
+from datetime import datetime
+from datetime import timedelta
+from urllib.parse import quote
+from urllib.parse import quote_plus
+from urllib.parse import unquote_plus
+from random import randint
+from re import findall
+from yarl import URL
+from bs4 import BeautifulSoup
+from io import BufferedReader
+from aiohttp import ClientSession
+from py7zr import SevenZipFile
+from py7zr import FILTER_COPY
+from zipfile import ZipFile
+from multivolumefile import MultiVolume
 
-
+#Datos
 api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
 bot_token = '6281846554:AAEQ97AM-d289ADS-bhJdAEpBvnHhF2crYY'
@@ -26,7 +64,7 @@ procesos = 0 #numero de procesos activos en el bot
 
 #inicio
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
-async def info(client: Client, message: Message):
+async def start(client: Client, message: Message):
 	username = message.from_user.username
 	send = message.reply
 	try:await get_messages()
