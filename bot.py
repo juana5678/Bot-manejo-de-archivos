@@ -60,7 +60,7 @@ async def start(client, message):
     try:await get_messages()
     except:await send_config()
     if acceso(username) == False:
-        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
     await send("Tines Acceso ")
