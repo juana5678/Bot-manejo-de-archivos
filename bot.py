@@ -31,7 +31,7 @@ procesos = 0 #numero de procesos activos en el bot
 async def send_config():
     try:
 	await bot.edit_message_text(Channel_Id,message_id=3,text=dumps(Configs,indent=4))
-    except: pass
+    except:pass
 #inicio
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
