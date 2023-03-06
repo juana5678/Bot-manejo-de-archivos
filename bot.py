@@ -202,7 +202,7 @@ async def start(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`")
+    await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`", quote=True)
  #   msg = '**Hola, Cómo estás?\nBienvenido, Te ayudaré a Descagar Gratis ❤️**\n\n`Actualmente su subida es:`'
   #  if Configs[username]["a"] == "upltu":
    #     mode = "**Subida hacia uvs.ltu**\n"
@@ -365,7 +365,7 @@ async def download_archive(client: Client, message: Message):
         try:
             a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
             if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
-                await msg.edit("**Down Finish**")
+                await msg.edit("**Descaga Finalizada**")
             count +=1
         except Exception as ex:
                 if procesos > 0:
@@ -413,19 +413,7 @@ async def delete_draft_y_down_media(client: Client, message: Message):
     else:
         downlist[username].append(message)
         await send("**/down Para Comenzar Descaga**", quote=True)
-#####
-        comp = comprobar_solo_un_proceso(username) 
-        if comp != False:
-            await send(comp)
-            return
-        else:pass
-        total_proc = total_de_procesos()
-        if total_proc != False:
-            await send(total_proc)
-            return
-        else:pass
-        procesos += 1
-        msg = await send("*Por Favor Espere 🔍")
+        msg = await send("*Por Favor Espere 🔍", quote=True)
         count = 0
         for i in downlist[username]:
             filesize = int(str(i).split('"file_size":')[1].split(",")[0])
