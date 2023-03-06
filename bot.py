@@ -322,6 +322,22 @@ async def gtm(client, message):
     await send_config()
     await send("**Nube ☁️ GTM ☁️ Configurada**")
 
+@bot.on_message(filters.command("cmw", prefixes="/") & filters.private)
+async def cmw(client, message):
+    username = message.from_user.username
+    send = message.reply
+    try:await get_messages()
+    except:await send_config()
+    if acceso(username) == False:
+        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
+        return
+    else:pass
+    Configs[username]["m"] = "u"
+    Configs[username]["a"] = "upcmw"
+    Configs[username]["z"] = 7
+    await send_config()
+    await send("**Nube ☁️ CMW ☁️ Configurada**")
+
 #Descargas de Archivos Reenviados
 @bot.on_message(filters.command("down", prefixes="/") & filters.private)
 async def download_archive(client: Client, message: Message):
