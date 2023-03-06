@@ -48,7 +48,7 @@ Channel_Id = -1001804018431
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
 Configs = {"uclv":'',"gtm":"","uvs":"","ltu":"a816210ff41853b689c154bad264da8e", 
-			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://190.15.159.152:10089', "s":"On", 
+			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://190.15.158.69:10089', "s":"On", 
 			'UHTRED_OF_BEBBANBURG': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'Stvz20': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'Locura05': {'z': 99,"m":"u","a":"c","t":"y"}, 
@@ -208,8 +208,8 @@ async def start(client, message):
     msg += mode
     await send(msg)
 
-@bot.on_message(filters.command("deleteall", prefixes="/")& filters.private)
-async def delete_all(client: Client, message: Message):
+@bot.on_message(filters.command("del_all", prefixes="/")& filters.private)
+async def del_all(client: Client, message: Message):
     username = message.from_user.username
     send = message.reply
     try:await get_messages()
@@ -222,6 +222,29 @@ async def delete_all(client: Client, message: Message):
     root[username]["actual_root"] = "downloads/"+username
     msg = files_formatter(str(root[username]["actual_root"])+"/",username)
     await limite_msg(msg[0],username)
+
+@bot.on_message(filters.command("add", prefixes="/") & filters.private)
+async def add(client: Client, message: Message):	
+    username = message.from_user.username
+    send = message.reply
+    user_id = message.from_user.id
+    try:await get_messages()
+    except:await send_config()
+    if acceso(username) == False:
+        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+        return
+    else:pass
+    if username not in boss and Configs["s"] == "Off":
+        await client.send_message(username,'⛔𝑬𝒔𝒕𝒂 𝒇𝒖𝒏𝒄𝒊𝒐𝒏 𝒆𝒔𝒕𝒂 𝒂𝒑𝒂𝒈𝒂𝒅𝒂')
+        return
+    else: pass
+    usr = int(message.text.split(" ")[1])
+    Configs[usr]["m"] = "u"
+    Configs[usr]["a"] = "upltu"
+    Configs[usr]["z"] = 19
+    Configs[usr]["t"] = 'y'
+    await send_config()
+    await send("**Agregado al BoT**")
 
 @bot.on_message(filters.command("up", prefixes="/") & filters.private)
 async def up(client: Client, message: Message):	
