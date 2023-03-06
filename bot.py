@@ -190,6 +190,53 @@ async def delete_draft_y_down_media(client: Client, message: Message):
         await send("**/down Para Comenzar Descaga**", quote=True)
         return
 
+#Mensajes De Progreso de Subida y Descaga
+def download_progres(data,message,format):
+    if data["status"] == "downloading":
+        filename = data["filename"].split("/")[-1]
+        _downloaded_bytes_str = data["_downloaded_bytes_str"]
+        _total_bytes_str = data["_total_bytes_str"]
+        if _total_bytes_str == "N/A":
+            _speed_str = data["_speed_str"].replace(" ","")
+            _total_bytes_str = data["_total_bytes_estimate_str"]
+            _format_str = format
+            msg = f"`Nombre: {filename}`\n\n"
+            msg+= f"`Progreso: {_downloaded_bytes_str} - {_total_bytes_str}`\n\n"
+            msg+= f"`Calidad: {_format_str}p`\n\n"
+            global seg
+            if seg != localtime().tm_sec:
+                try:message.edit(msg,reply_markup=message.reply_markup)
+                except:pass
+            seg = localtime().tm_sec
+async def downloadmessage_progres(chunk,filesize,filename,start,message):
+    now = time()
+    diff = now - start
+    mbs = chunk / diff
+    msg = f"`Nombre: {filename}`\n\n"
+    try:
+       msg+= update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
+    except:pass
+    msg+= f"`Progreso: {sizeof_fmt(chunk)} - {sizeof_fmt(filesize)}`\n\n"	
+    global seg
+    if seg != localtime().tm_sec:
+        try: await message.edit(msg)
+        except:pass
+    seg = localtime().tm_sec
+def uploadfile_progres(chunk,filesize,start,filename,message):
+    now = time()
+    diff = now - start
+    mbs = chunk / diff
+    msg = f"📦 𝐍𝐚𝐦𝐞: {filename}\n\n"
+    try:
+		msg+=update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
+	except:pass
+	msg+= f"▶️ 𝚄𝚙𝚕𝚘𝚊𝚍𝚒𝚗𝚐: {sizeof_fmt(chunk)} of {sizeof_fmt(filesize)}\n\n"
+	global seg
+	if seg != localtime().tm_sec:
+		message.edit(msg)
+	seg = localtime().tm_sec
+
+
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
 bot.loop.run_forever()
