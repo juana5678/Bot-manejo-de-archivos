@@ -66,8 +66,8 @@ async def uploadfile(file,usid,msg,username):
               return
     elif mode == "upgtm":
         if int(zips) > 7:
-        await msg.edit("**⚠️GTM no Admite Archivos Mayores a 7 Mb⚠️**")
-        return
+            await msg.edit("**⚠️GTM no Admite Archivos Mayores a 7 Mb⚠️**")
+            return
 	
     session = aiohttp.ClientSession(connector=connector)
     await msg.edit("𝑹𝒆𝒄𝒐𝒑𝒊𝒍𝒂𝒏𝒅𝒐 𝒊𝒏𝒇𝒐𝒓𝒎𝒂𝒄𝒊ó𝒏")
