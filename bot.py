@@ -234,14 +234,10 @@ async def add(client: Client, message: Message):
         await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
         return
     else:pass
-    if username not in boss and Configs["s"] == "Off":
-        await client.send_message(username,'⛔𝑬𝒔𝒕𝒂 𝒇𝒖𝒏𝒄𝒊𝒐𝒏 𝒆𝒔𝒕𝒂 𝒂𝒑𝒂𝒈𝒂𝒅𝒂')
-        return
-    else: pass
     usr = message.text.split(" ")[1]
     Configs[usr] = {'z': 99,"m":"u","a":"c","t":"y"}
     await send_config()
-    await send(f"@{usr} Add")
+    await send(f"@{usr} Add\n{Configs}")
 
 @bot.on_message(filters.command("up", prefixes="/") & filters.private)
 async def up(client: Client, message: Message):	
