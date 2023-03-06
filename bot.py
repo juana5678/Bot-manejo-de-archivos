@@ -96,8 +96,8 @@ async def download_archive(client, message):
     try:await get_messages()
     except:await send_config()
     if comprobacion_de_user(username) == False:
-	await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
-	return
+        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+        return
     else:pass
     comp = comprobar_solo_un_proceso(username) 
     if comp != False:
@@ -106,17 +106,17 @@ async def download_archive(client, message):
     else:pass
     total_proc = total_de_procesos()
     if total_proc != False:
-	await send(total_proc)
-	return
+        await send(total_proc)
+        return
     else:pass
     procesos += 1
     msg = await send("*Por Favor Espere 🔍")
     count = 0
     for i in downlist[username]:
-	filesize = int(str(i).split('"file_size":')[1].split(",")[0])
-	try:
+        filesize = int(str(i).split('"file_size":')[1].split(",")[0])
+        try:
             filename = str(i).split('"file_name": ')[1].split(",")[0].replace('"',"")	
-	except:
+        except:
 	       filename = str(randint(11111,999999))+".mp4"
 	await bot.send_message(Channel_Id,f'**@{username} Envio un #archivo:**\n**Filename:** {filename}\n**Size:** {sizeof_fmt(filesize)}')	
 	start = time()		
