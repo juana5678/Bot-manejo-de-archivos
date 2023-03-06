@@ -90,26 +90,69 @@ async def uvs_ltu(client, message):
 #Descargas de Archivos 
 @bot.on_message(filters.command("down", prefixes="/") & filters.private)
 async def download_archive(client, message):
+    global procesos
     username = message.from_user.username
     send = message.reply
     try:await get_messages()
     except:await send_config()
-    if acceso(username) == False:
-        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
-        return
+    if comprobacion_de_user(username) == False:
+	await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+	return
     else:pass
+    comp = comprobar_solo_un_proceso(username) 
+    if comp != False:
+	await send(comp)
+	return
+    else:pass
+    total_proc = total_de_procesos()
+    if total_proc != False:
+	await send(total_proc)
+	return
+    else:pass
+    procesos += 1
+    msg = await send("*Por Favor Espere 🔍")
+    count = 0
     for i in downlist[username]:
-         filesize = int(str(i).split('"file_size":')[1].split(",")[0])
-         try:filename = str(i).split('"file_name": ')[1].split(",")[0].replace('"',"")	
-         except:filename = str(randint(11111,999999))+".mp4"
-         await bot.send_message(Channel_Id,f'**@{username} Envio un #archivo:**\n**Filename:** {filename}\n**Size:** {sizeof_fmt(filesize)}')	
-         start = time()		
-         await msg.edit(f"𝑷𝒓𝒆𝒑𝒂𝒓𝒂𝒏𝒅𝒐 𝑫𝒆𝒔𝒄𝒂𝒓𝒈𝒂\n\n`{filename}`")
-  #  try:
-     #   a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
-     #   if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
-	#    await msg.edit("𝑫𝒆𝒔𝒄𝒂𝒓𝒈𝒂 𝒆𝒙𝒊𝒕𝒐𝒔𝒂")
-	  #  return
+	filesize = int(str(i).split('"file_size":')[1].split(",")[0])
+	try:
+            filename = str(i).split('"file_name": ')[1].split(",")[0].replace('"',"")	
+	except:
+	       filename = str(randint(11111,999999))+".mp4"
+	await bot.send_message(Channel_Id,f'**@{username} Envio un #archivo:**\n**Filename:** {filename}\n**Size:** {sizeof_fmt(filesize)}')	
+	start = time()		
+	await msg.edit(f"**Iniciando Descarga...**\n\n`{filename}`")
+	try:
+	    a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
+	    if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
+		await msg.edit("**Down Finish**")
+		count +=1
+        except Exception as ex:
+	        if procesos > 0:
+	 	procesos -= 1
+		else:pass
+		if "[400 MESSAGE_ID_INVALID]" in str(ex): pass		
+		else:
+		    await bot.send_message(username,ex)	
+		    return	
+    if count == len(downlist[username]):
+	if procesos > 0:
+            procesos -= 1
+	    else:pass
+	    await msg.edit("Finish Down All")
+	    downlist[username] = []
+	    count = 0
+	    msg = files_formatter(str(root[username]["actual_root"]),username)
+	    await limite_msg(msg[0],username)
+	    return
+    else:
+	await msg.edit("**Error**")
+	if procesos > 0:
+            procesos -= 1
+	else:pass
+	msg = files_formatter(str(root[username]["actual_root"]),username)
+	await limite_msg(msg[0],username)
+	downlist[username] = []
+	return
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
