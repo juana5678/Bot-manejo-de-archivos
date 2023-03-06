@@ -410,12 +410,12 @@ async def down_link(client: Client, message: Message):
 
 async def ytdlp_downloader(url,usid,msg,username,callback,format):
     class YT_DLP_LOGGER(object):
-    def debug(self,msg):
-        pass
-    def warning(self,msg):
-        pass
-    def error(self,msg):
-        pass
+        def debug(self,msg):
+            pass
+        def warning(self,msg):
+            pass
+        def error(self,msg):
+            pass
     j = str(root[username]["actual_root"])+"/"
     resolution = str(format)
     dlp = {"logger":YT_DLP_LOGGER(),"progress_hooks":[callback],"outtmpl":f"./{j}%(title)s.%(ext)s","format":f"best[height<={resolution}]"}
@@ -527,6 +527,13 @@ async def delete_draft_y_down_media(client: Client, message: Message):
         downlist[username].append(message)
         await send("**/down Para Comenzar Descaga**", quote=True)
         return
+
+
+
+
+
+
+
 
 #Mensajes De Progreso de Subida y Descaga
 def download_progres(data,message,format):
