@@ -347,10 +347,10 @@ async def down_link(client: Client, message: Message):
         msg = await send("**Por Favor Espere 🔍**")
         await client.send_message(Channel_Id,f'**@{username} Envio un link de #mediafire:**\n**Url:** {url}\n')
         procesos += 1
-        file = await download_mediafire(url, str(root[username]["actual_root"])+"/", msg, callback=mediafiredownload)
+        download = await ytdlp_downloader(url,user_id,msg,username,lambda data: download_progres(data,msg,format),format)
         if procesos != 0:
             procesos -= 1
-        await msg.edit("**Enlace De Mediafire Descargado**"
+        await msg.edit("**Enlace Descargado**")
         msg = files_formatter(str(root[username]["actual_root"]),username)
         await limite_msg(msg[0],username)
         return
