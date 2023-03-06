@@ -872,6 +872,7 @@ async def uploadfile(file,usid,msg,username):
         return
 
     id_de_ms[username] = {"msg":msg, "pat":filename, "proc":"Up"}
+
     if filesize-1048>zipssize:
         parts = round(filesize / zipssize)
         await msg.edit(f"📦 𝑪𝒐𝒎𝒑𝒓𝒊𝒎𝒊𝒆𝒏𝒅𝒐")
@@ -888,42 +889,27 @@ async def uploadfile(file,usid,msg,username):
                         upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
                         upload = str(upload) + '?token=' + token
                     elif mode == "a" or mode == "t":
-							while error_conv < 10:
-							
-								await msg.edit("𝑷𝒓𝒆𝒑𝒂𝒓𝒂𝒏𝒅𝒐 𝒑𝒂𝒓𝒂 𝒄𝒐𝒏𝒗𝒆𝒓𝒕𝒊𝒓")
-								await msg.edit("𝑪𝒐𝒏𝒗𝒊𝒓𝒕𝒊𝒆𝒏𝒅𝒐, 𝒔𝒆𝒂 𝒑𝒂𝒄𝒊𝒆𝒏𝒕𝒆...")
-								upload = upload[1]
-								upload = await move_to_profile(hot,uset,pasel,upload)
-								if upload != False:	
-									upload = upload.replace('pluginfile.php/','webservice/pluginfile.php/')
-									upload = str(upload) + '?token=' + token
-									
-									error_conv = 0
-								break
-								else:									await msg.edit("𝑬𝒓𝒓𝒐𝒓, 𝒓𝒆𝒊𝒏𝒕𝒆𝒏𝒕𝒂𝒏𝒅𝒐")
-									error_conv +=1														continue	
-                        else: 
-                            upload = upload[0]
-                            if upload == False:
-                                await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓.")
-          
-                                id_de_ms[username]["proc"] = ""
-                                return
-                            else:pass
-                            await bot.send_message(usid,f"__**{upload}**__",disable_web_page_preview=True)
-                            logslinks.append(upload)
-                            logerrors = 0
-                            break
+                    else:
+                        upload = upload[0]
+                        if upload == False:
+                            await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓.")
+                            id_de_ms[username]["proc"] = ""
+                            return
+                        else:pass
+                        await bot.send_message(usid,f"__**{upload}**__",disable_web_page_preview=True)
+                        logslinks.append(upload)
+                        logerrors = 0
+                        break
                 except Exception as ex:
                     logerrors += 1
                         if logerrors > 4:
                             if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
-                                else:
-                                    await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
-                                    id_de_ms[username]["proc"] = ""
-                        return
+                            else:
+                                await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
+                                id_de_ms[username]["proc"] = ""
+                            return
 
-####End
+###End
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
 bot.loop.run_forever()
