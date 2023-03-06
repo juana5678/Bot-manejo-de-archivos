@@ -288,6 +288,39 @@ async def up(client: Client, message: Message):
     except Exception as ex:
         await send(ex)
 
+@bot.on_message(filters.command("cancel", prefixes="/") & filters.private)
+async def cancelar(client: Client, message: Message):	
+    global procesos
+    username = message.from_user.username
+    send = message.reply
+    user_id = message.from_user.id
+    try:await get_messages()
+    except:await send_config()
+    if acceso(username) == False:
+        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+        return
+    else:pass
+    if id_de_ms[username]["proc"] == "Up":
+        p = await client.send_message(username,"`Por Favor Espere...`")
+        try:
+            await id_de_ms[username]["msg"].delete()
+            id_de_ms[username] = {"msg":"", "proc":""}
+            await p.edit("`Tarea Cancelada...`")
+            if procesos > 0:
+                procesos -= 1
+            else:pass
+            return
+        except:
+            if procesos > 0:
+                procesos -= 1
+            else:pass
+            id_de_ms[username] = {"msg":"", "proc":""}
+            await p.edit("`Tarea Cancelada...`")
+            return
+    else:
+        await client.send_message(username,"`No hay Tareas para Cancelar...`")
+        return      
+
 
 #Comfiguracion de Nubes#######################
 @bot.on_message(filters.command("uvs_ltu", prefixes="/") & filters.private)
