@@ -300,7 +300,7 @@ async def gtm(client, message):
     Configs[username]["a"] = "upgtm"
     Configs[username]["z"] = 7
     await send_config()
-    await send("**Nube ☁️ uvs.ltu Configurada**")
+    await send("**Nube ☁️ GTM ☁️ Configurada**")
 
 #Descargas de Archivos Reenviados
 @bot.on_message(filters.command("down", prefixes="/") & filters.private)
@@ -669,7 +669,7 @@ async def downloadmessage_tg(chunk,filesize,filename,start,message):
 ####Subida
 async def uploadfile(file,usid,msg,username):
     proxy = Configs["gp"]
-    mode = Configs[username]["m"]
+    mode = Configs[username]["a"]
     usernamew = ''
     passwordw = ''
 	
