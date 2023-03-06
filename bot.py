@@ -50,7 +50,7 @@ boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
 Configs = {"uclv":'',"gtm":"","uvs":"","ltu":"a816210ff41853b689c154bad264da8e", 
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://190.15.158.69:10089', "s":"On", 
 			'UHTRED_OF_BEBBANBURG': {'z': 99,"m":"u","a":"c","t":"y"}, 
-			'Stvz20': {'z': 99,"m":"u","a":"c","t":"y"}, 
+			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"}, 
 			'Locura05': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'mcfee2828': {'z': 99,"m":"u","a":"c","t":"y"}
 			}
@@ -202,9 +202,13 @@ async def start(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    msg = 'Hola'
-    if Configs[username]["a"] == "l":
-        mode = "**Subida hacía uvs.ltu**\n"
+    msg = '**Hola @{username}, Cómo estás?\nBienvenido, Te ayudaré a Descagar Gratis ❤️**\n\n`Actualmente su subida es:`'
+    if Configs[username]["a"] == "upltu":
+        mode = "**Subida hacia uvs.ltu**\n"
+    elif Configs[username]["a"] == "upgtm":
+          mode = "**Subida hacia GTM**\n"
+    elif Configs[username]["a"] == "upcmw":
+          mode = "**Subida hacia CMW**\n"
     msg += mode
     await send(msg)
 
@@ -230,14 +234,21 @@ async def add(client: Client, message: Message):
     user_id = message.from_user.id
     try:await get_messages()
     except:await send_config()
-    if acceso(username) == False:
-        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
-        return
-    else:pass
-    usr = message.text.split(" ")[1]
-    Configs[usr] = {'z': 99,"m":"u","a":"c","t":"y"}
-    await send_config()
-    await send(f"@{usr} Add\n{Configs}")
+  #  if acceso(username) == False:
+   #     await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+    #    return
+ #   else:pass
+ #   usr = message.text.split(" ")[1]
+#    Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
+#    await send_config()
+#    await send(f"@{usr} Add\n{Configs}")
+    if username in boss:
+        usr = message.text.split(" ")[1]
+        Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
+        await send_config()
+        await send(f"@{usr} Add\n{Configs}")
+    else: 
+        await send("⚠️Comando Para Administrador ⚠️")
 
 @bot.on_message(filters.command("up", prefixes="/") & filters.private)
 async def up(client: Client, message: Message):	
