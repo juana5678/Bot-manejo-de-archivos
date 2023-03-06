@@ -62,6 +62,14 @@ root = {} #directorio actual
 downlist = {} #lista de archivos descargados
 procesos = 0 #numero de procesos activos en el bot
 
+#Funcion
+def sizeof_fmt(num, suffix='B'):
+    for unit in ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi']:
+        if abs(num) < 1024.0:
+           return "%3.2f%s%s" % (num, unit, suffix)
+        num /= 1024.0 
+    return "%.2f%s%s" % (num, 'Yi', suffix)
+
 #Acceso de Uso al BoT
 def acceso(username):
      if username in Config or username in boss:
