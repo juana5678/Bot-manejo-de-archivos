@@ -95,7 +95,7 @@ async def download_archive(client, message):
     send = message.reply
     try:await get_messages()
     except:await send_config()
-    if comprobacion_de_user(username) == False:
+    if acceso(username) == False:
         await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
         return
     else:pass
@@ -160,15 +160,18 @@ async def delete_draft_y_down_media(client: Client, message: Message):
     send = message.reply
     try:await get_messages()
     except:await send_config()
-    if comprobacion_de_user(username) == False:
+    if acceso(username) == False:
         await send("⛔ 𝑵𝒐d 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
         return
     else:pass
     if str(message).split('"file_name": ')[1].split(",")[0].replace('"',"").endswith(".txt") and Configs[username]["m"] == "d":
         if message.from_user.is_bot:return
         await borrar_de_draft(message,client,username)
-    return
-
+        return
+    else:
+        downlist[username].append(message)
+        await send("**/down Para Comenzar Descaga**", quote=True)
+        return
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
