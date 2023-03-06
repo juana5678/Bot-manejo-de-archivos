@@ -70,6 +70,40 @@ def sizeof_fmt(num, suffix='B'):
         num /= 1024.0 
     return "%.2f%s%s" % (num, 'Yi', suffix)
 
+def files_formatter(path,username):
+    rut = str(path)
+    filespath = Path(str(path))
+    result = []
+    dirc = []
+    final = []
+    for p in filespath.glob("*"):
+        if p.is_file():
+           result.append(str(Path(p).name))
+        elif p.is_dir():
+             dirc.append(str(Path(p).name))
+    result.sort()
+    dirc.sort()
+    msg = f'**Mis Archivo 📂📁**\n**Utilice:\n/up - Más # De Archivo Para Subirlo\n\n `{str(rut).split("downloads/")[-1]}`\n\n'
+    if result == [] and dirc == [] :
+        return msg , final
+    for k in dirc:
+        final.append(k)
+    for l in result:
+        final.append(l)
+    i = 0
+    for n in final:
+        try:
+            size = Path(str(path)+"/"+n).stat().st_size
+        except: pass
+        if not "." in n:
+            msg+=f"**{i}**📂 `{n}` `|` `-` \n" 
+        else:
+            msg+=f"**/up_{i}** 📄 `|` `{n}` `|` `{sizeof_fmt(size)}` \n"
+            i+=1
+    msg+= f"\n**Eliminar Todo**\n    **/deleteall**"
+    return msg , final
+
+
 #Acceso de Uso al BoT
 def acceso(username):
      if username in Config or username in boss:
