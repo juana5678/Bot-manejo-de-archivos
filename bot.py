@@ -85,7 +85,7 @@ def files_formatter(path,username):
              dirc.append(str(Path(p).name))
     result.sort()
     dirc.sort()
-    msg = f'**Mis Archivo 📂📁**\n**Utilice:\n/up - Más # De Archivo Para Subirlo\n\n `{str(rut).split("downloads/")[-1]}`\n\n'
+    msg = f'** 📂Archivos📁**\n**Utilice:\n**/up - Más # De Archivo Para Subirlo\n/del_al - Para Eliminar Todo el Directorio**\nDirectorio Actual: `{str(rut).split("downloads/")[-1]}`\n\n'
     if result == [] and dirc == [] :
         return msg , final
     for k in dirc:
@@ -100,9 +100,9 @@ def files_formatter(path,username):
         if not "." in n:
             msg+=f"**{i}**📂 `{n}` `|` `-` \n" 
         else:
-            msg+=f"**/up_{i}** 📄 `|` `{n}` `|` `{sizeof_fmt(size)}` \n"
+            msg+=f"**{i}** 📄 `|` `{n}` `|` `{sizeof_fmt(size)}` \n"
             i+=1
-    msg+= f"\n**Eliminar Todo**\n    **/deleteall**"
+    #msg+= f"\n**Eliminar Todo**\n    **/deleteall**"
     return msg , final
 
 def descomprimir(archivo,ruta):
@@ -176,7 +176,7 @@ async def send_config():
 #Comprobacion de Procesos
 def comprobar_solo_un_proceso(username):
     if id_de_ms[username]["proc"] == "Up" :
-        rup = "𝒀𝒂 𝒕𝒊𝒆𝒏𝒆 𝒖𝒏 𝒑𝒓𝒐𝒄𝒆𝒔𝒐 𝒂𝒄𝒕𝒊𝒗𝒐. 𝑼𝒔𝒆 **/cancel** 𝒐 𝒆𝒔𝒑𝒆𝒓𝒆"
+        rup = "`Por Favor Espere, Ya posee una Tarea Activa\nUse: ` **/cancel** ` para Cancelar ❌ la Actual`"
         return rup
     else:
         return False
@@ -184,7 +184,7 @@ def comprobar_solo_un_proceso(username):
 #Maximos Procesos
 def total_de_procesos():
     global procesos
-    hgy = "𝑬𝒍 𝒃𝒐𝒕 𝒕𝒊𝒆𝒏𝒆 𝒅𝒆𝒎𝒂𝒔𝒊𝒂𝒅𝒐𝒔 𝒑𝒓𝒐𝒄𝒆𝒔𝒐𝒔 𝒂𝒄𝒕𝒊𝒗𝒐𝒔. 𝑷𝒓𝒖𝒆𝒃𝒆 𝒆𝒏 𝒖𝒏𝒐𝒔 𝒎𝒊𝒏𝒖𝒕𝒐𝒔."
+    hgy = "`⚠️BoT Ocupado, Prueba más Tarde ⚠️`"
     if procesos >= 15:
         return hgy
     else:
@@ -202,7 +202,8 @@ async def start(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    msg = '**Hola @{username}, Cómo estás?\nBienvenido, Te ayudaré a Descagar Gratis ❤️**\n\n`Actualmente su subida es:`'
+    bot.send_document(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\Para Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:\n/uvs_ltu - 19 Mb\n\gtm - 7 Mb\n/cmw - 400 Mb\n\Luego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`")
+    msg = '**Hola, Cómo estás?\nBienvenido, Te ayudaré a Descagar Gratis ❤️**\n\n`Actualmente su subida es:`'
     if Configs[username]["a"] == "upltu":
         mode = "**Subida hacia uvs.ltu**\n"
     elif Configs[username]["a"] == "upgtm":
