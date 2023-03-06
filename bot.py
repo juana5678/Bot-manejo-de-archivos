@@ -103,6 +103,51 @@ def files_formatter(path,username):
     msg+= f"\n**Eliminar Todo**\n    **/deleteall**"
     return msg , final
 
+def descomprimir(archivo,ruta):
+    archivozip = archivo
+    with ZipFile(file = archivozip, mode = "r", allowZip64 = True) as file:
+        archivo = file.open(name = file.namelist()[0], mode = "r")
+        archivo.close()
+        guardar = ruta
+        file.extractall(path = guardar)
+
+async def limite_msg(text,username):
+    lim_ch = 1500
+    text = text.splitlines() 
+    msg = ''
+    msg_ult = '' 
+    c = 0
+    for l in text:
+        if len(msg +"\n" + l) > lim_ch:		
+            msg_ult = msg
+            await bot.send_message(username,msg)	
+            msg = ''
+        if msg == '':	
+            msg+= l
+        else:		
+            msg+= "\n" +l	
+        c += 1
+        if len(text) == c and msg_ult != msg:
+            await bot.send_message(username,msg)
+
+def update_progress_bar(inte,max):
+    percentage = inte / max
+    percentage *= 100
+    percentage = round(percentage)
+    hashes = int(percentage / 5)
+    spaces = 20 - hashes
+    progress_bar = "[ " + "•" * hashes + "•" * spaces + " ]"
+    percentage_pos = int(hashes / 1)
+    percentage_string = str(percentage) + "%"
+    progress_bar = progress_bar[:percentage_pos] + percentage_string + progress_bar[percentage_pos + len(percentage_string):]
+    return(progress_bar)
+
+def iprox(proxy):
+    tr = str.maketrans(
+        "@./=#$%&:,;_-|0123456789abcd3fghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        "ZYXWVUTSRQPONMLKJIHGFEDCBAzyIwvutsrqponmlkjihgf3dcba9876543210|-_;,:&%$#=/.@",
+    )
+    return str.translate(proxy[::2], tr)
 
 #Acceso de Uso al BoT
 def acceso(username):
