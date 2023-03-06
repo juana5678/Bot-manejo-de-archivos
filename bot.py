@@ -457,7 +457,7 @@ async def delete_draft_y_down_media(client: Client, message: Message):
         if count == len(downlist[username]):
             if procesos > 0:
                 procesos -= 1
-        else:pass
+            else:pass
             await msg.edit("**Descaga Finalizada**")
             downlist[username] = []
             count = 0
