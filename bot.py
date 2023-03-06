@@ -412,8 +412,7 @@ async def delete_draft_y_down_media(client: Client, message: Message):
         return
     else:
         downlist[username].append(message)
-        await send("**/down Para Comenzar Descaga**", quote=True)
-        msg = await send("*Por Favor Espere 🔍", quote=True)
+        msg = await send("**Verificando Archivo 🔍**", quote=True)
         count = 0
         for i in downlist[username]:
             filesize = int(str(i).split('"file_size":')[1].split(",")[0])
@@ -425,7 +424,7 @@ async def delete_draft_y_down_media(client: Client, message: Message):
             try:
                 a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
                 if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
-                    await msg.edit("**Down Finish**")
+                    await msg.edit("**Descarga Finalizada**")
                 count +=1
             except Exception as ex:
                     if procesos > 0:
@@ -436,9 +435,6 @@ async def delete_draft_y_down_media(client: Client, message: Message):
                         await bot.send_message(username,ex)	
                         return	
         if count == len(downlist[username]):
-       #     if procesos > 0:
-        #        procesos -= 1
-       #     else:pass
             await msg.edit("**Descaga Finalizada**")
             downlist[username] = []
             count = 0
@@ -447,9 +443,6 @@ async def delete_draft_y_down_media(client: Client, message: Message):
             return
         else:
             await msg.edit("**Error**")
-         #   if procesos > 0:
-          #      procesos -= 1
-           # else:pass
             msg = files_formatter(str(root[username]["actual_root"]),username)
             await limite_msg(msg[0],username)
             downlist[username] = []
