@@ -1,11 +1,43 @@
+import shutil
+import asyncio
 import tgcrypto
+import aiohttp
+import aiohttp_socks
+import yt_dlp
 import os
+import aiohttp
+import re
+import requests
+import json
+import psutil
+import platform
+import pymegatools
 from pyrogram import Client , filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
+from json import loads,dumps
+from pathlib import Path
 from os.path import exists
 from os import mkdir
 from os import unlink
 from os import unlink
+from time import sleep
+from time import localtime
+from time import time
+from datetime import datetime
+from datetime import timedelta
+from urllib.parse import quote
+from urllib.parse import quote_plus
+from urllib.parse import unquote_plus
+from random import randint
+from re import findall
+from yarl import URL
+from bs4 import BeautifulSoup
+from io import BufferedReader
+from aiohttp import ClientSession
+from py7zr import SevenZipFile
+from py7zr import FILTER_COPY
+from zipfile import ZipFile
+from multivolumefile import MultiVolume
 
 #BoT Configuration Variables
 api_id = 9910861
@@ -228,14 +260,27 @@ def uploadfile_progres(chunk,filesize,start,filename,message):
     mbs = chunk / diff
     msg = f"📦 𝐍𝐚𝐦𝐞: {filename}\n\n"
     try:
-		msg+=update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
-	except:pass
-	msg+= f"▶️ 𝚄𝚙𝚕𝚘𝚊𝚍𝚒𝚗𝚐: {sizeof_fmt(chunk)} of {sizeof_fmt(filesize)}\n\n"
-	global seg
-	if seg != localtime().tm_sec:
-		message.edit(msg)
-	seg = localtime().tm_sec
-
+       msg+=update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
+    except:pass
+    msg+= f"▶️ 𝚄𝚙𝚕𝚘𝚊𝚍𝚒𝚗𝚐: {sizeof_fmt(chunk)} of {sizeof_fmt(filesize)}\n\n"
+    global seg
+    if seg != localtime().tm_sec: 
+        message.edit(msg)
+    seg = localtime().tm_sec
+async def downloadmessage_tg(chunk,filesize,filename,start,message):
+    now = time()
+    diff = now - start
+    mbs = chunk / diff
+    msg = f"📦 𝐍𝐚𝐦𝐞: {filename}\n\n"
+    try:
+       msg+=update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
+    except:pass
+    msg+= f"▶️ 𝚄𝚙𝚕𝚘𝚊𝚍𝚒𝚗𝚐: {sizeof_fmt(chunk)} of {sizeof_fmt(filesize)}\n\n"	
+    global seg
+    if seg != localtime().tm_sec:
+        try: await message.edit(msg)
+        except:pass
+    seg = localtime().tm_sec
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
