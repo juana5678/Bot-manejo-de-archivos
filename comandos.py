@@ -46,11 +46,11 @@ async def up(client: Client, message: Message):
         if Configs[username]["m"] == "u": 
             fd = await uploadfile(path,user_id,msg,username)
         elif Configs[username]["m"] == "e":
-              if len(Urls[username]) >= 10  and username not in boss:
-                  await msg.edit('⛔️ 𝑬𝒍 𝒍𝒊𝒎𝒊𝒕𝒆 𝒅𝒆 𝒍𝒊𝒏𝒌𝒔 𝒇𝒖𝒆 𝒑𝒂𝒔𝒂𝒅𝒐 , 𝒖𝒕𝒊𝒍𝒊𝒛𝒆 **/deletelinks**')
-                  return
-              else:
-                  await uploadfileapi(path,user_id,msg,username)
+            if len(Urls[username]) >= 10  and username not in boss:
+                await msg.edit('⛔️ 𝑬𝒍 𝒍𝒊𝒎𝒊𝒕𝒆 𝒅𝒆 𝒍𝒊𝒏𝒌𝒔 𝒇𝒖𝒆 𝒑𝒂𝒔𝒂𝒅𝒐 , 𝒖𝒕𝒊𝒍𝒊𝒛𝒆 **/deletelinks**')
+                return
+            else:
+                await uploadfileapi(path,user_id,msg,username)
         elif Configs[username]["m"] == "n":
 	    await proccess(path,msg,username)
         else:
