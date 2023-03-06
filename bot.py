@@ -281,7 +281,7 @@ async def uvs_ltu(client, message):
         return
     else:pass
     Configs[username]["m"] = "u"
-    Configs[username]["a"] = "l"
+    Configs[username]["a"] = "upltu"
     Configs[username]["z"] = 19
     await send_config()
     await send("**Nube ☁️ uvs.ltu Configurada**")
@@ -297,7 +297,7 @@ async def gtm(client, message):
         return
     else:pass
     Configs[username]["m"] = "u"
-    Configs[username]["a"] = "h"
+    Configs[username]["a"] = "upgtm"
     Configs[username]["z"] = 7
     await send_config()
     await send("**Nube ☁️ uvs.ltu Configurada**")
@@ -668,8 +668,8 @@ async def downloadmessage_tg(chunk,filesize,filename,start,message):
     seg = localtime().tm_sec
 ####Subida
 async def uploadfile(file,usid,msg,username):
-    proxy = Configs["pproxy"]
-    mode = Configs[username]["updl"]
+    proxy = Configs["gp"]
+    mode = Configs[username]["m"]
     usernamew = ''
     passwordw = ''
 	
