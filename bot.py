@@ -179,6 +179,7 @@ def comprobar_solo_un_proceso(username):
         return rup
     else:
         return False
+
 #Maximos Procesos
 def total_de_procesos():
     global procesos
@@ -206,7 +207,7 @@ async def start(client, message):
     msg += mode
     await send(msg)
 
-#Comfiguracion de Nubes
+#Comfiguracion de Nubes#######################
 @bot.on_message(filters.command("uvs_ltu", prefixes="/") & filters.private)
 async def uvs_ltu(client, message):
     username = message.from_user.username
@@ -223,6 +224,21 @@ async def uvs_ltu(client, message):
     await send_config()
     await send("**Nube ☁️ uvs.ltu Configurada**")
 
+@bot.on_message(filters.command("gtm", prefixes="/") & filters.private)
+async def gtm(client, message):
+    username = message.from_user.username
+    send = message.reply
+    try:await get_messages()
+    except:await send_config()
+    if acceso(username) == False:
+        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
+        return
+    else:pass
+    Configs[username]["m"] = "u"
+    Configs[username]["a"] = "h"
+    Configs[username]["z"] = 7
+    await send_config()
+    await send("**Nube ☁️ uvs.ltu Configurada**")
 
 #Descargas de Archivos Reenviados
 @bot.on_message(filters.command("down", prefixes="/") & filters.private)
@@ -527,12 +543,6 @@ async def delete_draft_y_down_media(client: Client, message: Message):
         downlist[username].append(message)
         await send("**/down Para Comenzar Descaga**", quote=True)
         return
-
-
-
-
-
-
 
 
 #Mensajes De Progreso de Subida y Descaga
