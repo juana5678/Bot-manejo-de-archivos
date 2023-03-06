@@ -202,7 +202,7 @@ async def start(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    bot.send_document(username,"logo.jpg",caption="Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\Para Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:\n/uvs_ltu - 19 Mb\n\gtm - 7 Mb\n/cmw - 400 Mb\n\Luego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas")
+    await bot.send_document(username,"logo.jpg",caption="Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\Para Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:\n/uvs_ltu - 19 Mb\n\gtm - 7 Mb\n/cmw - 400 Mb\n\Luego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas")
     msg = '**Hola, Cómo estás?\nBienvenido, Te ayudaré a Descagar Gratis ❤️**\n\n`Actualmente su subida es:`'
     if Configs[username]["a"] == "upltu":
         mode = "**Subida hacia uvs.ltu**\n"
