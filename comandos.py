@@ -51,9 +51,9 @@ async def up(client: Client, message: Message):
                   return
               else:
                   await uploadfileapi(path,user_id,msg,username)
-              elif Configs[username]["m"] == "n":
-	          await proccess(path,msg,username)
-              else:
-                  await uploaddraft(path,user_id,msg,username)
+        elif Configs[username]["m"] == "n":
+	    await proccess(path,msg,username)
+        else:
+            await uploaddraft(path,user_id,msg,username)
     except Exception as ex:
         await send(ex)
