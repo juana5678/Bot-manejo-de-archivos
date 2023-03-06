@@ -125,13 +125,12 @@ async def download_archive(client, message):
                 await msg.edit("**Down Finish**")
             count +=1
         except Exception as ex:
-                if procesos > 0:
-	            procesos -= 1
+                if procesos > 0:procesos -= 1
 	        else:pass
 	        if "[400 MESSAGE_ID_INVALID]" in str(ex): pass		
 	        else:
-		    await bot.send_message(username,ex)	
-	            return	
+                    await bot.send_message(username,ex)	
+                    return	
     if count == len(downlist[username]):
         if procesos > 0:
             procesos -= 1
