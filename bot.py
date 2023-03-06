@@ -295,7 +295,7 @@ async def delete_draft_y_down_media(client: Client, message: Message):
     username = message.from_user.username
     send = message.reply
     try:await get_messages()
-	except:await send_config()
+    except:await send_config()
     if acceso(username) == False:
         await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
         return
@@ -507,11 +507,6 @@ def filezip(fpath: Path, password: str = None, volume = None):
     for file in archive._files:
         files.append(file.name)
     return files
-
-
-
-
-
 
 @bot.on_message(filters.media & filters.private)
 async def delete_draft_y_down_media(client: Client, message: Message):
