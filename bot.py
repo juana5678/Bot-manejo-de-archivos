@@ -135,13 +135,13 @@ async def download_archive(client, message):
     if count == len(downlist[username]):
         if procesos > 0:
             procesos -= 1
-            else:pass
-            await msg.edit("Finish Down All")
-            downlist[username] = []
-            count = 0
-            msg = files_formatter(str(root[username]["actual_root"]),username)
-            await limite_msg(msg[0],username)
-            return
+        else:pass
+        await msg.edit("Finish Down All")
+        downlist[username] = []
+        count = 0
+        msg = files_formatter(str(root[username]["actual_root"]),username)
+        await limite_msg(msg[0],username)
+        return
     else:
         await msg.edit("**Error**")
         if procesos > 0:
