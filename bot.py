@@ -390,6 +390,7 @@ async def download_archive(client: Client, message: Message):
 #Descarga de Archivos y Enlaces
 @bot.on_message(filters.media & filters.private)
 async def delete_draft_y_down_media(client: Client, message: Message):
+    global procesos
     username = message.from_user.username
     send = message.reply
     try:await get_messages()
@@ -440,7 +441,7 @@ async def delete_draft_y_down_media(client: Client, message: Message):
         if count == len(downlist[username]):
             if procesos > 0:
                 procesos -= 1
-            else:pass
+        else:pass
             await msg.edit("**Descaga Finalizada**")
             downlist[username] = []
             count = 0
