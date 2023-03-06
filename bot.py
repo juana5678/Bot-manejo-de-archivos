@@ -248,7 +248,7 @@ async def up(client: Client, message: Message):
         await send(total_proc)
         return
     else:pass
-    list = message.text.split("_")[1]		
+    list = message.text.split(" ")[1]		
     msgh = files_formatter(str(root[username]["actual_root"]),username)
     try:
         path = str(root[username]["actual_root"]+"/")+msgh[1][list]
