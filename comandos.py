@@ -29,9 +29,9 @@ async def up(client: Client, message: Message):
         return
     else: pass	
     comp = comprobar_solo_un_proceso(username) 
-	if comp != False:
-            await send(comp)
-            return
+    if comp != False:
+        await send(comp)
+        return
     else:pass
     total_proc = total_de_procesos()
     if total_proc != False:
