@@ -122,7 +122,7 @@ async def download_archive(client, message):
         try:
             a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
             if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
-            await msg.edit("**Down Finish**")
+                await msg.edit("**Down Finish**")
             count +=1
         except Exception as ex:
                 if procesos > 0:
