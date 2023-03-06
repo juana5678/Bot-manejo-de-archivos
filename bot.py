@@ -119,13 +119,12 @@ async def download_archive(client, message):
         await bot.send_message(Channel_Id,f'**@{username} Envio un #archivo:**\n**Filename:** {filename}\n**Size:** {sizeof_fmt(filesize)}')	
         start = time()		
         await msg.edit(f"**Iniciando Descarga...**\n\n`{filename}`")
-        try:
-	    a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
-	    if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
-	        await msg.edit("**Down Finish**")
-	        count +=1
+        try:a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
+            if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
+            await msg.edit("**Down Finish**")
+            count +=1
         except Exception as ex:
-	        if procesos > 0:
+                if procesos > 0:
 	        procesos -= 1
 	        else:pass
 	        if "[400 MESSAGE_ID_INVALID]" in str(ex): pass		
