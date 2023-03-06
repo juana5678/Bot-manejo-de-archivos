@@ -44,7 +44,7 @@ async def up(client: Client, message: Message):
         path = str(root[username]["actual_root"]+"/")+msgh[1][list]
         msg = await send(f"Archivo 📂: {path}**")
         if Configs[username]["m"] == "u": 
-             fd = await uploadfile(path,user_id,msg,username)
+            fd = await uploadfile(path,user_id,msg,username)
         elif Configs[username]["m"] == "e":
               if len(Urls[username]) >= 10  and username not in boss:
                   await msg.edit('⛔️ 𝑬𝒍 𝒍𝒊𝒎𝒊𝒕𝒆 𝒅𝒆 𝒍𝒊𝒏𝒌𝒔 𝒇𝒖𝒆 𝒑𝒂𝒔𝒂𝒅𝒐 , 𝒖𝒕𝒊𝒍𝒊𝒛𝒆 **/deletelinks**')
