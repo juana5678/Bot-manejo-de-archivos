@@ -1,5 +1,4 @@
 import upload_token
-import comandos
 import shutil
 import asyncio
 import tgcrypto
