@@ -126,7 +126,7 @@ async def download_archive(client, message):
             count +=1
         except Exception as ex:
                 if procesos > 0:
-	        procesos -= 1
+	            procesos -= 1
 	        else:pass
 	        if "[400 MESSAGE_ID_INVALID]" in str(ex): pass		
 	        else:
@@ -161,7 +161,7 @@ async def delete_draft_y_down_media(client: Client, message: Message):
     try:await get_messages()
     except:await send_config()
     if comprobacion_de_user(username) == False:
-        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+        await send("⛔ 𝑵𝒐d 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
         return
     else:pass
     if str(message).split('"file_name": ')[1].split(",")[0].replace('"',"").endswith(".txt") and Configs[username]["m"] == "d":
