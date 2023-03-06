@@ -52,6 +52,23 @@ async def send_config():
     try:await bot.edit_message_text(Channel_Id,message_id=3,text=dumps(Configs,indent=4))
     except:pass
 
+#Comprobacion de Procesos
+def comprobar_solo_un_proceso(username):
+    if id_de_ms[username]["proc"] == "Up" :
+        rup = "𝒀𝒂 𝒕𝒊𝒆𝒏𝒆 𝒖𝒏 𝒑𝒓𝒐𝒄𝒆𝒔𝒐 𝒂𝒄𝒕𝒊𝒗𝒐. 𝑼𝒔𝒆 **/cancel** 𝒐 𝒆𝒔𝒑𝒆𝒓𝒆"
+        return rup
+    else:
+        return False
+#Maximos Procesos
+def total_de_procesos():
+    global procesos
+    hgy = "𝑬𝒍 𝒃𝒐𝒕 𝒕𝒊𝒆𝒏𝒆 𝒅𝒆𝒎𝒂𝒔𝒊𝒂𝒅𝒐𝒔 𝒑𝒓𝒐𝒄𝒆𝒔𝒐𝒔 𝒂𝒄𝒕𝒊𝒗𝒐𝒔. 𝑷𝒓𝒖𝒆𝒃𝒆 𝒆𝒏 𝒖𝒏𝒐𝒔 𝒎𝒊𝒏𝒖𝒕𝒐𝒔."
+    if procesos >= 15:
+        return hgy
+    else:
+        return False
+
+
 #inicio
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
@@ -89,7 +106,7 @@ async def uvs_ltu(client, message):
 
 #Descargas de Archivos Reenviados
 @bot.on_message(filters.command("down", prefixes="/") & filters.private)
-async def download_archive(client, message):
+async def download_archive(client: Client, message: Message):
     global procesos
     username = message.from_user.username
     send = message.reply
@@ -153,7 +170,7 @@ async def download_archive(client, message):
         return
 
 #Descarga de Archivos y Enlaces 
-@bot.on_message(filters.command("cancel", prefixes="/") & filters.private)
+@bot.on_message(filters.media & filters.private)
 async def delete_draft_y_down_media(client: Client, message: Message):
     global procesos
     username = message.from_user.username
