@@ -87,7 +87,7 @@ async def uvs_ltu(client, message):
     await send("**Nube ☁️ uvs.ltu Configurada**")
 
 
-#Descargas de Archivos 
+#Descargas de Archivos Reenviados
 @bot.on_message(filters.command("down", prefixes="/") & filters.private)
 async def download_archive(client, message):
     global procesos
@@ -120,9 +120,9 @@ async def download_archive(client, message):
         start = time()		
         await msg.edit(f"**Iniciando Descarga...**\n\n`{filename}`")
         try:a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
-            if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
-            await msg.edit("**Down Finish**")
-            count +=1
+           if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
+           await msg.edit("**Down Finish**")
+           count +=1
         except Exception as ex:
                 if procesos > 0:
 	        procesos -= 1
@@ -150,6 +150,24 @@ async def download_archive(client, message):
         await limite_msg(msg[0],username)
         downlist[username] = []
         return
+
+#Descarga de Archivos y Enlaces 
+@bot.on_message(filters.command("cancel", prefixes="/") & filters.private)
+async def delete_draft_y_down_media(client: Client, message: Message):
+    global procesos
+    username = message.from_user.username
+    send = message.reply
+    try:await get_messages()
+    except:await send_config()
+    if comprobacion_de_user(username) == False:
+        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+        return
+    else:pass
+    if str(message).split('"file_name": ')[1].split(",")[0].replace('"',"").endswith(".txt") and Configs[username]["m"] == "d":
+        if message.from_user.is_bot:return
+        await borrar_de_draft(message,client,username)
+    return
+
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
