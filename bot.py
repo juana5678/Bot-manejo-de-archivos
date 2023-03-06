@@ -235,19 +235,11 @@ async def add(client: Client, message: Message):
     user_id = message.from_user.id
     try:await get_messages()
     except:await send_config()
-  #  if acceso(username) == False:
-   #     await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
-    #    return
- #   else:pass
- #   usr = message.text.split(" ")[1]
-#    Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
-#    await send_config()
-#    await send(f"@{usr} Add\n{Configs}")
     if username in boss:
         usr = message.text.split(" ")[1]
         Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
         await send_config()
-        await send(f"@{usr} Add\n{Configs}", quote=True)
+        await send(f"@{usr} **Tiene Acceso**", quote=True)
     else: 
         await send("⚠️Comando Para Administrador ⚠️", quote=True)
 
@@ -406,6 +398,18 @@ async def delete_draft_y_down_media(client: Client, message: Message):
         await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
         return
     else:pass
+    comp = comprobar_solo_un_proceso(username) 
+    if comp != False:
+        await send(comp)
+        return
+    else:pass
+    total_proc = total_de_procesos()
+    if total_proc != False:
+        await send(total_proc)
+        return
+    else:pass
+    procesos += 1
+    count = 0
     if str(message).split('"file_name": ')[1].split(",")[0].replace('"',"").endswith(".txt") and Configs[username]["m"] == "d" :
         if message.from_user.is_bot: return
         await borrar_de_draft(message,client,username)
@@ -413,7 +417,6 @@ async def delete_draft_y_down_media(client: Client, message: Message):
     else:
         downlist[username].append(message)
         msg = await send("**Verificando Archivo 🔍**", quote=True)
-        count = 0
         for i in downlist[username]:
             filesize = int(str(i).split('"file_size":')[1].split(",")[0])
             try:filename = str(i).split('"file_name": ')[1].split(",")[0].replace('"',"")	
@@ -435,6 +438,9 @@ async def delete_draft_y_down_media(client: Client, message: Message):
                         await bot.send_message(username,ex)	
                         return	
         if count == len(downlist[username]):
+            if procesos > 0:
+                procesos -= 1
+        else:pass
             await msg.edit("**Descaga Finalizada**")
             downlist[username] = []
             count = 0
