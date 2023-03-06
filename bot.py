@@ -396,7 +396,7 @@ async def down_link(client: Client, message: Message):
                 start = time()
                 async for chunk in r.content.iter_chunked(1024*1024):
                     newchunk+=len(chunk)
-	            await mediafiredownload(newchunk,fsize,filename,start,msg)
+                    await mediafiredownload(newchunk,fsize,filename,start,msg)
                     f.write(chunk)
                 f.close()
                 file = f"{j}{filename}"
