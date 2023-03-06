@@ -436,10 +436,10 @@ async def delete_draft_y_down_media(client: Client, message: Message):
                         await bot.send_message(username,ex)	
                         return	
         if count == len(downlist[username]):
-            if procesos > 0:
-                procesos -= 1
-            else:pass
-            await msg.edit("Finish Down All")
+       #     if procesos > 0:
+        #        procesos -= 1
+       #     else:pass
+            await msg.edit("**Descaga Finalizada**")
             downlist[username] = []
             count = 0
             msg = files_formatter(str(root[username]["actual_root"]),username)
@@ -447,9 +447,9 @@ async def delete_draft_y_down_media(client: Client, message: Message):
             return
         else:
             await msg.edit("**Error**")
-            if procesos > 0:
-                procesos -= 1
-            else:pass
+         #   if procesos > 0:
+          #      procesos -= 1
+           # else:pass
             msg = files_formatter(str(root[username]["actual_root"]),username)
             await limite_msg(msg[0],username)
             downlist[username] = []
