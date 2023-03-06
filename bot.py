@@ -247,9 +247,9 @@ async def add(client: Client, message: Message):
         usr = message.text.split(" ")[1]
         Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
         await send_config()
-        await send(f"@{usr} Add\n{Configs}")
+        await send(f"@{usr} Add\n{Configs}", quote=True)
     else: 
-        await send("⚠️Comando Para Administrador ⚠️")
+        await send("⚠️Comando Para Administrador ⚠️", quote=True)
 
 @bot.on_message(filters.command("up", prefixes="/") & filters.private)
 async def up(client: Client, message: Message):	
@@ -767,7 +767,7 @@ async def uploadfile(file,usid,msg,username):
             return
 	
     session = aiohttp.ClientSession(connector=connector)
-    await msg.edit("𝑹𝒆𝒄𝒐𝒑𝒊𝒍𝒂𝒏𝒅𝒐 𝒊𝒏𝒇𝒐𝒓𝒎𝒂𝒄𝒊ó𝒏")
+    await msg.edit("`Comprobando que la Nube este Activa`")
     filename = Path(file).name
     filesize = Path(file).stat().st_size
     zipssize = 1024*1024*int(zips)
@@ -778,9 +778,9 @@ async def uploadfile(file,usid,msg,username):
     try:
         async with session.get(moodle,timeout=20,ssl=False) as resp:
             await resp.text()
-            await msg.edit("𝑺𝒆𝒓𝒗𝒊𝒅𝒐𝒓 𝑶𝒏𝒍𝒊𝒏𝒆 ✔")
+            await msg.edit("`Nube activa 😁✅`")
     except Exception as ex:
-        await msg.edit(f"{moodle} is Down:\n\n{ex}")
+        await msg.edit(f"{moodle} Caído 🔻:\n\n{ex}")
         return
 
     id_de_ms[username] = {"msg":msg, "pat":filename, "proc":"Up"}
