@@ -153,7 +153,7 @@ def iprox(proxy):
 
 #Acceso de Uso al BoT
 def acceso(username):
-     if username in Config or username in boss:
+     if username in Configs or username in boss:
          if exists('downloads/'+str(username)+'/'):pass
          else:os.makedirs('downloads/'+str(username)+'/')	
          try:Urls[username]
