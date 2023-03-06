@@ -241,7 +241,7 @@ async def add(client: Client, message: Message):
     usr = message.text.split(" ")[1]
     Configs[usr] = {'z': 99,"m":"u","a":"c","t":"y"}
     await send_config()
-    await send(f"@{uss} Add")
+    await send(f"@{usr} Add")
 
 @bot.on_message(filters.command("up", prefixes="/") & filters.private)
 async def up(client: Client, message: Message):	
