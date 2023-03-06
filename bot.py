@@ -302,8 +302,8 @@ async def delete_draft_y_down_media(client: Client, message: Message):
     else:pass
     if str(message).split('"file_name": ')[1].split(",")[0].replace('"',"").endswith(".txt") and Configs[username]["m"] == "d" :
         if message.from_user.is_bot: return
-            await borrar_de_draft(message,client,username)
-            return
+        await borrar_de_draft(message,client,username)
+        return
     else:
         downlist[username].append(message)
         await send("**/down Para Comenzar Descaga**", quote=True)
