@@ -114,10 +114,8 @@ async def download_archive(client, message):
     count = 0
     for i in downlist[username]:
         filesize = int(str(i).split('"file_size":')[1].split(",")[0])
-        try:
-            filename = str(i).split('"file_name": ')[1].split(",")[0].replace('"',"")	
-        except:
-	       filename = str(randint(11111,999999))+".mp4"
+        try:filename = str(i).split('"file_name": ')[1].split(",")[0].replace('"',"")	
+        except:filename = str(randint(11111,999999))+".mp4"
 	await bot.send_message(Channel_Id,f'**@{username} Envio un #archivo:**\n**Filename:** {filename}\n**Size:** {sizeof_fmt(filesize)}')	
 	start = time()		
 	await msg.edit(f"**Iniciando Descarga...**\n\n`{filename}`")
