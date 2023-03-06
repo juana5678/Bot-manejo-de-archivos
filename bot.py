@@ -290,6 +290,111 @@ async def download_archive(client: Client, message: Message):
         return
 
 #Descarga de Archivos y Enlaces 
+async def ytdlp_downloader(url,usid,msg,username,callback,format):
+    class YT_DLP_LOGGER(object):
+    def debug(self,msg):
+        pass
+    def warning(self,msg):
+        pass
+    def error(self,msg):
+        pass
+    j = str(root[username]["actual_root"])+"/"
+    resolution = str(format)
+    dlp = {"logger":YT_DLP_LOGGER(),"progress_hooks":[callback],"outtmpl":f"./{j}%(title)s.%(ext)s","format":f"best[height<={resolution}]"}
+    downloader = yt_dlp.YoutubeDL(dlp)
+    loop = asyncio.get_running_loop()
+    filedata = await loop.run_in_executor(None,downloader.extract_info, url)
+    filepath = downloader.prepare_filename(filedata)
+    return filedata["requested_downloads"][0]["_filename"]
+
+def update(username):
+    Configs[username] = {"z": 900,"m":"e","a":"a"}
+
+async def get_messages():
+    msg = await bot.get_messages(Channel_Id,message_ids=3)
+    Configs.update(loads(msg.text))
+
+async def send_config():
+    try:
+        await bot.edit_message_text(Channel_Id,message_id=3,text=dumps(Configs,indent=4))
+    except:
+        pass
+
+async def extractDownloadLink(contents):
+    for line in contents.splitlines():
+        m = re.search(r'href="((http|https)://download[^"]+)', line)
+        if m:
+            return m.groups()[0]
+
+async def download_mediafire(url, path, msg, callback=None):
+    session = aiohttp.ClientSession()
+    response = await session.get(url)
+    url = await extractDownloadLink(await response.text())
+    response = await session.get(url)
+    filename = response.content_disposition.filename
+    f = open(path+"/"+filename, "wb")
+    chunk_ = 0
+    total = int(response.headers.get("Content-Length"))
+    start = time()
+    while True:
+        chunk = await response.content.read(1024)
+        if not chunk:
+            break
+            chunk_+=len(chunk)
+		if callback:
+	            await callback(chunk_,total,filename,start,msg)
+                f.write(chunk)
+                f.flush()
+       return path+"/"+filename
+
+def sevenzip(fpath: Path, password: str = None, volume = None):
+    filters = [{"id": FILTER_COPY}]
+    fpath = Path(fpath)
+    fsize = fpath.stat().st_size
+    if not volume:
+        volume = fsize + 1024
+    ext_digits = len(str(fsize // volume + 1))
+    if ext_digits < 3:
+        ext_digits = 3
+    with MultiVolume(
+        fpath.with_name(fpath.name+".7z"), mode="wb", volume=volume, ext_digits=ext_digits
+    ) as archive:
+        with SevenZipFile(archive, "w", filters=filters, password=password) as archive_writer:
+            if password:
+                archive_writer.set_encoded_header_mode(True)
+                archive_writer.set_encrypted_header(True)
+            archive_writer.write(fpath, fpath.name)
+    files = []
+    for file in archive._files:
+        files.append(file.name)
+    return files
+
+def filezip(fpath: Path, password: str = None, volume = None):
+    filters = [{"id": FILTER_COPY}]
+    fpath = Path(fpath)
+    fsize = fpath.stat().st_size
+    if not volume:
+        volume = fsize + 1024
+    ext_digits = len(str(fsize // volume + 1))
+    if ext_digits < 3:
+        ext_digits = 3
+    with MultiVolume(
+        fpath.with_name(fpath.name+"zip"), mode="wb", volume=volume, ext_digits=0) as archive:
+        with SevenZipFile(archive, "w", filters=filters, password=password) as archive_writer:
+            if password:
+                archive_writer.set_encoded_header_mode(True)
+                archive_writer.set_encrypted_header(True)
+            archive_writer.write(fpath, fpath.name)
+    files = []
+    for file in archive._files:
+        files.append(file.name)
+    return files
+
+
+
+
+
+
 @bot.on_message(filters.media & filters.private)
 async def delete_draft_y_down_media(client: Client, message: Message):
     global procesos
