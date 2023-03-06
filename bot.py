@@ -413,8 +413,59 @@ async def delete_draft_y_down_media(client: Client, message: Message):
     else:
         downlist[username].append(message)
         await send("**/down Para Comenzar Descaga**", quote=True)
-        print(len(downlist[username]))
-        return
+#####
+        comp = comprobar_solo_un_proceso(username) 
+        if comp != False:
+            await send(comp)
+            return
+        else:pass
+        total_proc = total_de_procesos()
+        if total_proc != False:
+            await send(total_proc)
+            return
+        else:pass
+        procesos += 1
+        msg = await send("*Por Favor Espere 🔍")
+        count = 0
+        for i in downlist[username]:
+            filesize = int(str(i).split('"file_size":')[1].split(",")[0])
+            try:filename = str(i).split('"file_name": ')[1].split(",")[0].replace('"',"")	
+            except:filename = str(randint(11111,999999))+".mp4"
+            await bot.send_message(Channel_Id,f'**@{username} Envio un #archivo:**\n**Filename:** {filename}\n**Size:** {sizeof_fmt(filesize)}')	
+            start = time()		
+            await msg.edit(f"**Iniciando Descarga...**\n\n`{filename}`")
+            try:
+                a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
+                if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
+                    await msg.edit("**Down Finish**")
+                count +=1
+            except Exception as ex:
+                    if procesos > 0:
+                        procesos -= 1
+                    else:pass
+                    if "[400 MESSAGE_ID_INVALID]" in str(ex): pass		
+                    else:
+                        await bot.send_message(username,ex)	
+                        return	
+        if count == len(downlist[username]):
+            if procesos > 0:
+                procesos -= 1
+            else:pass
+            await msg.edit("Finish Down All")
+            downlist[username] = []
+            count = 0
+            msg = files_formatter(str(root[username]["actual_root"]),username)
+            await limite_msg(msg[0],username)
+            return
+        else:
+            await msg.edit("**Error**")
+            if procesos > 0:
+                procesos -= 1
+            else:pass
+            msg = files_formatter(str(root[username]["actual_root"]),username)
+            await limite_msg(msg[0],username)
+            downlist[username] = []
+            return      
 
 @bot.on_message((filters.regex("https://") | filters.regex("http://")) & filters.private)
 async def down_link(client: Client, message: Message):
