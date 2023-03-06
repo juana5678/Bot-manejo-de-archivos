@@ -59,7 +59,7 @@ async def uploadfile(file,usid,msg,username):
     elif mode  == "upcmw":
           if int(zips) > 499:
               await msg.edit("**⚠️CMW no Admite Archivos Mayores a 499 Mb⚠️**")
-               return
+              return
     elif mode == "upltu":
           if int(zips) > 249:
               await msg.edit("**⚠️UVS.LTU no Admite Archivos Mayores a 19 Mb⚠️**")
