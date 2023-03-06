@@ -1,3 +1,4 @@
+impor upload_token
 import shutil
 import asyncio
 import tgcrypto
