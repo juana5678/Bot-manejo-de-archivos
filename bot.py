@@ -256,7 +256,7 @@ async def text_filter(client, message):
             else:
                 await send(ex)	
                 return
-    else:
+    elif 'https://' in msg:
         j = str(root[username]["actual_root"])+"/"
         url = message.text
         async with aiohttp.ClientSession() as session:
