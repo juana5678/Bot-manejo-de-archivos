@@ -923,7 +923,21 @@ class MoodleClient:
             return a , url
         except:
             return url
+class Progress(BufferedReader):
+    def __init__(self, filename, read_callback):
+        f = open(filename, "rb")
+        self.filename = Path(filename).name
+        self.__read_callback = read_callback
+        super().__init__(raw=f)
+        self.start = time()
+        self.length = Path(filename).stat().st_size
 
+    def read(self, size=None):
+        calc_sz = size
+        if not calc_sz:
+            calc_sz = self.length - self.tell()
+        self.__read_callback(self.tell(), self.length,self.start,self.filename)
+        return super(Progress, self).read(size))
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
