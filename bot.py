@@ -198,7 +198,7 @@ async def text_filter(client, message):
     user_id = message.from_user.id
     username = message.from_user.username
     send = message.reply
-    msg = message.text
+    mss = message.text
     try:await get_messages()
     except:await send_config()
     if acceso(username) == False:
@@ -258,7 +258,7 @@ async def text_filter(client, message):
             else:
                 await send(ex)	
                 return
-    elif '/downlink' in msg:
+    elif '/downlink' in mss:
         j = str(root[username]["actual_root"])+"/"
         url = message.text.split(" ")[1]
         async with aiohttp.ClientSession() as session:
@@ -288,7 +288,7 @@ async def text_filter(client, message):
                 await limite_msg(msg[0],username)
                 return
 
-    elif "/up_" in msg:
+    elif "/up_" in mss:
           comp = comprobar_solo_un_proceso(username) 
           if comp != False:
               await send(comp)
@@ -319,16 +319,16 @@ async def text_filter(client, message):
           except Exception as ex:
               await send(ex)
 
-    elif '/start' in msg:
+    elif '/start' in mss:
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`")
 
-    elif '/del_all'in msg:
+    elif '/del_all'in mss:
         shutil.rmtree("downloads/"+username+"/")
         root[username]["actual_root"] = "downloads/"+username
         msg = files_formatter(str(root[username]["actual_root"])+"/",username)
         await limite_msg(msg[0],username)
 
-    elif '/add' in msg:
+    elif '/add' in mss:
         usr = message.text.split(" ")[1]
         if username in boss:
             Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
@@ -337,7 +337,7 @@ async def text_filter(client, message):
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
 
-    elif '/cancel' in msg:
+    elif '/cancel' in mss:
         if id_de_ms[username]["proc"] == "Up":
             p = await client.send_message(username,"`Por Favor Espere...`")
             try:
@@ -359,21 +359,21 @@ async def text_filter(client, message):
             await client.send_message(username,"`No hay Tareas para Cancelar...`")
             return
 
-    elif '/uvs_ltu' in msg:
+    elif '/uvs_ltu' in mss:
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "upltu"
         Configs[username]["z"] = 19
         await send_config()
         await send("**Nube ☁️ uvs.ltu Configurada**")
 
-    elif 'cmw' in msg:
+    elif 'cmw' in mss:
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "upcmw"
         Configs[username]["z"] = 7
         await send_config()
         await send("**Nube ☁️ CMW ☁️ Configurada**")
 
-    elif 'gtm' in msg:
+    elif 'gtm' in mss:
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "upgtm"
         Configs[username]["z"] = 7
