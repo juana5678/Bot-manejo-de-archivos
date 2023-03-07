@@ -885,10 +885,10 @@ async def uploadfile(file,usid,msg,username):
                 try:
                     upload = await client.uploadtoken(path,lambda chunk,total,start,filen:
                     uploadfile_progres(chunk,total,start,filen,msg),token)
-                     if mode == "upltu" or mode == "gtm":
-                         upload = upload[1]
-                         upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
-                         upload = str(upload) + '?token=' + token
+                    if mode == "upltu" or mode == "upgtm" or mode == "upcmw":
+                        upload = upload[1]
+                        upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
+                        upload = str(upload) + '?token=' + token
 
 
 
