@@ -878,23 +878,23 @@ async def uploadfile(file,usid,msg,username):
                         await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
                     id_de_ms[username]["proc"] = ""
                     return
-            if len(logslinks) == 1:
-                await msg.edit("✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆")
-                with open(filename+".txt","w") as f:
-                    message = ""
-                    lin = ""
-                    for li in logslinks:
-                        message+=li+"\n"
-                        lin+=li+"\n"
-                    f.write(message)				
-                await bot.send_document(usid,filename+".txt",caption=" 
-                id_de_ms[username]["proc"] = ""
-                os.unlink(filename+".txt")
-                return
-            else:
-                await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
-                id_de_ms[username]["proc"] = ""
-                return                    
+        if len(logslinks) == 1:
+            await msg.edit("✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆")
+            with open(filename+".txt","w") as f:
+                message = ""
+                lin = ""
+                for li in logslinks:
+                    message+=li+"\n"
+                    lin+=li+"\n"
+                f.write(message)				
+            await bot.send_document(usid,filename+".txt",caption=" 
+            id_de_ms[username]["proc"] = ""
+            os.unlink(filename+".txt")
+            return
+        else:
+            await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
+            id_de_ms[username]["proc"] = ""
+            return                    
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
