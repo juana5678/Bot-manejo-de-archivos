@@ -937,7 +937,7 @@ class Progress(BufferedReader):
         if not calc_sz:
             calc_sz = self.length - self.tell()
         self.__read_callback(self.tell(), self.length,self.start,self.filename)
-        return super(Progress, self).read(size))
+        return super(Progress, self).read(size)
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
