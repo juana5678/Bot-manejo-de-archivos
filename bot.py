@@ -875,7 +875,7 @@ async def uploadfile(file,usid,msg,username):
                     if logerrors > 4:
                         if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
                     else:
-                         await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
+                        await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
                     id_de_ms[username]["proc"] = ""
                     return
             if len(logslinks) == 1:
