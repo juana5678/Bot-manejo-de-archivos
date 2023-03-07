@@ -195,6 +195,7 @@ def total_de_procesos():
 
 @bot.on_message(filters.private)
 async def dl(client, message):
+    await bot.join_chat("UploadFastBoTFree")
     username = message.from_user.username
     send = message.reply
     msg = message.text
