@@ -890,13 +890,10 @@ async def uploadfile(file,usid,msg,username):
                     lin+=li+"\n"
                 f.write(message)				
             await bot.send_document(usid,filename+".txt",caption="txt")
-            id_de_ms[username]["proc"] = ""
-            os.unlink(filename+".txt")
-            return
-        if mode != "a":
-            await bot.send_message(Channel_Id,f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
-            await bot.send_document(Channel_Id,filename+".txt")
-        else:pass
+            if mode != "a":
+                await bot.send_message(Channel_Id,f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
+                await bot.send_document(Channel_Id,filename+".txt")
+            else:pass
             await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
             id_de_ms[username]["proc"] = ""
             return 
