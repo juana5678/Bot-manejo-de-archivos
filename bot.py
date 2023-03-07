@@ -203,36 +203,119 @@ async def text_filter(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    if "/up_" in msg:
-         comp = comprobar_solo_un_proceso(username) 
-         if comp != False:
-             await send(comp)
-             return
-         else:pass
-         total_proc = total_de_procesos()
-         if total_proc != False:
-             await send(total_proc)
-             return
-         else:pass
-         list = int(message.text.split("_")[1])		
-         msgh = files_formatter(str(root[username]["actual_root"]),username)
-         try:
-             path = str(root[username]["actual_root"]+"/")+msgh[1][list]
-             msg = await send(f"Archivo 📂: {path}**")
-             if Configs[username]["m"] == "u": 
-                 fd = await uploadfile(path,user_id,msg,username)
-             elif Configs[username]["m"] == "e":
-                 if len(Urls[username]) >= 10  and username not in boss:
-                     msg.edit('⛔️ 𝑬𝒍 𝒍𝒊𝒎𝒊𝒕𝒆 𝒅𝒆 𝒍𝒊𝒏𝒌𝒔 𝒇𝒖𝒆 𝒑𝒂𝒔𝒂𝒅𝒐 , 𝒖𝒕𝒊𝒍𝒊𝒛𝒆 **/deletelinks**')
-                     return
-                 else:
-                     await uploadfileapi(path,user_id,msg,username)
-             elif Configs[username]["m"] == "n":
-                 await proccess(path,msg,username)
-             else:
-                 await uploaddraft(path,user_id,msg,username)
-         except Exception as ex:
-             await send(ex)
+    if "youtu.be/" in message.text or "twitch.tv/" in message.text or "youtube.com/" in message.text or "xvideos.com" in message.text or "xnxx.com" in message.text:
+        list = message.text.split(" ")
+        url = list[0]
+        try:format = str(list[1])
+        except:format = "720"
+        msg = await send("**Por Favor Espere 🔍**")
+        await client.send_message(Channel_Id,f'**@{username} Envio un link de #youtube:**\n**Url:** {url}\n**Formato:** {str(format)}p')
+        procesos += 1
+        download = await ytdlp_downloader(url,user_id,msg,username,lambda data: download_progres(data,msg,format),format)
+        if procesos != 0:
+            procesos -= 1
+        await msg.edit("**Enlace Descargado**")
+        msg = files_formatter(str(root[username]["actual_root"]),username)
+        await limite_msg(msg[0],username)
+        return
+
+    elif "https://www.mediafire.com/" in message.text:
+        url = message.text
+        if "?dkey=" in str(url):
+            url = str(url).split("?dkey=")[0]
+        msg = await send("**Por Favor Espere 🔍**")
+        await client.send_message(Channel_Id,f'**@{username} Envio un link de #mediafire:**\n**Url:** {url}\n')
+        procesos += 1
+        download = await ytdlp_downloader(url,user_id,msg,username,lambda data: download_progres(data,msg,format),format)
+        if procesos != 0:
+            procesos -= 1
+        await msg.edit("**Enlace Descargado**")
+        msg = files_formatter(str(root[username]["actual_root"]),username)
+        await limite_msg(msg[0],username)
+        return
+
+    elif "https://mega.nz/file/" in message.text:
+        url = message.text
+        mega = pymegatools.Megatools()
+        try:
+            filename = mega.filename(url)
+            g = await send(f"Descargando {filename} ...")
+            data = mega.download(url,progress=None)	
+            procesos += 1
+            shutil.move(filename,str(root[username]["actual_root"]))
+            await g.delete()
+            msg = files_formatter(str(root[username]["actual_root"]),username)
+            await limite_msg(msg[0],username)
+            if procesos != 0:
+                procesos -= 1
+            return
+        except Exception as ex:
+            if procesos != 0:
+                procesos -= 1
+            if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
+            else:
+                await send(ex)	
+                return
+    else:
+        j = str(root[username]["actual_root"])+"/"
+        url = message.text
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as r:
+                try:
+                    filename = unquote_plus(url.split("/")[-1])
+                except:
+                    filename = r.content_disposition.filename	
+                fsize = int(r.headers.get("Content-Length"))
+                msg = await send("**Por Favor Espere 🔍**")
+                procesos += 1
+                await client.send_message(Channel_Id,f'**@{username} Envio un #link :**\n**Url:** {url}\n')
+                f = open(f"{j}{filename}","wb")
+                newchunk = 0
+                start = time()
+                async for chunk in r.content.iter_chunked(1024*1024):
+                    newchunk+=len(chunk)
+                    await mediafiredownload(newchunk,fsize,filename,start,msg)
+                    f.write(chunk)
+                f.close()
+                file = f"{j}{filename}"
+                await msg.edit("**Enlace Descargado**")
+                if procesos != 0:
+                    procesos -= 1
+                else:pass
+                msg = files_formatter(str(root[username]["actual_root"]),username)
+                await limite_msg(msg[0],username)
+                return
+
+    elif "/up_" in msg:
+          comp = comprobar_solo_un_proceso(username) 
+          if comp != False:
+              await send(comp)
+              return
+          else:pass
+          total_proc = total_de_procesos()
+          if total_proc != False:
+              await send(total_proc)
+              return
+          else:pass
+          list = int(message.text.split("_")[1])		
+          msgh = files_formatter(str(root[username]["actual_root"]),username)
+          try:
+              path = str(root[username]["actual_root"]+"/")+msgh[1][list]
+              msg = await send(f"Archivo 📂: {path}**")
+              if Configs[username]["m"] == "u": 
+                  fd = await uploadfile(path,user_id,msg,username)
+              elif Configs[username]["m"] == "e":
+                  if len(Urls[username]) >= 10  and username not in boss:
+                      msg.edit('⛔️ 𝑬𝒍 𝒍𝒊𝒎𝒊𝒕𝒆 𝒅𝒆 𝒍𝒊𝒏𝒌𝒔 𝒇𝒖𝒆 𝒑𝒂𝒔𝒂𝒅𝒐 , 𝒖𝒕𝒊𝒍𝒊𝒛𝒆 **/deletelinks**')
+                      return
+                  else:
+                      await uploadfileapi(path,user_id,msg,username)
+              elif Configs[username]["m"] == "n":
+                  await proccess(path,msg,username)
+              else:
+                  await uploaddraft(path,user_id,msg,username)
+          except Exception as ex:
+              await send(ex)
 
     elif '/start' in msg:
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`")
@@ -294,6 +377,7 @@ async def text_filter(client, message):
         Configs[username]["z"] = 7
         await send_config()
         await send("**Nube ☁️ GTM ☁️ Configurada**")
+
 
 #Descarga de Archivos y Enlaces
 @bot.on_message(filters.media & filters.private)
