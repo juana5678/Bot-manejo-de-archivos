@@ -890,14 +890,60 @@ async def uploadfile(file,usid,msg,username):
                     lin+=li+"\n"
                 f.write(message)				
             await bot.send_document(usid,filename+".txt",caption="txt")
-            if mode != "a":
-                await bot.send_message(Channel_Id,f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
-                await bot.send_document(Channel_Id,filename+".txt")
-            else:pass
-            await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
-            id_de_ms[username]["proc"] = ""
-            return 
-                   
+            await bot.send_message(f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
+           # await bot.send_document(Channel_Id,filename+".txt")
+        else:pass
+        await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
+        id_de_ms[username]["proc"] = ""
+        return 
+#Subida si el Archivo no sobrepasa el tamaño Predeterminado 
+    else:           
+        client = MoodleClient(usernamew,passwordw,moodle,connector)
+        while logerrors < 5:
+            error_conv = 0
+            try:
+                upload = await client.uploadtoken(path,lambda chunk,total,start,filen:uploadfile_progres(chunk,total,start,filen,msg),token)
+                if mode == "upltu" or mode == "upgtm" or mode == "upcmw":
+                    upload = upload[1]
+                    upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
+                    upload = str(upload) + '?token=' + token
+                else: 
+                    upload = upload[0]
+                if upload == False:
+                    await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓.")
+                    id_de_ms[username]["proc"] = ""
+                    return
+                else:pass
+                await bot.send_message(usid,f"__**{upload}**__",disable_web_page_preview=True)
+                logslinks.append(upload)
+                logerrors = 0
+                break
+            except Exception as ex:
+                logerrors += 1
+                if logerrors > 4:
+                    if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
+                else:
+                    await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
+                id_de_ms[username]["proc"] = ""
+                return
+    if len(logslinks) == 1:
+        await msg.edit("✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆")
+        with open(filename+".txt","w") as f:
+            message = ""
+            lin = ""
+            for li in logslinks:
+                message+=li+"\n"
+                lin+=li+"\n"
+            f.write(message)				
+            await bot.send_document(usid,filename+".txt",caption="txt")
+            await bot.send_message(f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
+           # await bot.send_document(Channel_Id,filename+".txt")
+        else:pass
+        await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
+        id_de_ms[username]["proc"] = ""
+        return
+
+
 ###Client Subdia
 class MoodleClient:
     def __init__(self,username,password,moodle,proxy):
