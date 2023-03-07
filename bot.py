@@ -205,7 +205,6 @@ async def hola(client, message):
         return
     else:pass
     await send('Hola')
-    else:pass
 
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
