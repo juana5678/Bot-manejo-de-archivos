@@ -262,7 +262,7 @@ async def text_filter(client, message):
                 if procesos > 0:
                     procesos -= 1
                 else:pass
-               return
+                return
             except:
                 if procesos > 0:
                     procesos -= 1
