@@ -339,7 +339,7 @@ async def text_filter(client, message):
 
     elif '/proxy' in mss:
         if username in boss:
-            Configs[ucuser][gp] = str(message.text.split(" ")[1])
+            Configs["gp"] = str(message.text.split(" ")[1])
             await send_config()
             await send(f"**Proxy Establecido**", quote=True)
         else: 
