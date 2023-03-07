@@ -887,7 +887,7 @@ async def uploadfile(file,usid,msg,username):
                     message+=li+"\n"
                     lin+=li+"\n"
                 f.write(message)				
-            await bot.send_document(usid,filename+".txt",caption=" 
+            await bot.send_document(usid,filename+".txt",caption="txt")
             id_de_ms[username]["proc"] = ""
             os.unlink(filename+".txt")
             return
