@@ -193,8 +193,8 @@ def total_de_procesos():
 
 #inicio Comandos 
 
-@bot.on_message(filters.private)
-async def dl(client, message):
+@bot.on_message(filters.text & filters.private)
+async def hola(client, message):
     username = message.from_user.username
     send = message.reply
     msg = message.text
@@ -204,15 +204,7 @@ async def dl(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    if 'h' in msg:
-        await send('Ostia')
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton("Data", callback_data="callback_data")],
-                [InlineKeyboardButton("Docs", url="https://docs.pyrogram.org")]
-            ])
-        await send('Ostia', reply_markup)
-        return
+    await send('Hola')
     else:pass
 
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
