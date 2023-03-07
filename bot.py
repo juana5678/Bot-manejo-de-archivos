@@ -85,7 +85,7 @@ def files_formatter(path,username):
              dirc.append(str(Path(p).name))
     result.sort()
     dirc.sort()
-    msg = f'** 📂Archivos📁**\n**Utilice:\n**/up - Más # De Archivo Para Subirlo\n/del_al - Para Eliminar Todo el Directorio**\nDirectorio Actual: `{str(rut).split("downloads/")[-1]}`\n\n'
+    msg = f'** 📂Archivos📁**\n**Utilice:\n**/up_ - Más # De Archivo Para Subirlo\n/del_all - Para Eliminar Todo el Directorio**\n**Ruta: **`{str(rut).split("downloads/")[-1]}`\n\n'
     if result == [] and dirc == [] :
         return msg , final
     for k in dirc:
@@ -98,9 +98,9 @@ def files_formatter(path,username):
             size = Path(str(path)+"/"+n).stat().st_size
         except: pass
         if not "." in n:
-            msg+=f"**{i}**📂 `{n}` `|` `-` \n" 
+            msg+=f"**╭─❮ /up_{i} ❯─❮ /rn_{i} ❯─❮ /dl_{i} ❯\n╰➣ `{n}` `|` `-` \n" 
         else:
-            msg+=f"**{i}** 📄 `|` `{n}` `|` `{sizeof_fmt(size)}` \n"
+            msg+=f"**╭─❮ /up_{i} ❯─❮ /rn_{i} ❯─❮ /dl_{i} ❯\n╰➣ {sizeof_fmt(size)} - ** `{n}`\n"
             i+=1
     #msg+= f"\n**Eliminar Todo**\n    **/deleteall**"
     return msg , final
@@ -281,103 +281,19 @@ async def text_filter(client, message):
         await send_config()
         await send("**Nube ☁️ uvs.ltu Configurada**")
 
-#Comfiguracion de Nubes#######################
-@bot.on_message(filters.command("gtm", prefixes="/") & filters.private)
-async def gtm(client, message):
-    username = message.from_user.username
-    send = message.reply
-    try:await get_messages()
-    except:await send_config()
-    if acceso(username) == False:
-        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
-        return
-    else:pass
-    Configs[username]["m"] = "u"
-    Configs[username]["a"] = "upgtm"
-    Configs[username]["z"] = 7
-    await send_config()
-    await send("**Nube ☁️ GTM ☁️ Configurada**")
+    elif 'cmw' in msg:
+        Configs[username]["m"] = "u"
+        Configs[username]["a"] = "upcmw"
+        Configs[username]["z"] = 7
+        await send_config()
+        await send("**Nube ☁️ CMW ☁️ Configurada**")
 
-@bot.on_message(filters.command("cmw", prefixes="/") & filters.private)
-async def cmw(client, message):
-    username = message.from_user.username
-    send = message.reply
-    try:await get_messages()
-    except:await send_config()
-    if acceso(username) == False:
-        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
-        return
-    else:pass
-    Configs[username]["m"] = "u"
-    Configs[username]["a"] = "upcmw"
-    Configs[username]["z"] = 7
-    await send_config()
-    await send("**Nube ☁️ CMW ☁️ Configurada**")
-
-#Descargas de Archivos Reenviados
-@bot.on_message(filters.command("down", prefixes="/") & filters.private)
-async def download_archive(client: Client, message: Message):
-    global procesos
-    username = message.from_user.username
-    send = message.reply
-    try:await get_messages()
-    except:await send_config()
-    if acceso(username) == False:
-        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
-        return
-    else:pass
-    comp = comprobar_solo_un_proceso(username) 
-    if comp != False:
-        await send(comp)
-        return
-    else:pass
-    total_proc = total_de_procesos()
-    if total_proc != False:
-        await send(total_proc)
-        return
-    else:pass
-    procesos += 1
-    msg = await send("*Por Favor Espere 🔍")
-    count = 0
-    for i in downlist[username]:
-        filesize = int(str(i).split('"file_size":')[1].split(",")[0])
-        try:filename = str(i).split('"file_name": ')[1].split(",")[0].replace('"',"")	
-        except:filename = str(randint(11111,999999))+".mp4"
-        await bot.send_message(Channel_Id,f'**@{username} Envio un #archivo:**\n**Filename:** {filename}\n**Size:** {sizeof_fmt(filesize)}')	
-        start = time()		
-        await msg.edit(f"**Iniciando Descarga...**\n\n`{filename}`")
-        try:
-            a = await i.download(file_name=str(root[username]["actual_root"])+"/"+filename,progress=downloadmessage_progres,progress_args=(filename,start,msg))
-            if Path(str(root[username]["actual_root"])+"/"+ filename).stat().st_size == filesize:
-                await msg.edit("**Descaga Finalizada**")
-            count +=1
-        except Exception as ex:
-                if procesos > 0:
-                    procesos -= 1
-                else:pass
-                if "[400 MESSAGE_ID_INVALID]" in str(ex): pass		
-                else:
-                    await bot.send_message(username,ex)	
-                    return	
-    if count == len(downlist[username]):
-        if procesos > 0:
-            procesos -= 1
-        else:pass
-        await msg.edit("Finish Down All")
-        downlist[username] = []
-        count = 0
-        msg = files_formatter(str(root[username]["actual_root"]),username)
-        await limite_msg(msg[0],username)
-        return
-    else:
-        await msg.edit("**Error**")
-        if procesos > 0:
-            procesos -= 1
-        else:pass
-        msg = files_formatter(str(root[username]["actual_root"]),username)
-        await limite_msg(msg[0],username)
-        downlist[username] = []
-        return
+    elif 'gtm' in msg:
+        Configs[username]["m"] = "u"
+        Configs[username]["a"] = "upgtm"
+        Configs[username]["z"] = 7
+        await send_config()
+        await send("**Nube ☁️ GTM ☁️ Configurada**")
 
 #Descarga de Archivos y Enlaces
 @bot.on_message(filters.media & filters.private)
@@ -409,7 +325,7 @@ async def delete_draft_y_down_media(client: Client, message: Message):
         return
     else:
         downlist[username].append(message)
-        msg = await send("**Verificando Archivo 🔍**", quote=True)
+        msg = await send("**Verificando Archivo **", quote=True)
         for i in downlist[username]:
             filesize = int(str(i).split('"file_size":')[1].split(",")[0])
             try:filename = str(i).split('"file_name": ')[1].split(",")[0].replace('"',"")	
