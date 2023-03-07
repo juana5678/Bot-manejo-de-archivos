@@ -193,7 +193,7 @@ def total_de_procesos():
 
 #inicio Comandos 
 
-@bot.on_message(filters.command("hola")
+@bot.on_message(filters.command("hola" & filters.private)
 async def hola(client, message):
     username = message.from_user.username
     send = message.reply
@@ -205,9 +205,9 @@ async def hola(client, message):
         return
     else:pass
   #  if hola in msg:
-    await send('Hola')
+    await send('Hola Comando')
 
-@bot.on_message(filters.text)
+@bot.on_message(filters.text('hola') & filters.private)
 async def hola(client, message):
     username = message.from_user.username
     send = message.reply
@@ -219,7 +219,7 @@ async def hola(client, message):
         return
     else:pass
     if hola in msg:
-        await send('Hola')
+        await send('Hola Text')
 
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
