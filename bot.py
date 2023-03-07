@@ -191,7 +191,7 @@ def total_de_procesos():
         return False
 
 
-#######inicio Todos los Comandos ########
+####### Inicio Todos los Comandos ########
 @bot.on_message(filters.text & filters.private)
 async def text_filter(client, message):
     global procesos
@@ -334,6 +334,14 @@ async def text_filter(client, message):
             Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
             await send_config()
             await send(f"@{usr} **Tiene Acceso**", quote=True)
+        else: 
+            await send("⚠️Comando Para Administrador ⚠️", quote=True)
+
+    elif '/add_proxy' in mss:
+        if username in boss:
+            Configs[gp] = str(message.text.split(" ")[1])
+            await send_config()
+            await send(f"**Proxy Establecido**", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
 
@@ -582,6 +590,21 @@ async def extractDownloadLink(contents):
         m = re.search(r'href="((http|https)://download[^"]+)', line)
         if m:
             return m.groups()[0]
+
+async def mediafiredownload(chunk,total,filename,start,message):
+    now = time()
+    diff = now - start
+    mbs = chunk / diff
+    msg = f"`Nombre: {filename}`\n\n"
+    try:
+        msg+= update_progress_bar(chunk,total)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
+    except: pass
+    msg+= f"`Progreso: {sizeof_fmt(chunk)} - {sizeof_fmt(total)}`\n\n"
+    global seg
+    if seg != localtime().tm_sec:
+        try: await message.edit(msg)
+        except:pass
+    seg = localtime().tm_sec
 
 async def download_mediafire(url, path, msg, callback=None):
     session = aiohttp.ClientSession()
