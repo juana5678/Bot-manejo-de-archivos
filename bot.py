@@ -844,7 +844,7 @@ async def uploadfile(file,usid,msg,username):
         await msg.edit(f"{moodle} Caído 🔻:\n\n{ex}")
         return
 
-    id_de_ms[username] = {"msg":msg, "pat":filename, "proc":"Up"}
+    id_de_ms[username] = {"msg":msg, "path":filename, "proc":"Up"}
     if filesize-1048>zipssize:
         parts = round(filesize / zipssize)
         await msg.edit(f"📦 𝑪𝒐𝒎𝒑𝒓𝒊𝒎𝒊𝒆𝒏𝒅𝒐")
