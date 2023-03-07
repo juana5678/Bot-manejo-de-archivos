@@ -207,7 +207,7 @@ async def hola(client, message):
   #  if hola in msg:
     await send('Hola Comando')
 
-@bot.on_message(filters.text('hola') & filters.private)
+@bot.on_message(filters.text(text_filter("hola")) & filters.private)
 async def hola(client, message):
     username = message.from_user.username
     send = message.reply
