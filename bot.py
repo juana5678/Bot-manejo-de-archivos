@@ -204,7 +204,7 @@ async def hola(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-  #  if hola in msg:
+  #  if "hola" in msg:
     await send('Hola Comando')
 
 @bot.on_message(filters.text & filters.private)
