@@ -210,7 +210,7 @@ async def dl(client, message):
             [
                 [InlineKeyboardButton("Data", callback_data="callback_data")],
                 [InlineKeyboardButton("Docs", url="https://docs.pyrogram.org")]
-            ]))
+            ])
         await send('Ostia', reply_markup)
         return
     else:pass
