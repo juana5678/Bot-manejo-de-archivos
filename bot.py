@@ -200,7 +200,6 @@ async def dl(client, message):
     msg = message.text
     try:await get_messages()
     except:await send_config()
-    await bot.join_chat("UploadFastBoTFree")
     if acceso(username) == False:
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
