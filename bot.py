@@ -195,6 +195,7 @@ def total_de_procesos():
 @bot.on_message(filters.text & filters.private)
 async def text_filter(client, message):
     global procesos
+    user_id = message.from_user.id
     username = message.from_user.username
     send = message.reply
     msg = message.text
