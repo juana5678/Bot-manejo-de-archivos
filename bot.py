@@ -191,7 +191,7 @@ def total_de_procesos():
         return False
 
 
-#inicio Comandos ########
+#######inicio Todos los Comandos ########
 @bot.on_message(filters.text & filters.private)
 async def text_filter(client, message):
     username = message.from_user.username
@@ -214,7 +214,7 @@ async def text_filter(client, message):
              await send(total_proc)
              return
          else:pass
-         list = int(message.text.split(" ")[1])		
+         list = int(message.text.split("_")[1])		
          msgh = files_formatter(str(root[username]["actual_root"]),username)
          try:
              path = str(root[username]["actual_root"]+"/")+msgh[1][list]
@@ -251,154 +251,37 @@ async def text_filter(client, message):
             await send(f"@{usr} **Tiene Acceso**", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
-   
-@bot.on_message(filters.command("start", prefixes="/") & filters.private)
-async def start(client, message):
-    username = message.from_user.username
-    send = message.reply
-    try:await get_messages()
-    except:await send_config()
-    if acceso(username) == False:
-        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
-        return
-    else:pass
-    await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`")
- #   msg = '**Hola, Cómo estás?\nBienvenido, Te ayudaré a Descagar Gratis ❤️**\n\n`Actualmente su subida es:`'
-  #  if Configs[username]["a"] == "upltu":
-   #     mode = "**Subida hacia uvs.ltu**\n"
-   # elif Configs[username]["a"] == "upgtm":
-    #      mode = "**Subida hacia GTM**\n"
-    #elif Configs[username]["a"] == "upcmw":
-   #       mode = "**Subida hacia CMW**\n"
-   # msg += mode
-   # await send(msg)
 
-@bot.on_message(filters.command("del_all", prefixes="/")& filters.private)
-async def del_all(client: Client, message: Message):
-    username = message.from_user.username
-    send = message.reply
-    try:await get_messages()
-    except:await send_config()
-    if acceso(username) == False:
-        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
-        return
-    else:pass
-    shutil.rmtree("downloads/"+username+"/")
-    root[username]["actual_root"] = "downloads/"+username
-    msg = files_formatter(str(root[username]["actual_root"])+"/",username)
-    await limite_msg(msg[0],username)
-
-@bot.on_message(filters.command("add", prefixes="/") & filters.private)
-async def add(client: Client, message: Message):	
-    username = message.from_user.username
-    send = message.reply
-    user_id = message.from_user.id
-    try:await get_messages()
-    except:await send_config()
-    if username in boss:
-        usr = message.text.split(" ")[1]
-        Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
-        await send_config()
-        await send(f"@{usr} **Tiene Acceso**", quote=True)
-    else: 
-        await send("⚠️Comando Para Administrador ⚠️", quote=True)
-
-@bot.on_message(filters.command("up", prefixes="/") & filters.private)
-async def up(client: Client, message: Message):	
-    username = message.from_user.username
-    send = message.reply
-    user_id = message.from_user.id
-    try:await get_messages()
-    except:await send_config()
-    if acceso(username) == False:
-        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
-        return
-    else:pass
-    if username not in boss and Configs["s"] == "Off":
-        await client.send_message(username,'⛔𝑬𝒔𝒕𝒂 𝒇𝒖𝒏𝒄𝒊𝒐𝒏 𝒆𝒔𝒕𝒂 𝒂𝒑𝒂𝒈𝒂𝒅𝒂')
-        return
-    else: pass	
-    comp = comprobar_solo_un_proceso(username) 
-    if comp != False:
-        await send(comp)
-        return
-    else:pass
-    total_proc = total_de_procesos()
-    if total_proc != False:
-        await send(total_proc)
-        return
-    else:pass
-    list = int(message.text.split(" ")[1])		
-    msgh = files_formatter(str(root[username]["actual_root"]),username)
-    try:
-        path = str(root[username]["actual_root"]+"/")+msgh[1][list]
-        msg = await send(f"Archivo 📂: {path}**")
-        if Configs[username]["m"] == "u": 
-            fd = await uploadfile(path,user_id,msg,username)
-        elif Configs[username]["m"] == "e":
-            if len(Urls[username]) >= 10  and username not in boss:
-                await msg.edit('⛔️ 𝑬𝒍 𝒍𝒊𝒎𝒊𝒕𝒆 𝒅𝒆 𝒍𝒊𝒏𝒌𝒔 𝒇𝒖𝒆 𝒑𝒂𝒔𝒂𝒅𝒐 , 𝒖𝒕𝒊𝒍𝒊𝒛𝒆 **/deletelinks**')
+    elif '/cancel' in msg 
+        if id_de_ms[username]["proc"] == "Up":
+            p = await client.send_message(username,"`Por Favor Espere...`")
+            try:
+                await id_de_ms[username]["msg"].delete()
+                id_de_ms[username] = {"msg":"", "proc":""}
+                await p.edit("`Tarea Cancelada...`")
+                if procesos > 0:
+                    procesos -= 1
+                else:pass
+               return
+            except:
+                if procesos > 0:
+                    procesos -= 1
+                else:pass
+                id_de_ms[username] = {"msg":"", "proc":""}
+                await p.edit("`Tarea Cancelada...`")
                 return
-            else:
-                await uploadfileapi(path,user_id,msg,username)
-        elif Configs[username]["m"] == "n":
-            await proccess(path,msg,username)
         else:
-            await uploaddraft(path,user_id,msg,username)
-    except Exception as ex:
-        await send(ex)
-
-@bot.on_message(filters.command("cancel", prefixes="/") & filters.private)
-async def cancelar(client: Client, message: Message):	
-    global procesos
-    username = message.from_user.username
-    send = message.reply
-    user_id = message.from_user.id
-    try:await get_messages()
-    except:await send_config()
-    if acceso(username) == False:
-        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
-        return
-    else:pass
-    if id_de_ms[username]["proc"] == "Up":
-        p = await client.send_message(username,"`Por Favor Espere...`")
-        try:
-            await id_de_ms[username]["msg"].delete()
-            id_de_ms[username] = {"msg":"", "proc":""}
-            await p.edit("`Tarea Cancelada...`")
-            if procesos > 0:
-                procesos -= 1
-            else:pass
+            await client.send_message(username,"`No hay Tareas para Cancelar...`")
             return
-        except:
-            if procesos > 0:
-                procesos -= 1
-            else:pass
-            id_de_ms[username] = {"msg":"", "proc":""}
-            await p.edit("`Tarea Cancelada...`")
-            return
-    else:
-        await client.send_message(username,"`No hay Tareas para Cancelar...`")
-        return      
 
+    elif '/uvs_ltu' in msg:
+        Configs[username]["m"] = "u"
+        Configs[username]["a"] = "upltu"
+        Configs[username]["z"] = 19
+        await send_config()
+        await send("**Nube ☁️ uvs.ltu Configurada**")
 
 #Comfiguracion de Nubes#######################
-@bot.on_message(filters.command("uvs_ltu", prefixes="/") & filters.private)
-async def uvs_ltu(client, message):
-    username = message.from_user.username
-    send = message.reply
-    try:await get_messages()
-    except:await send_config()
-    if acceso(username) == False:
-        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
-        return
-    else:pass
-    Configs[username]["m"] = "u"
-    Configs[username]["a"] = "upltu"
-    Configs[username]["z"] = 19
-    await send_config()
-    await send("**Nube ☁️ uvs.ltu Configurada**")
-
 @bot.on_message(filters.command("gtm", prefixes="/") & filters.private)
 async def gtm(client, message):
     username = message.from_user.username
