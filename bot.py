@@ -844,7 +844,7 @@ async def uploadfile(file,usid,msg,username):
         await msg.edit(f"{moodle} Caído 🔻:\n\n{ex}")
         return
 
-    id_de_ms[username] = {"msg":msg, "path":filename, "proc":"Up"}
+    id_de_ms[username] = {"msg":msg, "pat":filename, "proc":"Up"}
     if filesize-1048>zipssize:
         parts = round(filesize / zipssize)
         await msg.edit(f"📦 𝑪𝒐𝒎𝒑𝒓𝒊𝒎𝒊𝒆𝒏𝒅𝒐")
@@ -926,22 +926,22 @@ async def uploadfile(file,usid,msg,username):
                     await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
                 id_de_ms[username]["proc"] = ""
                 return
-    if len(logslinks) == 1:
-        await msg.edit("✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆")
-        with open(filename+".txt","w") as f:
-            message = ""
-            lin = ""
-            for li in logslinks:
-                message+=li+"\n"
-                lin+=li+"\n"
-            f.write(message)				
-        await bot.send_document(usid,filename+".txt",caption="txt")
-        await bot.send_message(f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
+        if len(logslinks) == 1:
+            await msg.edit("✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆")
+            with open(filename+".txt","w") as f:
+                message = ""
+                lin = ""
+                for li in logslinks:
+                    message+=li+"\n"
+                    lin+=li+"\n"
+                f.write(message)				
+            await bot.send_document(usid,filename+".txt",caption="txt")
+            wait bot.send_message(f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
            # await bot.send_document(Channel_Id,filename+".txt")
-    else:
-        await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
-        id_de_ms[username]["proc"] = ""
-        return
+        else:
+            await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
+            id_de_ms[username]["proc"] = ""
+            return
 
 
 ###Client Subdia
