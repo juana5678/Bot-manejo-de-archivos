@@ -675,17 +675,17 @@ def download_progres(data,message,format):
         _downloaded_bytes_str = data["_downloaded_bytes_str"]
         _total_bytes_str = data["_total_bytes_str"]
         if _total_bytes_str == "N/A":
-            _speed_str = data["_speed_str"].replace(" ","")
             _total_bytes_str = data["_total_bytes_estimate_str"]
-            _format_str = format
-            msg = f"`Nombre: {filename}`\n\n"
-            msg+= f"`Progreso: {_downloaded_bytes_str} - {_total_bytes_str}`\n\n"
-            msg+= f"`Calidad: {_format_str}p`\n\n"
-            global seg
-            if seg != localtime().tm_sec:
-                try:message.edit(msg,reply_markup=message.reply_markup)
-                except:pass
-            seg = localtime().tm_sec
+        _speed_str = data["_speed_str"].replace(" ","")
+        _format_str = format
+        msg = f"`Nombre: {filename}`\n\n"
+        msg+= f"`Progreso: {_downloaded_bytes_str} - {_total_bytes_str}`\n\n"
+        msg+= f"`Calidad: {_format_str}p`\n\n"
+        global seg
+        if seg != localtime().tm_sec:
+            try:message.edit(msg,reply_markup=message.reply_markup)
+            except:pass
+        seg = localtime().tm_sec
 
 def download_progres(data,message,format):
     if data["status"] == "downloading":
