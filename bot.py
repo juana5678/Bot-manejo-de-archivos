@@ -207,8 +207,10 @@ async def dl(client, message):
     else:pass
     if 'luis' in msg:
         await send('Funciona Joder')
+        return
     else:
-       # await send('Comando Inválido')
+        await send('Comando Inválido')
+        return
 
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
