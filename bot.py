@@ -14,7 +14,7 @@ import psutil
 import platform
 import pymegatools
 from pyrogram import Client , filters
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
+from pyrogram.types import Message, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from json import loads,dumps
 from pathlib import Path
 from os.path import exists
@@ -204,13 +204,16 @@ async def dl(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    if 'luis' in msg:
-        await send('yes')
-        await bot.pin_chat_message(username, 'Q Bola')
+    if 'h' in msg:
+        await send('Ostia')
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [InlineKeyboardButton("Data", callback_data="callback_data")],
+                [InlineKeyboardButton("Docs", url="https://docs.pyrogram.org")]
+            ]))
+        await send('Ostia', reply_markup)
         return
-    else:
-        await send('Comando Inválido')
-        return
+    else:pass
 
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
