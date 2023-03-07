@@ -218,8 +218,36 @@ async def text_filter(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    if "hola" in msg:
-        await send('Hola Text')
+    if "subir_" in msg:
+         comp = comprobar_solo_un_proceso(username) 
+         if comp != False:
+             await send(comp)
+             return
+         else:pass
+         total_proc = total_de_procesos()
+         if total_proc != False:
+             await send(total_proc)
+             return
+         else:pass
+         list = int(message.text.split(" ")[1])		
+         msgh = files_formatter(str(root[username]["actual_root"]),username)
+        try:
+            path = str(root[username]["actual_root"]+"/")+msgh[1][list]
+            msg = await send(f"Archivo 📂: {path}**")
+            if Configs[username]["m"] == "u": 
+                fd = await uploadfile(path,user_id,msg,username)
+            elif Configs[username]["m"] == "e":
+                if len(Urls[username]) >= 10  and username not in boss:
+                       msg.edit('⛔️ 𝑬𝒍 𝒍𝒊𝒎𝒊𝒕𝒆 𝒅𝒆 𝒍𝒊𝒏𝒌𝒔 𝒇𝒖𝒆 𝒑𝒂𝒔𝒂𝒅𝒐 , 𝒖𝒕𝒊𝒍𝒊𝒛𝒆 **/deletelinks**')
+                       return
+                else:
+                    await uploadfileapi(path,user_id,msg,username)
+            elif Configs[username]["m"] == "n":
+                await proccess(path,msg,username)
+            else:
+                await uploaddraft(path,user_id,msg,username)
+        except Exception as ex:
+            await send(ex)
 
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
