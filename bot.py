@@ -600,6 +600,25 @@ def download_progres(data,message,format):
                 try:message.edit(msg,reply_markup=message.reply_markup)
                 except:pass
             seg = localtime().tm_sec
+
+def download_progres(data,message,format):
+    if data["status"] == "downloading":
+        filename = data["filename"].split("/")[-1]
+        _downloaded_bytes_str = data["_downloaded_bytes_str"]
+        _total_bytes_str = data["_total_bytes_str"]
+        if _total_bytes_str == "N/A":
+            _total_bytes_str = data["_total_bytes_estimate_str"]		
+            _speed_str = data["_speed_str"].replace(" ","")
+            _format_str = format		
+            msg = f"📦 𝐍𝐚𝐦𝐞: {filename}\n\n"
+            msg+= f"▶️ 𝙳𝚘𝚠𝚗𝚕𝚘𝚊𝚍𝚒𝚗𝚐: {_downloaded_bytes_str} of {_total_bytes_str}\n\n"
+            msg+= f"🎥Resolución: {_format_str}p\n\n"	
+            global seg 
+            if seg != localtime().tm_sec:
+                try:message.edit(msg,reply_markup=message.reply_markup)
+                except:pass
+            seg = localtime().tm_sec
+
 async def downloadmessage_progres(chunk,filesize,filename,start,message):
     now = time()
     diff = now - start
@@ -614,6 +633,7 @@ async def downloadmessage_progres(chunk,filesize,filename,start,message):
         try: await message.edit(msg)
         except:pass
     seg = localtime().tm_sec
+
 def uploadfile_progres(chunk,filesize,start,filename,message):
     now = time()
     diff = now - start
@@ -627,6 +647,7 @@ def uploadfile_progres(chunk,filesize,start,filename,message):
     if seg != localtime().tm_sec: 
         message.edit(msg)
     seg = localtime().tm_sec
+
 async def downloadmessage_tg(chunk,filesize,filename,start,message):
     now = time()
     diff = now - start
@@ -641,6 +662,7 @@ async def downloadmessage_tg(chunk,filesize,filename,start,message):
         try: await message.edit(msg)
         except:pass
     seg = localtime().tm_sec
+
 ####Subida
 async def uploadfile(file,usid,msg,username):
     proxy = Configs["gp"]
