@@ -193,7 +193,7 @@ def total_de_procesos():
 
 #inicio Comandos 
 
-@bot.on_message(filters.text & filters.private)
+@bot.on_message(filters.text)
 async def hola(client, message):
     username = message.from_user.username
     send = message.reply
