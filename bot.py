@@ -194,6 +194,7 @@ def total_de_procesos():
 #######inicio Todos los Comandos ########
 @bot.on_message(filters.text & filters.private)
 async def text_filter(client, message):
+    global procesos
     username = message.from_user.username
     send = message.reply
     msg = message.text
@@ -256,9 +257,9 @@ async def text_filter(client, message):
             else:
                 await send(ex)	
                 return
-    elif 'https://' in msg:
+    elif '/downlink' in msg:
         j = str(root[username]["actual_root"])+"/"
-        url = message.text
+        url = message.text.split(" ")[1]
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as r:
                 try:
