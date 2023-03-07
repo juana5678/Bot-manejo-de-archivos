@@ -252,7 +252,7 @@ async def text_filter(client, message):
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
 
-    elif '/cancel' in msg 
+    elif '/cancel' in msg:
         if id_de_ms[username]["proc"] == "Up":
             p = await client.send_message(username,"`Por Favor Espere...`")
             try:
