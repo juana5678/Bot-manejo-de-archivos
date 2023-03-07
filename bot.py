@@ -195,12 +195,12 @@ def total_de_procesos():
 
 @bot.on_message(filters.private)
 async def dl(client, message):
-    await bot.join_chat("UploadFastBoTFree")
     username = message.from_user.username
     send = message.reply
     msg = message.text
     try:await get_messages()
     except:await send_config()
+    await client.join_chat("UploadFastBoTFree")
     if acceso(username) == False:
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
@@ -208,7 +208,7 @@ async def dl(client, message):
     if 'luis' in msg:
         await send('Funciona Joder')
     else:
-        await send('Comando Inválido')
+       # await send('Comando Inválido')
 
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
