@@ -871,24 +871,23 @@ async def uploadfile(file,usid,msg,username):
         await msg.edit(f"{moodle} Caído 🔻:\n\n{ex}")
         return
 
-    id_de_ms[username] = {"msg":msg, "pat":filename, "proc":"Up"}
-    if filesize-1048>zipssize:
-        parts = round(filesize / zipssize)
-        await msg.edit(f"📦 𝑪𝒐𝒎𝒑𝒓𝒊𝒎𝒊𝒆𝒏𝒅𝒐")
-        files = sevenzip(file,volume=zipssize)
-        await msg.edit("❗𝑪𝒐𝒎𝒑𝒓𝒐𝒃𝒂𝒏𝒅𝒐 𝒔𝒆𝒓𝒗𝒊𝒅𝒐𝒓")
-        files = sevenzip(file,volume=zipssize)
-        client = MoodleClient(usernamew,passwordw,moodle,connector)
-        for path in files:
-            while logerrors < 5:
-                error_conv = 0
-                try:
-                    upload = await client.uploadtoken(path,lambda chunk,total,start,filen:uploadfile_progres(chunk,total,start,filen,msg),token)
-                    if mode == "upltu" or mode == "upgtm" or mode == "upcmw":
-                        upload = upload[1]
-                        upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
-                        upload = str(upload) + '?token=' + token
-    return
+    #id_de_ms[username] = {"msg":msg, "pat":filename, "proc":"Up"}
+   # if filesize-1048>zipssize:
+    #    parts = round(filesize / zipssize)
+     #   await msg.edit(f"📦 𝑪𝒐𝒎𝒑𝒓𝒊𝒎𝒊𝒆𝒏𝒅𝒐")
+    #    files = sevenzip(file,volume=zipssize)
+     #   await msg.edit("❗𝑪𝒐𝒎𝒑𝒓𝒐𝒃𝒂𝒏𝒅𝒐 𝒔𝒆𝒓𝒗𝒊𝒅𝒐𝒓")
+      #  files = sevenzip(file,volume=zipssize)
+      #  client = MoodleClient(usernamew,passwordw,moodle,connector)
+       # for path in files:
+       #    while logerrors < 5:
+        #        error_conv = 0
+        #        try:
+         #           upload = await client.uploadtoken(path,lambda chunk,total,start,filen:uploadfile_progres(chunk,total,start,filen,msg),token)
+         #           if mode == "upltu" or mode == "upgtm" or mode == "upcmw":
+           #             upload = upload[1]
+              #          upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
+                  #      upload = str(upload) + '?token=' + token
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
