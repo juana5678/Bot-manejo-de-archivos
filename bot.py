@@ -191,22 +191,7 @@ def total_de_procesos():
         return False
 
 
-#inicio Comandos 
-
-@bot.on_message(filters.command("hola") & filters.private)
-async def hola(client, message):
-    username = message.from_user.username
-    send = message.reply
-    msg = message.text
-    try:await get_messages()
-    except:await send_config()
-    if acceso(username) == False:
-        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
-        return
-    else:pass
-  #  if "hola" in msg:
-    await send('Hola Comando')
-
+#inicio Comandos ########
 @bot.on_message(filters.text & filters.private)
 async def text_filter(client, message):
     username = message.from_user.username
@@ -218,7 +203,7 @@ async def text_filter(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    if "subir_" in msg:
+    if "/up_" in msg:
          comp = comprobar_solo_un_proceso(username) 
          if comp != False:
              await send(comp)
@@ -249,6 +234,24 @@ async def text_filter(client, message):
          except Exception as ex:
              await send(ex)
 
+    elif '/start' in msg:
+        await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`")
+
+    elif '/del_all'in msg:
+        shutil.rmtree("downloads/"+username+"/")
+        root[username]["actual_root"] = "downloads/"+username
+        msg = files_formatter(str(root[username]["actual_root"])+"/",username)
+        await limite_msg(msg[0],username)
+
+    elif '/add' in msg:
+        usr = message.text.split(" ")[1]
+        if username in boss:
+            Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
+            await send_config()
+            await send(f"@{usr} **Tiene Acceso**", quote=True)
+        else: 
+            await send("⚠️Comando Para Administrador ⚠️", quote=True)
+   
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
     username = message.from_user.username
