@@ -337,7 +337,7 @@ async def text_filter(client, message):
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
 
-    elif '/add_proxy' in mss:
+    elif '/proxy' in mss:
         if username in boss:
             Configs[gp] = str(message.text.split(" ")[1])
             await send_config()
