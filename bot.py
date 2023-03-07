@@ -204,10 +204,9 @@ async def dl(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    msg = await bot.join_chat("UploadFastBoTFree")
     if 'luis' in msg:
         await send('yes')
-        await send(msg)
+        await bot.pin_chat_message(username, 'Q Bola')
         return
     else:
         await send('Comando Inválido')
