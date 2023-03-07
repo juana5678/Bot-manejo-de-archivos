@@ -855,7 +855,7 @@ async def uploadfile(file,usid,msg,username):
             return
 	
     session = aiohttp.ClientSession(connector=connector)
-    await msg.edit("`Comprobando que la Nube este Activa`")
+    await msg.edit("`Comprobando Server`")
     filename = Path(file).name
     filesize = Path(file).stat().st_size
     zipssize = 1024*1024*int(zips)
@@ -866,132 +866,31 @@ async def uploadfile(file,usid,msg,username):
     try:
         async with session.get(moodle,timeout=20,ssl=False) as resp:
             await resp.text()
-            await msg.edit("`Nube activa 😁✅`")
+            await msg.edit("`Server Online`")
     except Exception as ex:
         await msg.edit(f"{moodle} Caído 🔻:\n\n{ex}")
         return
 
     id_de_ms[username] = {"msg":msg, "pat":filename, "proc":"Up"}
-
     if filesize-1048>zipssize:
         parts = round(filesize / zipssize)
         await msg.edit(f"📦 𝑪𝒐𝒎𝒑𝒓𝒊𝒎𝒊𝒆𝒏𝒅𝒐")
         files = sevenzip(file,volume=zipssize)
         await msg.edit("❗𝑪𝒐𝒎𝒑𝒓𝒐𝒃𝒂𝒏𝒅𝒐 𝒔𝒆𝒓𝒗𝒊𝒅𝒐𝒓")
+        files = sevenzip(file,volume=zipssize)
         client = MoodleClient(usernamew,passwordw,moodle,connector)
         for path in files:
             while logerrors < 5:
-                error_conv = 0
-                try:
-                    upload = await client.uploadtoken(path,lambda chunk,total,start,filen: uploadfile_progres(chunk,total,start,filen,msg),token)
-                    if mode == "l" or mode == "b":
-                        upload = upload[1]
-                        upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
-                        upload = str(upload) + '?token=' + token
-                    elif mode == "a" or mode == "t":
-                    else:
-                        upload = upload[0]
-                        if upload == False:
-                            await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓.")
-                            id_de_ms[username]["proc"] = ""
-                            return
-                        else:pass
-                        await bot.send_message(usid,f"__**{upload}**__",disable_web_page_preview=True)
-                        logslinks.append(upload)
-                        logerrors = 0
-                        break
-                except Exception as ex:
-                    logerrors += 1
-                        if logerrors > 4:
-                            if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
-                                else:
-                                    await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
-                                    id_de_ms[username]["proc"] = ""
-                                    return
-        if len(logslinks) == len(files):
-            await msg.edit("✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆")
-            with open(filename+".txt","w") as f:
-                message = ""
-            for li in logslinks:
-                    message+=li+"\n"
-                    f.write(message)
-                    await bot.send_document(usid,filename+".txt",caption="Gracias por usar nuestros sevicios\nPara continuar subiendo use **/ls** :)")
-            if mode != "a":
-                await bot.send_message(Channel_Id,f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
-                await bot.send_document(Channel_Id,filename+".txt")
-            else:pass
-            id_de_ms[username]["proc"] = ""
-            os.unlink(filename+".txt")
-            return
-        else:
-            await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
-            id_de_ms[username]["proc"] = ""
-            return
-    else:
-        client = MoodleClient(usernamew,passwordw,moodle,connector)
-        while logerrors < 5:
             error_conv = 0
             try:
-                upload = await client.uploadtoken(file,lambda chunk,total,start,filen: uploadfile_progres(chunk,total,start,filen,msg),token)
-                if mode == "l" or mode == "b":
-                    upload = upload[1]
-                    upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
-                    upload = str(upload) + '?token=' + token
-                elif mode == "a" or mode == "t":
-                      while error_conv < 10:
-                          await msg.edit("𝑷𝒓𝒆𝒑𝒂𝒓𝒂𝒏𝒅𝒐 𝒑𝒂𝒓𝒂 𝒄𝒐𝒏𝒗𝒆𝒓𝒕𝒊𝒓")
-                          await msg.edit("𝑪𝒐𝒏𝒗𝒊𝒓𝒕𝒊𝒆𝒏𝒅𝒐, 𝒔𝒆𝒂 𝒑𝒂𝒄𝒊𝒆𝒏𝒕𝒆...")
-                          upload = upload[1]
-                          upload = await move_to_profile(hot,uset,pasel,upload)
-                     if upload != False:	
-                         upload = upload.replace('pluginfile.php/','webservice/pluginfile.php/')
-                         upload = str(upload) + '?token=' + token
-                         error_conv = 0
-                         break
-                     else:
-                         await msg.edit("𝑬𝒓𝒓𝒐𝒓, 𝒓𝒆𝒊𝒏𝒕𝒆𝒏𝒕𝒂𝒏𝒅𝒐")
-                         error_conv +=1
-                         continue	
-                     else:
-                         upload = upload[0]
-                         if upload == False:
-                             await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓.")
-                             id_de_ms[username]["proc"] = ""
-                             return
-                         else:pass
-                         await bot.send_message(usid,f"__**{upload}**__",disable_web_page_preview=True)
-                         logslinks.append(upload)
-                         logerrors = 0
-                         break
-        except Exception as ex:
-            logerrors += 1
-            if logerrors > 4:
-                if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
-                    else:
-                        await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
-                        id_de_ms[username]["proc"] = ""
-                        return
-    if len(logslinks) == 1:
-        await msg.edit("✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆")
-        with open(filename+".txt","w") as f:
-            message = ""
-            lin = ""
-            for li in logslinks:
-                message+=li+"\n"
-                lin+=li+"\n"
-                f.write(message)
-                await bot.send_document(usid,filename+".txt",caption="Gracias por usar nuestros sevicios\nPara continuar subiendo use **/ls** :)")
-            if mode != "a":
-                await bot.send_message(Channel_Id,f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{lin}")
-                await bot.send_document(Channel_Id,filename+".txt")
-            else:pass
-            id_de_ms[username]["proc"] = ""
-            os.unlink(filename+".txt")
-            return
-    else:
-        await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
-        id_de_ms[username]["proc"] = ""
-        return
+                upload = await client.uploadtoken(path,lambda chunk,total,start,filen:
+                uploadfile_progres(chunk,total,start,filen,msg),token)
+                if mode == "upltu" or mode == "gtm" or mode == "upcmw":
+                     upload = upload[1]
+                     upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
+                     upload = str(upload) + '?token=' + token
+
+
 
 
 ###End
