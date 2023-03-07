@@ -888,11 +888,8 @@ async def uploadfile(file,usid,msg,username):
                         upload = upload[1]
                         upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
                         upload = str(upload) + '?token=' + token
+    return
 
-
-
-
-###End
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
 bot.loop.run_forever()
