@@ -192,6 +192,23 @@ def total_de_procesos():
 
 
 #inicio Comandos 
+
+@bot.on_message(filters.private)
+async def dl(client, message):
+    username = message.from_user.username
+    send = message.reply
+    msg = message.text
+    try:await get_messages()
+    except:await send_config()
+    if acceso(username) == False:
+        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
+        return
+    else:pass
+    if 'luis' in msg:
+        await send('Funciona Joder')
+    else:
+        await send('Comando Inválido')
+
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
     username = message.from_user.username
