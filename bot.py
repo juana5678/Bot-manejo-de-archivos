@@ -218,7 +218,7 @@ async def text_filter(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
-    if hola in msg:
+    if "hola" in msg:
         await send('Hola Text')
 
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
