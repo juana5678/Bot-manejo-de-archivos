@@ -193,7 +193,7 @@ def total_de_procesos():
 
 #inicio Comandos 
 
-@bot.on_message(filters.text("up_"))
+@bot.on_message(filters.command("hola")
 async def hola(client, message):
     username = message.from_user.username
     send = message.reply
@@ -204,7 +204,22 @@ async def hola(client, message):
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
     else:pass
+  #  if hola in msg:
     await send('Hola')
+
+@bot.on_message(filters.text)
+async def hola(client, message):
+    username = message.from_user.username
+    send = message.reply
+    msg = message.text
+    try:await get_messages()
+    except:await send_config()
+    if acceso(username) == False:
+        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
+        return
+    else:pass
+    if hola in msg:
+        await send('Hola')
 
 @bot.on_message(filters.command("start", prefixes="/") & filters.private)
 async def start(client, message):
