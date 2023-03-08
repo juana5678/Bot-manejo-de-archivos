@@ -317,16 +317,17 @@ async def text_filter(client, message):
                   await uploaddraft(path,user_id,msg,username)
           except Exception as ex:
               await send(ex)
+              return
 
     elif '/start' in mss:
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`")
-
+        return
     elif '/del_all'in mss:
         shutil.rmtree("downloads/"+username+"/")
         root[username]["actual_root"] = "downloads/"+username
         msg = files_formatter(str(root[username]["actual_root"])+"/",username)
         await limite_msg(msg[0],username)
-
+        return
     elif '/add' in mss:
         usr = message.text.split(" ")[1]
         if username in boss:
@@ -335,7 +336,7 @@ async def text_filter(client, message):
             await send(f"@{usr} **Tiene Acceso**", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
-
+            return
     elif '/proxy' in mss:
         if username in boss:
             Configs["gp"] = str(message.text.split(" ")[1])
@@ -343,7 +344,7 @@ async def text_filter(client, message):
             await send(f"**Proxy Establecido**", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
-
+            return
     elif '/cancel' in mss:
         if id_de_ms[username]["proc"] == "Up":
             p = await client.send_message(username,"`Por Favor Espere...`")
@@ -372,21 +373,21 @@ async def text_filter(client, message):
         Configs[username]["z"] = 19
         await send_config()
         await send("**Nube ☁️ uvs.ltu Configurada**")
-
+        return
     elif 'cmw' in mss:
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "upcmw"
         Configs[username]["z"] = 7
         await send_config()
         await send("**Nube ☁️ CMW ☁️ Configurada**")
-
+        return
     elif 'gtm' in mss:
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "upgtm"
         Configs[username]["z"] = 7
         await send_config()
         await send("**Nube ☁️ GTM ☁️ Configurada**")
-
+        return
 
 #Descarga de Archivos y Enlaces
 @bot.on_message(filters.media & filters.private)
