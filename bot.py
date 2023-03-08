@@ -754,9 +754,9 @@ async def uploadfile(file,usid,msg,username):
     id_de_ms[username] = {"msg":msg, "pat":filename, "proc":"Up"}
     if filesize-1048>zipssize:
         parts = round(filesize / zipssize)
-        await msg.edit(f"📦 𝑪𝒐𝒎𝒑𝒓𝒊𝒎𝒊𝒆𝒏𝒅𝒐")
+        await msg.edit(f"**Comprimiendo❗**")
         files = sevenzip(file,volume=zipssize)
-        await msg.edit("❗𝑪𝒐𝒎𝒑𝒓𝒐𝒃𝒂𝒏𝒅𝒐 𝒔𝒆𝒓𝒗𝒊𝒅𝒐𝒓")
+       # await msg.edit("❗𝑪𝒐𝒎𝒑𝒓𝒐𝒃𝒂𝒏𝒅𝒐 𝒔𝒆𝒓𝒗𝒊𝒅𝒐𝒓")
         files = sevenzip(file,volume=zipssize)
         client = MoodleClient(usernamew,passwordw,moodle,connector)
         for path in files:
@@ -787,7 +787,7 @@ async def uploadfile(file,usid,msg,username):
                         await bot.send_message(usid,f"**Error Al Subir**:\n\n{ex}")
                     id_de_ms[username]["proc"] = ""
                     return
-        if len(logslinks) == 1:
+        if len(logslinks) == len(files):
             await msg.edit("**Subida Finalizada**✅")
             with open(filename+".txt","w") as f:
                 message = ""
@@ -797,8 +797,8 @@ async def uploadfile(file,usid,msg,username):
                     lin+=li+"\n"
                 f.write(message)				
             await msg.edit("**Enviando TxT📃**")				
-            await bot.send_document(usid,filename+".txt",caption="**Gracias Por Utilizar Nuestros Servicios ❤️**")
-            await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}**")
+            await bot.send_document(usid,filename+".txt",caption=f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️**")
+           # await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}**")
             id_de_ms[username]["proc"] = "" 
         else:
             await msg.edit("**Error Al Subir**")
@@ -844,8 +844,8 @@ async def uploadfile(file,usid,msg,username):
                     lin+=li+"\n"
                 f.write(message)
             await msg.edit("**Enviando TxT📃**")				
-            await bot.send_document(usid,filename+".txt",caption="**Gracias Por Utilizar Nuestros Servicios ❤️**")
-            await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}**")
+            await bot.send_document(usid,filename+".txt",caption=f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️**")
+         #   await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}**")
             id_de_ms[username]["proc"] = ""
         else:
             await msg.edit("**Error Al Subir**")
