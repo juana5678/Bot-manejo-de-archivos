@@ -1,4 +1,4 @@
-git clone $REPO XYZ
+git clone https://stvz21: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@github.com/stvz21/web-stvz
 cd web-stvz
 pip3 install --upgrade pip
 pip3 install -U -r requirements.txt
