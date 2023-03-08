@@ -86,7 +86,7 @@ def files_formatter(path,username):
              dirc.append(str(Path(p).name))
     result.sort()
     dirc.sort()
-    msg = f'** 📂Archivos📁**\n**Utilice:\n**/up_ - Más # De Archivo Para Subirlo\n/del_all - Para Eliminar Todo el Directorio**\n**Ruta: **`{str(rut).split("downloads/")[-1]}`\n\n'
+    msg = f'**Ruta: **`{str(rut).split("downloads/")[-1]}`\n**/del_all - Para Eliminar Todo el Directorio**\n\n'
     if result == [] and dirc == [] :
         return msg , final
     for k in dirc:
@@ -719,7 +719,7 @@ async def downloadmessage_progres(chunk,filesize,filename,start,message):
     try:
        msg+= update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
     except:pass
-    msg+= f"`Progreso: {sizeof_fmt(chunk)} - {sizeof_fmt(filesize)}`\n\n"	
+    msg+= f"`Progreso: {sizeof_fmt(chunk)} | {sizeof_fmt(filesize)}`\n\n"	
     global seg
     if seg != localtime().tm_sec:
         try: await message.edit(msg)
@@ -730,11 +730,11 @@ def uploadfile_progres(chunk,filesize,start,filename,message):
     now = time()
     diff = now - start
     mbs = chunk / diff
-    msg = f"📦 𝐍𝐚𝐦𝐞: {filename}\n\n"
+    msg = f"**Name: **{filename}\n\n"
     try:
        msg+=update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
     except:pass
-    msg+= f"▶️ 𝚄𝚙𝚕𝚘𝚊𝚍𝚒𝚗𝚐: {sizeof_fmt(chunk)} of {sizeof_fmt(filesize)}\n\n"
+    msg+= f"**Progreso: {sizeof_fmt(chunk)} | {sizeof_fmt(filesize)}**\n\n"
     global seg
     if seg != localtime().tm_sec: 
         message.edit(msg)
@@ -744,11 +744,11 @@ async def downloadmessage_tg(chunk,filesize,filename,start,message):
     now = time()
     diff = now - start
     mbs = chunk / diff
-    msg = f"📦 𝐍𝐚𝐦𝐞: {filename}\n\n"
+    msg = f"**Nombre: {filename}**\n\n"
     try:
        msg+=update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
     except:pass
-    msg+= f"▶️ 𝚄𝚙𝚕𝚘𝚊𝚍𝚒𝚗𝚐: {sizeof_fmt(chunk)} of {sizeof_fmt(filesize)}\n\n"	
+    msg+= f"**Nombre: {sizeof_fmt(chunk)} | {sizeof_fmt(filesize)}**\n\n"	
     global seg
     if seg != localtime().tm_sec:
         try: await message.edit(msg)
