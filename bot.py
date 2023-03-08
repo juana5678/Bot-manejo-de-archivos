@@ -757,7 +757,6 @@ async def downloadmessage_tg(chunk,filesize,filename,start,message):
 
 ####Subida
 async def uploadfile(file,usid,msg,username):
-    id_de_ms[username]["proc"] == "Up":
     proxy = Configs["gp"]
     mode = Configs[username]["a"]
     usernamew = ''
