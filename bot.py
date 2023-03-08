@@ -902,7 +902,7 @@ async def uploadfile(file,usid,msg,username):
         while logerrors < 5:
             error_conv = 0
             try:
-                upload = await client.uploadtoken(path,lambda chunk,total,start,filen:uploadfile_progres(chunk,total,start,filen,msg),token)
+                upload = await client.uploadtoken(file,lambda chunk,total,start,filen:uploadfile_progres(chunk,total,start,filen,msg),token)
                 if mode == "upltu" or mode == "upgtm" or mode == "upcmw":
                     upload = upload[1]
                     upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
