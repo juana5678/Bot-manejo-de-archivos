@@ -787,8 +787,8 @@ async def uploadfile(file,usid,msg,username):
                         await bot.send_message(usid,f"**Error Al Subir**:\n\n{ex}")
                     id_de_ms[username]["proc"] = ""
                     return
-        if len(logslinks) == 1:
-            await msg.edit("**Subida Finalizada**✅")
+        if len(logslinks) == len(files):
+            await msg.edit("**Subida Finalizada**")
             with open(filename+".txt","w") as f:
                 message = ""
                 lin = ""
@@ -844,7 +844,7 @@ async def uploadfile(file,usid,msg,username):
                     lin+=li+"\n"
                 f.write(message)
             await msg.edit("**Enviando TxT📃**")				
-            await bot.send_document(usid,filename+".txt",caption="**Gracias Por Utilizar Nuestros Servicios ❤️**")
+            await bot.send_document(usid,filename+".txt",caption=f"**Gracias Por Utilizar Nuestros Servicios ❤️**\n**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}**")
             await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}**")
             id_de_ms[username]["proc"] = ""
         else:
