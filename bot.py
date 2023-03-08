@@ -42,12 +42,12 @@ from multivolumefile import MultiVolume
 #BoT Configuration Variables
 api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
-bot_token = "6281846554:AAEQ97AM-d289ADS-bhJdAEpBvnHhF2crYY"
+bot_token = "5897771276:AAEWRXb1mKNXML09NBTwEro2c6qP-W3Z11Q"
 Channel_Id = -1001804018431
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
 Configs = {"uclv":'',"gtm":"","uvs":"","ltu":"a816210ff41853b689c154bad264da8e", 
-			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://190.15.158.69:10089', "s":"On", 
+			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://181.225.255.48:9050', "s":"On", 
 			'UHTRED_OF_BEBBANBURG': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"}, 
 			'Locura05': {'z': 99,"m":"u","a":"c","t":"y"}, 
@@ -335,7 +335,14 @@ async def text_filter(client, message):
             await send(f"@{usr} **Tiene Acceso**", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
-
+    elif '/ban' in mss:
+        usr = message.text.split(" ")[1]
+        if username in boss:
+            del Configs[usr]
+            await send_config()
+            await send(f"@{usr} **Ya no tiene acceso**", quote=True)
+        else: 
+            await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/proxy' in mss:
         if username in boss:
             Configs["gp"] = str(message.text.split(" ")[1])
