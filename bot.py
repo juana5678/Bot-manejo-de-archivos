@@ -800,10 +800,10 @@ async def uploadfile(file,usid,msg,username):
             await bot.send_document(usid,filename+".txt",caption="**Gracias Por Utilizar Nuestros Servicios ❤️**")
             await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}**")
             id_de_ms[username]["proc"] = "" 
-        else:pass
-        await msg.edit("**Error Al Subir**")
-        id_de_ms[username]["proc"] = ""
-        return 
+        else:
+            await msg.edit("**Error Al Subir**")
+            id_de_ms[username]["proc"] = ""
+            return 
 #Subida si el Archivo no sobrepasa el tamaño Predeterminado 
     else:           
         client = MoodleClient(usernamew,passwordw,moodle,connector)
