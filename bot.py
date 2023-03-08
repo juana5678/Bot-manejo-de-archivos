@@ -497,11 +497,11 @@ async def mediafiredownload(chunk,total,filename,start,message):
     now = time()
     diff = now - start
     mbs = chunk / diff
-    msg = f"`Nombre: {filename}`\n\n"
+    msg = f"**Nombre: {filename}**\n"
     try:
         msg+= update_progress_bar(chunk,total)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
     except: pass
-    msg+= f"`Progreso: {sizeof_fmt(chunk)} - {sizeof_fmt(total)}`\n\n"
+    msg+= f"**Progreso: {sizeof_fmt(chunk)}|{sizeof_fmt(total)}**\n\n"
     global seg
     if seg != localtime().tm_sec:
         try: await message.edit(msg)
@@ -604,7 +604,7 @@ def download_progres(data,message,format):
         _speed_str = data["_speed_str"].replace(" ","")
         _format_str = format
         msg = f"**Nombre: {filename}**\n\n"
-        msg+= f"**Progreso: {_downloaded_bytes_str} | {_total_bytes_str}**\n\n"
+        msg+= f"**Progreso: {_downloaded_bytes_str}|{_total_bytes_str}**\n\n"
         msg+= f"**Calidad: {_format_str}p**\n\n"
         global seg
         if seg != localtime().tm_sec:
@@ -616,11 +616,11 @@ async def downloadmessage_progres(chunk,filesize,filename,start,message):
     now = time()
     diff = now - start
     mbs = chunk / diff
-    msg = f"`**Nombre: **{filename}`\n\n"
+    msg = f"`**Nombre: {filename}**\n"
     try:
-       msg+= update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
+       msg+= update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n"
     except:pass
-    msg+= f"**Progreso: {sizeof_fmt(chunk)} | {sizeof_fmt(filesize)}**\n\n"	
+    msg+= f"**Progreso: {sizeof_fmt(chunk)}|{sizeof_fmt(filesize)}**\n\n"	
     global seg
     if seg != localtime().tm_sec:
         try: await message.edit(msg)
@@ -631,11 +631,11 @@ def uploadfile_progres(chunk,filesize,start,filename,message):
     now = time()
     diff = now - start
     mbs = chunk / diff
-    msg = f"**Name: **{filename}\n\n"
+    msg = f"**Name: {filename}**\n"
     try:
-       msg+=update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
+       msg+=update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n"
     except:pass
-    msg+= f"**Progreso: {sizeof_fmt(chunk)} | {sizeof_fmt(filesize)}**\n\n"
+    msg+= f"**Progreso: {sizeof_fmt(chunk)}|{sizeof_fmt(filesize)}**\n\n"
     global seg
     if seg != localtime().tm_sec: 
         message.edit(msg)
@@ -645,11 +645,11 @@ async def downloadmessage_tg(chunk,filesize,filename,start,message):
     now = time()
     diff = now - start
     mbs = chunk / diff
-    msg = f"**Nombre: {filename}**\n\n"
+    msg = f"**Nombre: {filename}**\n"
     try:
-       msg+=update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
+       msg+=update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n"
     except:pass
-    msg+= f"**Nombre: {sizeof_fmt(chunk)} | {sizeof_fmt(filesize)}**\n\n"	
+    msg+= f"**Nombre: {sizeof_fmt(chunk)}|{sizeof_fmt(filesize)}**\n\n"	
     global seg
     if seg != localtime().tm_sec:
         try: await message.edit(msg)
