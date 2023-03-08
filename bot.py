@@ -458,104 +458,6 @@ async def delete_draft_y_down_media(client: Client, message: Message):
             downlist[username] = []
             return      
 
-@bot.on_message((filters.regex("https://") | filters.regex("http://")) & filters.private)
-async def down_link(client: Client, message: Message):
-    global procesos
-    try:username = message.from_user.username
-    except:
-        return
-    send = message.reply
-    user_id = message.from_user.id
-    try:await get_messages()
-    except:await send_config()
-    if acceso(username) == False:
-        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
-        return
-    else:pass
-    if "youtu.be/" in message.text or "twitch.tv/" in message.text or "youtube.com/" in message.text or "xvideos.com" in message.text or "xnxx.com" in message.text:
-        list = message.text.split(" ")
-        url = list[0]
-        try:format = str(list[1])
-        except:format = "720"
-        msg = await send("**Por Favor Espere 🔍**")
-        await client.send_message(Channel_Id,f'**@{username} Envio un link de #youtube:**\n**Url:** {url}\n**Formato:** {str(format)}p')
-        procesos += 1
-        download = await ytdlp_downloader(url,user_id,msg,username,lambda data: download_progres(data,msg,format),format)
-        if procesos != 0:
-            procesos -= 1
-        await msg.edit("**Enlace Descargado**")
-        msg = files_formatter(str(root[username]["actual_root"]),username)
-        await limite_msg(msg[0],username)
-        return
-
-    elif "https://www.mediafire.com/" in message.text:
-        url = message.text
-        if "?dkey=" in str(url):
-            url = str(url).split("?dkey=")[0]
-        msg = await send("**Por Favor Espere 🔍**")
-        await client.send_message(Channel_Id,f'**@{username} Envio un link de #mediafire:**\n**Url:** {url}\n')
-        procesos += 1
-        download = await ytdlp_downloader(url,user_id,msg,username,lambda data: download_progres(data,msg,format),format)
-        if procesos != 0:
-            procesos -= 1
-        await msg.edit("**Enlace Descargado**")
-        msg = files_formatter(str(root[username]["actual_root"]),username)
-        await limite_msg(msg[0],username)
-        return
-
-    elif "https://mega.nz/file/" in message.text:
-        url = message.text
-        mega = pymegatools.Megatools()
-        try:
-            filename = mega.filename(url)
-            g = await send(f"Descargando {filename} ...")
-            data = mega.download(url,progress=None)	
-            procesos += 1
-            shutil.move(filename,str(root[username]["actual_root"]))
-            await g.delete()
-            msg = files_formatter(str(root[username]["actual_root"]),username)
-            await limite_msg(msg[0],username)
-            if procesos != 0:
-                procesos -= 1
-            return
-        except Exception as ex:
-            if procesos != 0:
-                procesos -= 1
-            if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
-            else:
-                await send(ex)	
-                return
-
-    else:
-        j = str(root[username]["actual_root"])+"/"
-        url = message.text
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url) as r:
-                try:
-                    filename = unquote_plus(url.split("/")[-1])
-                except:
-                    filename = r.content_disposition.filename	
-                fsize = int(r.headers.get("Content-Length"))
-                msg = await send("**Por Favor Espere 🔍**")
-                procesos += 1
-                await client.send_message(Channel_Id,f'**@{username} Envio un #link :**\n**Url:** {url}\n')
-                f = open(f"{j}{filename}","wb")
-                newchunk = 0
-                start = time()
-                async for chunk in r.content.iter_chunked(1024*1024):
-                    newchunk+=len(chunk)
-                    await mediafiredownload(newchunk,fsize,filename,start,msg)
-                    f.write(chunk)
-                f.close()
-                file = f"{j}{filename}"
-                await msg.edit("**Enlace Descargado**")
-                if procesos != 0:
-                    procesos -= 1
-                else:pass
-                msg = files_formatter(str(root[username]["actual_root"]),username)
-                await limite_msg(msg[0],username)
-                return
-
 async def ytdlp_downloader(url,usid,msg,username,callback,format):
     class YT_DLP_LOGGER(object):
         def debug(self,msg):
@@ -679,7 +581,7 @@ async def delete_draft_y_down_media(client: Client, message: Message):
     try:await get_messages()
     except:await send_config()
     if acceso(username) == False:
-        await send("⛔ 𝑵𝒐d 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+        await send("⚠️Sin Acceso ⚠️")
         return
     else:pass
     if str(message).split('"file_name": ')[1].split(",")[0].replace('"',"").endswith(".txt") and Configs[username]["m"] == "d":
@@ -702,9 +604,9 @@ def download_progres(data,message,format):
             _total_bytes_str = data["_total_bytes_estimate_str"]
         _speed_str = data["_speed_str"].replace(" ","")
         _format_str = format
-        msg = f"`Nombre: {filename}`\n\n"
-        msg+= f"`Progreso: {_downloaded_bytes_str} - {_total_bytes_str}`\n\n"
-        msg+= f"`Calidad: {_format_str}p`\n\n"
+        msg = f"**Nombre: {filename}**\n\n"
+        msg+= f"**Progreso: {_downloaded_bytes_str} | {_total_bytes_str}**\n\n"
+        msg+= f"**Calidad: {_format_str}p**\n\n"
         global seg
         if seg != localtime().tm_sec:
             try:message.edit(msg,reply_markup=message.reply_markup)
@@ -715,11 +617,11 @@ async def downloadmessage_progres(chunk,filesize,filename,start,message):
     now = time()
     diff = now - start
     mbs = chunk / diff
-    msg = f"`Nombre: {filename}`\n\n"
+    msg = f"`**Nombre: **{filename}`\n\n"
     try:
        msg+= update_progress_bar(chunk,filesize)+ "  " + sizeof_fmt(mbs)+"/s\n\n"
     except:pass
-    msg+= f"`Progreso: {sizeof_fmt(chunk)} | {sizeof_fmt(filesize)}`\n\n"	
+    msg+= f"**Progreso: {sizeof_fmt(chunk)} | {sizeof_fmt(filesize)}**\n\n"	
     global seg
     if seg != localtime().tm_sec:
         try: await message.edit(msg)
@@ -891,7 +793,7 @@ async def uploadfile(file,usid,msg,username):
                 f.write(message)				
             await msg.edit("**Enviando TxT📃**")				
             await bot.send_document(usid,filename+".txt",caption="**Gracias Por Utilizar Nuestros Servicios ❤️**")
-            await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {filesize}**")
+            await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}**")
             id_de_ms[username]["proc"] = "" 
         else:pass
         await msg.edit("**Error Al Subir**")
@@ -938,7 +840,7 @@ async def uploadfile(file,usid,msg,username):
                 f.write(message)
             await msg.edit("**Enviando TxT📃**")				
             await bot.send_document(usid,filename+".txt",caption="**Gracias Por Utilizar Nuestros Servicios ❤️**")
-            await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {filesize}**")
+            await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}**")
             id_de_ms[username]["proc"] = ""
         else:
             await msg.edit("**Error Al Subir**")
