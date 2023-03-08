@@ -864,11 +864,11 @@ async def uploadfile(file,usid,msg,username):
                     else: 
                         upload = upload[0]
                     if upload == False:
-                        await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓.")
+                        await bot.send_message(usid,f"**Error Al Subir**")
                         id_de_ms[username]["proc"] = ""
                         return
                     else:pass
-                    await bot.send_message(usid,f"__**{upload}**__",disable_web_page_preview=True)
+                 #   await bot.send_message(usid,f"__**{upload}**__",disable_web_page_preview=True)
                     logslinks.append(upload)
                     logerrors = 0
                     break
@@ -877,11 +877,11 @@ async def uploadfile(file,usid,msg,username):
                     if logerrors > 4:
                         if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
                     else:
-                        await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
+                        await bot.send_message(usid,f"**Error Al Subir**:\n\n{ex}")
                     id_de_ms[username]["proc"] = ""
                     return
         if len(logslinks) == 1:
-            await msg.edit("✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆")
+            await msg.edit("**Subida Finalizada**✅")
             with open(filename+".txt","w") as f:
                 message = ""
                 lin = ""
@@ -889,12 +889,12 @@ async def uploadfile(file,usid,msg,username):
                     message+=li+"\n"
                     lin+=li+"\n"
                 f.write(message)				
-            await bot.send_document(usid,filename+".txt",caption="txt")
-          #  await bot.send_message(f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
-            #await bot.send_document(Channel_Id,filename+".txt")
+            await msg.edit("**Enviando TxT📃**")				
+            await bot.send_document(usid,filename+".txt",caption="**Gracias Por Utilizar Nuestros Servicios ❤️**")
+            await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {filesize}**")
             id_de_ms[username]["proc"] = "" 
         else:pass
-        await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
+        await msg.edit("**Error Al Subir**")
         id_de_ms[username]["proc"] = ""
         return 
 #Subida si el Archivo no sobrepasa el tamaño Predeterminado 
@@ -911,11 +911,11 @@ async def uploadfile(file,usid,msg,username):
                 else: 
                     upload = upload[0]
                 if upload == False:
-                    await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓.")
+                    await bot.send_message(usid,f"**Error Al Subir**")
                     id_de_ms[username]["proc"] = ""
                     return
                 else:pass
-                await bot.send_message(usid,f"__**{upload}**__",disable_web_page_preview=True)
+              #  await bot.send_message(usid,f"__**{upload}**__",disable_web_page_preview=True)
                 logslinks.append(upload)
                 logerrors = 0
                 break
@@ -924,7 +924,7 @@ async def uploadfile(file,usid,msg,username):
                 if logerrors > 4:
                     if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
                 else:
-                    await msg.edit(f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
+                    await msg.edit(f"**Error Al Subir**:\n\n{ex}")
                 id_de_ms[username]["proc"] = ""
                 return
         if len(logslinks) == 1:
@@ -937,13 +937,11 @@ async def uploadfile(file,usid,msg,username):
                     lin+=li+"\n"
                 f.write(message)
             await msg.edit("**Enviando TxT📃**")				
-            await bot.send_document(usid,filename+".txt",caption="txt")
-            await msg.edit(f"**Info y Enlaces\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}**")
-            #wait send(f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
-            #await bot.send_docu(Channel_Id,filename+".txt")
+            await bot.send_document(usid,filename+".txt",caption="**Gracias Por Utilizar Nuestros Servicios ❤️**")
+            await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {filesize}**")
             id_de_ms[username]["proc"] = ""
         else:
-            await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
+            await msg.edit("**Error Al Subir**")
             id_de_ms[username]["proc"] = ""
             return
 
