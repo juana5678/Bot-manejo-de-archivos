@@ -259,7 +259,7 @@ async def text_filter(client, message):
             else:
                 await send(ex)	
                 return
-    elif '/downlink' in mss:
+    elif '/wget' in mss:
         j = str(root[username]["actual_root"])+"/"
         url = message.text.split(" ")[1]
         async with aiohttp.ClientSession() as session:
@@ -757,6 +757,7 @@ async def downloadmessage_tg(chunk,filesize,filename,start,message):
 
 ####Subida
 async def uploadfile(file,usid,msg,username):
+    id_de_ms[username]["proc"] == "Up":
     proxy = Configs["gp"]
     mode = Configs[username]["a"]
     usernamew = ''
@@ -891,7 +892,8 @@ async def uploadfile(file,usid,msg,username):
                 f.write(message)				
             await bot.send_document(usid,filename+".txt",caption="txt")
           #  await bot.send_message(f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
-           # await bot.send_document(Channel_Id,filename+".txt")
+            #await bot.send_document(Channel_Id,filename+".txt")
+            id_de_ms[username]["proc"] = "" 
         else:pass
         await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
         id_de_ms[username]["proc"] = ""
@@ -923,21 +925,24 @@ async def uploadfile(file,usid,msg,username):
                 if logerrors > 4:
                     if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
                 else:
-                    await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
+                    await msg.edit(f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
                 id_de_ms[username]["proc"] = ""
                 return
         if len(logslinks) == 1:
-            await msg.edit("✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆")
+            await msg.edit("**Subida Finalizada**✅")
             with open(filename+".txt","w") as f:
                 message = ""
                 lin = ""
                 for li in logslinks:
                     message+=li+"\n"
                     lin+=li+"\n"
-                f.write(message)				
+                f.write(message)
+            await msg.edit("**Enviando TxT📃**")				
             await bot.send_document(usid,filename+".txt",caption="txt")
-           # wait send(f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
-           # await bot.send_docu(Channel_Id,filename+".txt")
+            await msg.edit(f"**Info y Enlaces\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}**")
+            #wait send(f"✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆\n\n𝑵𝒐𝒎𝒃𝒓𝒆: {filename}\n🖇{message}")
+            #await bot.send_docu(Channel_Id,filename+".txt")
+            id_de_ms[username]["proc"] = ""
         else:
             await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
             id_de_ms[username]["proc"] = ""
