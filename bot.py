@@ -1,5 +1,3 @@
-from moodle_client import MoodleClient2
-from client_nex import Client as moodle
 import shutil
 import asyncio
 import tgcrypto
