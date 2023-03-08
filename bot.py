@@ -46,7 +46,7 @@ bot_token = os.environ.get('bot_token')
 Channel_Id = -1001804018431
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
-Configs = {"uclv":'',"gtm":"","uvs":"","ltu":"a816210ff41853b689c154bad264da8e", 
+Configs = {"uclv":'',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e", 
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://181.225.255.48:9050', "s":"On", 
 			'UHTRED_OF_BEBBANBURG': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"}, 
@@ -787,8 +787,8 @@ async def uploadfile(file,usid,msg,username):
                         await bot.send_message(usid,f"**Error Al Subir**:\n\n{ex}")
                     id_de_ms[username]["proc"] = ""
                     return
-        if len(logslinks) == len(files):
-            await msg.edit("**Subida Finalizada**")
+        if len(logslinks) == 1:
+            await msg.edit("**Subida Finalizada**✅")
             with open(filename+".txt","w") as f:
                 message = ""
                 lin = ""
@@ -844,7 +844,7 @@ async def uploadfile(file,usid,msg,username):
                     lin+=li+"\n"
                 f.write(message)
             await msg.edit("**Enviando TxT📃**")				
-            await bot.send_document(usid,filename+".txt",caption=f"**Gracias Por Utilizar Nuestros Servicios ❤️**\n**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}**")
+            await bot.send_document(usid,filename+".txt",caption="**Gracias Por Utilizar Nuestros Servicios ❤️**")
             await msg.edit(f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}**")
             id_de_ms[username]["proc"] = ""
         else:
