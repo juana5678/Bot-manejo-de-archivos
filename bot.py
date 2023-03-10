@@ -370,7 +370,7 @@ async def text_filter(client, message):
               subida = 'Eduvirtual ☁️'
         else:   
             subida = 'Nube Personal ☁️'
-        mens= (f"Nube En Uso: {subida})
+        mens += f"Nube En Uso: {subida}"
         await send(mens)
 
     elif '/zips' in mss:
