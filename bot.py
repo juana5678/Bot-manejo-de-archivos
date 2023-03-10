@@ -83,10 +83,10 @@ async def text_filter(client, message):
     ]    
     reply_markup = ReplyKeyboardMarkup(but)           
     if "/button" in mss:
-        send(
-            text=texto,
-            reply_markup=reply_markup
-        )   
+        await send(
+                  text=texto,
+                  reply_markup=reply_markup
+              )   
 
 
 #Funcion
