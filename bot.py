@@ -339,11 +339,26 @@ async def text_filter(client, message):
         await limite_msg(msg[0],username)
         return     
 
+    elif '/auth' un mss:
+        await send(f"Envié sus credenciales de la siguiente forma:\n`/auth moodle.cu user password repoid")
+        cuenta = message.text
+        host = message.text.split(" ")[1]
+        user = message.text.split(" ")[2]
+        password = message.text.split(" ")[3]
+        repoid = message.text.split(" ")[4]
+        Config[username]["username"] = user
+        Config[username]["password"] = password
+        Config[username]["host"] = host
+        Config[username]["repoid"] = int(repoid)
+        mens = f"**Configuración ⚙️ {username}**\n"
+        mens += f"**User: {Config[username]["username"]}\nPasword: {Config[username]["password"]}\nhost: {Config[username]["host"]}\nRepoID: {Config[username]["repoid"]}\nZips: {Configs[username]["z"]}**")
+        await send(f"✅")
+
     elif '/zips' in mss:
         sip = int(message.text.split(" ")[1])
         Configs[username]["z"] = sip
         await send_config()
-        await send("Tamaño de Zips Configurados a:{sip}")    
+        await send(f"Tamaño de Zips Configurados a:{sip}")    
 
     elif '/del_all'in mss:
         shutil.rmtree("downloads/"+username+"/")
