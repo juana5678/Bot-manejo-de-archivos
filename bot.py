@@ -78,9 +78,10 @@ async def text_filter(client, message):
         return
     else:pass
     texto = 'Hi, es probando'
-    reply_markup = [
-        [ReplyKeyboardMarkup('Stvz20', url = 'https://t.me/FreeXDownloader')]
-    ]               
+    but = [
+        [InlineKeyboardButton('Stvz20', url = 'https://t.me/FreeXDownloader')]
+    ]    
+    reply_markup = ReplyKeyboardMarkup(but)           
     if "/button" in mss:
         send(
             text=texto,
