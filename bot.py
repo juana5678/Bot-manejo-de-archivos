@@ -332,7 +332,10 @@ async def text_filter(client, message):
               await send(ex)
 
     elif '/start' in mss:
-        await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`")
+        but = [[InlineKeyboardButton('Stvz20', url = f'https://t.me/FreeXDownloader')]]    
+        reply_markup = InlineKeyboardMarkup(but)
+        await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
+            reply_markup=reply_markup)
 
     elif '/ls' in mss:
         msg = files_formatter(str(root[username]["actual_root"]),username)
@@ -355,8 +358,19 @@ async def text_filter(client, message):
         host_moodle = Config[username]["host"]
         rid = Config[username]["repoid"]
         rar = Configs[username]["z"]
-        mens = f"**Configuración ⚙️ {username}**\n"
-        mens += f"**User: {usuario}\nPasword: {passw}\nhost: {host_moodle}\nRepoID: {rid}\nZips: {rar}**"
+        mens = f"**Configuración ⚙️ @{username}**\n"
+        mens += f"**User: {usuario}\nPasword: {passw}\nhost: {host_moodle}\nRepoID: {rid}\nZips: {rar}\n\n**"
+        if Configs[username]["a"] = 'upgtm'
+            subida = 'GTM ☁️'
+        elif Configs[username]["a"] = 'upuvs'  
+              subida = 'uvs.ltu ☁️'
+        elif Configs[username]["a"] = 'upcmw'  
+              subida = 'CMW ☁️' 
+        elif Configs[username]["a"] = 'eduvirtual'  
+              subida = 'Eduvirtual ☁️'
+        else:   
+            subida = 'Nube Personal ☁️'
+        mens= (f"Nube En Uso: {subida})
         await send(mens)
 
     elif '/zips' in mss:
@@ -438,6 +452,19 @@ async def text_filter(client, message):
         await send_config()
         await send("**Nube ☁️ GTM ☁️ Configurada**")
 
+    elif '/eduvirtual' in mss:
+        Configs[username]["m"] = "eduvirtual"
+        Configs[username]["a"] = "edvirtual"
+        Configs[username]["z"] = 500
+        await send_config()
+        await send("**Nube ☁️ Eduvirtual ☁️ Configurada**")
+
+    elif '/nube_personal' in mss:
+        Configs[username]["m"] = "personal"
+        Configs[username]["a"] = "personal"
+        Configs[username]["z"] = 100
+        await send_config()
+        await send("**Nube ☁️ Personal ☁️ Configurada**")
 
 #Descarga de Archivos y Enlaces
 @bot.on_message(filters.media & filters.private)
