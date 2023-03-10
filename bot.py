@@ -77,7 +77,8 @@ async def text_filter(bot, message):
                   text=texto,
                   reply_markup=reply_markup
               )   
-
+    else:
+        await bot.message.reply('??')
 
 #Funcion
 seg = 0
