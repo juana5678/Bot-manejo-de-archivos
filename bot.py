@@ -352,7 +352,7 @@ async def text_filter(client, message):
         Config[username]["repoid"] = int(repoid)
         mens = f"**Configuración ⚙️ {username}**\n"
         mens += f"**User: {Config[username]["username"]}\nPasword: {Config[username]["password"]}\nhost: {Config[username]["host"]}\nRepoID: {Config[username]["repoid"]}\nZips: {Configs[username]["z"]}**")
-        await send(f"✅")
+        await send(mens)
 
     elif '/zips' in mss:
         sip = int(message.text.split(" ")[1])
