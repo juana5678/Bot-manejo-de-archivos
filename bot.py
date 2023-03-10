@@ -350,8 +350,13 @@ async def text_filter(client, message):
         Config[username]["password"] = password
         Config[username]["host"] = host
         Config[username]["repoid"] = int(repoid)
+        usuario = Config[username]["username"]
+        passw = Config[username]["password"]
+        host_moodle = Config[username]["host"]
+        rid = Config[username]["repoid"]
+        rar = Configs[username]["z"]
         mens = f"**Configuración ⚙️ {username}**\n"
-        mens += "**User: {Config[username]["username"]}\nPasword: {Config[username]["password"]}\nhost: {Config[username]["host"]}\nRepoID: {Config[username]["repoid"]}\nZips: {Configs[username]["z"]}**"
+        mens += f"**User: {usuario}\nPasword: {passw}\nhost: {host_moodle}\nRepoID: {rid}\nZips: {rar}**"
         await send(mens)
 
     elif '/zips' in mss:
