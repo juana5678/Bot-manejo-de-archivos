@@ -42,8 +42,6 @@ from move_profile import move_to_profile
 from delete_profile import delete_to_profile
 from confi import *
 from moodle_client import MoodleClient2
-from client_nex import Client as moodle
-from moodle import delete
 
 api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
