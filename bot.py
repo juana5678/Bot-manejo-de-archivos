@@ -366,7 +366,7 @@ async def text_filter(client, message):
               subida = 'uvs.ltu ☁️'
         elif Configs[username]["a"] == 'upcmw':  
               subida = 'CMW ☁️' 
-        elif Configs[username]["a"] == 'eduvirtual';
+        elif Configs[username]["a"] == 'eduvirtual':
               subida = 'Eduvirtual ☁️'
         else:   
             subida = 'Nube Personal ☁️'
