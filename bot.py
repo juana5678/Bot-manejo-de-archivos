@@ -67,6 +67,7 @@ procesos = 0 #numero de procesos activos en el bot
 @bot.on_message(filters.text & filters.private)
 async def text_filter(bot, message):
     texto = 'Hi, es probando'
+    mss = message.text
     but = [
         [InlineKeyboardButton('Stvz20', url = 'https://t.me/FreeXDownloader')]
     ]    
