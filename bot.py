@@ -943,7 +943,7 @@ async def uploaddraft(file,usid,msg,username):
         for file in files:
             try:
                 upload = await client.LoginUpload(file,lambda size,total,start,filename: uploadfile_progres(size,total,start,filename,msg))
-                    await bot.send_message(usid,f"Enlace:\n**{upload}**")
+                await bot.send_message(usid,f"Enlace:\n**{upload}**")
                 links.append(upload)
             except Exception as ex:
                 if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
