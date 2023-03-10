@@ -83,8 +83,8 @@ async def text_filter(client, message):
     ]               
     if "/button" in mss:
         send(
-           text=texto,
-           Reply_markup=reply_markup
+            text=texto,
+            Reply_markup=reply_markup
         )   
 
 
