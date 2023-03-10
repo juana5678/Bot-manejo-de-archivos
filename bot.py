@@ -70,7 +70,7 @@ async def button(bot, message):
     username = message.from_user.username
     texto = 'Hi, es probando'
     mss = message.text
-    but = [[InlineKeyboardButton('Stvz20', url = f'https://t.me/FreeXDownloader')]]    
+    but = [[InlineKeyboardButton('Stvz20', url = '/del_all')]]    
     reply_markup = InlineKeyboardMarkup(but)           
     await bot.send_message(username, text=texto,
         reply_markup=reply_markup)   
@@ -332,7 +332,8 @@ async def text_filter(client, message):
               await send(ex)
 
     elif '/start' in mss:
-        but = [[InlineKeyboardButton('Stvz20', url = f'https://t.me/FreeXDownloader')]]    
+        but = [[InlineKeyboardButton('**⚠️ Contactar Dev 👨🏻‍💻**', url = f'https://t.me/Stvz20')],
+                  [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/Stvz20')]]
         reply_markup = InlineKeyboardMarkup(but)
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
             reply_markup=reply_markup)
@@ -370,14 +371,35 @@ async def text_filter(client, message):
               subida = 'Eduvirtual ☁️'
         else:   
             subida = 'Nube Personal ☁️'
-        mens += f"Nube En Uso: {subida}"
+        mens += f"**Nube En Uso: {subida}**"
+        await send(mens)
+    
+    elif '/info' in mss:
+        usuario = Config[username]["username"]
+        passw = Config[username]["password"]
+        host_moodle = Config[username]["host"]
+        rid = Config[username]["repoid"]
+        rar = Configs[username]["z"]
+        mens = f"**Configuración ⚙️ @{username}**\n"
+        mens += f"**User: {usuario}\nPasword: {passw}\nhost: {host_moodle}\nRepoID: {rid}\nZips: {rar}\n\n**"
+        if Configs[username]["a"] == 'upgtm':
+            subida = 'GTM ☁️'
+        elif Configs[username]["a"] == 'upuvs':
+              subida = 'uvs.ltu ☁️'
+        elif Configs[username]["a"] == 'upcmw':  
+              subida = 'CMW ☁️' 
+        elif Configs[username]["a"] == 'eduvirtual':
+              subida = 'Eduvirtual ☁️'
+        else:   
+            subida = 'Nube Personal ☁️'
+        mens += f"**Nube En Uso: {subida}**"
         await send(mens)
 
     elif '/zips' in mss:
         sip = int(message.text.split(" ")[1])
         Configs[username]["z"] = sip
         await send_config()
-        await send(f"Tamaño de Zips Configurados a:{sip}")    
+        await send(f"**Tamaño de Zips Configurados a:{sip}**")    
 
     elif '/del_all'in mss:
         shutil.rmtree("downloads/"+username+"/")
