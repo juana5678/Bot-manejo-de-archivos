@@ -62,6 +62,32 @@ root = {} #directorio actual
 downlist = {} #lista de archivos descargados
 procesos = 0 #numero de procesos activos en el bot
 
+
+###Buttons
+@bot.on_message(filters.text & filters.private)
+async def text_filter(client, message):
+    global procesos
+    user_id = message.from_user.id
+    username = message.from_user.username
+    send = message.reply
+    mss = message.text
+    try:await get_messages()
+    except:await send_config()
+    if acceso(username) == False:
+        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
+        return
+    else:pass
+    texto = 'Hi, es probando'
+    reply_markup = [
+        [ReplyKeyboardMarkup('Stvz20',url='https://t.me/FreeXDownloader')]
+    ]               
+    if "/button" in mss:
+        send(
+           text=texto,
+           Reply_markup=reply_markup
+        )   
+
+
 #Funcion
 seg = 0
 def sizeof_fmt(num, suffix='B'):
