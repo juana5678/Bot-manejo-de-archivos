@@ -64,21 +64,18 @@ procesos = 0 #numero de procesos activos en el bot
 
 
 ###Buttons
-@bot.on_message(filters.text & filters.private)
-async def text_filter(bot, message):
+@bot.on_message(filters.comand('button') & filters.private)
+def button(bot, message):
     texto = 'Hi, es probando'
     mss = message.text
     but = [
         [InlineKeyboardButton('Stvz20', url = 'https://t.me/FreeXDownloader')]
     ]    
     reply_markup = ReplyKeyboardMarkup(but)           
-    if "/button" in mss:
-        await bot.send_message(
-            text=texto,
-            reply_markup=reply_markup
-        )   
-    else:
-        await message.reply('??')
+    message.reply(
+        text=texto,
+        reply_markup=reply_markup
+    )   
 
 #Funcion
 seg = 0
