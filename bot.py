@@ -360,13 +360,13 @@ async def text_filter(client, message):
         rar = Configs[username]["z"]
         mens = f"**Configuración ⚙️ @{username}**\n"
         mens += f"**User: {usuario}\nPasword: {passw}\nhost: {host_moodle}\nRepoID: {rid}\nZips: {rar}\n\n**"
-        if Configs[username]["a"] = 'upgtm'
+        if Configs[username]["a"] == 'upgtm':
             subida = 'GTM ☁️'
-        elif Configs[username]["a"] = 'upuvs'  
+        elif Configs[username]["a"] == 'upuvs':
               subida = 'uvs.ltu ☁️'
-        elif Configs[username]["a"] = 'upcmw'  
+        elif Configs[username]["a"] == 'upcmw':  
               subida = 'CMW ☁️' 
-        elif Configs[username]["a"] = 'eduvirtual'  
+        elif Configs[username]["a"] == 'eduvirtual';
               subida = 'Eduvirtual ☁️'
         else:   
             subida = 'Nube Personal ☁️'
