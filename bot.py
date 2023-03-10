@@ -69,9 +69,9 @@ async def button(bot, message):
     username = message.from_user.username
     texto = 'Hi, es probando'
     mss = message.text
-    but = [[InlineKeyboardButton('Stvz20', url = 'https://t.me/FreeXDownloader')]]    
-    reply_markup = ReplyKeyboardMarkup(but)           
-    await bot.send_message(username, text=texto
+    but = [[InlineKeyboardButton('Stvz20', url = f'https://t.me/FreeXDownloader')]]    
+    reply_markup = InlineKeyboardMarkup(but)           
+    await bot.send_message(username, text=texto,
         reply_markup=reply_markup)   
 
 #Funcion
