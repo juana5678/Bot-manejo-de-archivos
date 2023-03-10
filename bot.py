@@ -74,9 +74,9 @@ async def text_filter(bot, message):
     reply_markup = ReplyKeyboardMarkup(but)           
     if "/button" in mss:
         await bot.message.reply(
-                  text=texto,
-                  reply_markup=reply_markup
-              )   
+            text=texto,
+            reply_markup=reply_markup
+        )   
     else:
         await bot.message.reply('??')
 
