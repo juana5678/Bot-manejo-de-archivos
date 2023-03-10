@@ -65,25 +65,14 @@ procesos = 0 #numero de procesos activos en el bot
 
 ###Buttons
 @bot.on_message(filters.text & filters.private)
-async def text_filter(client, message):
-    global procesos
-    user_id = message.from_user.id
-    username = message.from_user.username
-    send = message.reply
-    mss = message.text
-    try:await get_messages()
-    except:await send_config()
-    if acceso(username) == False:
-        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
-        return
-    else:pass
+async def text_filter(bot, message):
     texto = 'Hi, es probando'
     but = [
         [InlineKeyboardButton('Stvz20', url = 'https://t.me/FreeXDownloader')]
     ]    
     reply_markup = ReplyKeyboardMarkup(but)           
     if "/button" in mss:
-        await send(
+        await bot.message.reply(
                   text=texto,
                   reply_markup=reply_markup
               )   
