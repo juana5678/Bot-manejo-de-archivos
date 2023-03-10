@@ -339,7 +339,7 @@ async def text_filter(client, message):
         await limite_msg(msg[0],username)
         return     
 
-    elif '/auth' un mss:
+    elif '/auth' in mss:
         await send(f"Envié sus credenciales de la siguiente forma:\n`/auth moodle.cu user password repoid")
         cuenta = message.text
         host = message.text.split(" ")[1]
