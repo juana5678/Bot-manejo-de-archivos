@@ -70,7 +70,7 @@ async def button(bot, message):
     username = message.from_user.username
     texto = 'Hi, es probando'
     mss = message.text
-    but = [[InlineKeyboardButton('Stvz20', url = '/del_all')]]    
+    but = [[InlineKeyboardButton('Stvz20', '/del_all')]]    
     reply_markup = InlineKeyboardMarkup(but)           
     await bot.send_message(username, text=texto,
         reply_markup=reply_markup)   
@@ -333,7 +333,7 @@ async def text_filter(client, message):
 
     elif '/start' in mss:
         but = [[InlineKeyboardButton('**⚠️ Contactar Dev 👨🏻‍💻**', url = f'https://t.me/Stvz20')],
-                  [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/Stvz20')]]
+                  [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
         reply_markup = InlineKeyboardMarkup(but)
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
             reply_markup=reply_markup)
