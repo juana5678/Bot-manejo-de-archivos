@@ -79,12 +79,12 @@ async def text_filter(client, message):
     else:pass
     texto = 'Hi, es probando'
     reply_markup = [
-        [ReplyKeyboardMarkup('Stvz20',url='https://t.me/FreeXDownloader')]
+        [ReplyKeyboardMarkup('Stvz20', url = 'https://t.me/FreeXDownloader')]
     ]               
     if "/button" in mss:
         send(
             text=texto,
-            Reply_markup=reply_markup
+            reply_markup=reply_markup
         )   
 
 
