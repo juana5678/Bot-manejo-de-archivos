@@ -758,7 +758,7 @@ async def uploadfile(file,usid,msg,username):
     try:
         async with session.get(moodle,timeout=20,ssl=False) as resp:
             await resp.text()
-            await msg.edit("`Server Online`")
+            await msg.edit("**Server Online❗**")
     except Exception as ex:
         await msg.edit(f"{moodle} Caído 🔻:\n\n{ex}")
         return
@@ -864,7 +864,6 @@ async def uploadfile(file,usid,msg,username):
             id_de_ms[username]["proc"] = ""
             return
 
-
 ###Client Subdia
 class MoodleClient:
     def __init__(self,username,password,moodle,proxy):
@@ -905,6 +904,82 @@ class Progress(BufferedReader):
             calc_sz = self.length - self.tell()
         self.__read_callback(self.tell(), self.length,self.start,self.filename)
         return super(Progress, self).read(size)
+###Subida x Login
+async def uploaddraft(file,usid,msg,username):
+    user = Config[username]["username"]
+    password = Config[username]["password"]
+    host = Config[username]["host"]
+    repoid = Config[username]["repoid"]
+    zips = Configs[username]["z"]
+    proxy = Configs["gp"]
+    if proxy == "":
+        connector = None
+    else:
+        connector = proxy
+    if proxy == "":
+        connection = aiohttp.TCPConnector()
+    else:
+        connection = aiohttp_socks.ProxyConnector(ssl=False).from_url(f"{proxy}")
+    session = aiohttp.ClientSession(connector=connection)
+  #  await msg.edit("𝑹𝒆𝒄𝒐𝒑𝒊𝒍𝒂𝒏𝒅𝒐 𝒊𝒏𝒇𝒐𝒓𝒎𝒂𝒄𝒊ó𝒏")
+    filename = Path(file).name
+    filesize = Path(file).stat().st_size
+    zipssize = 1024*1024*int(zips)
+ #   await msg.edit("❗𝑪𝒐𝒎𝒑𝒓𝒐𝒃𝒂𝒏𝒅𝒐 𝒔𝒆𝒓𝒗𝒊𝒅𝒐𝒓")
+    try:
+        async with session.get(host,timeout=20,ssl=False) as resp:
+            await resp.text()
+            await msg.edit("**Server Online❗**")
+    except Exception as ex:
+        await msg.edit(f"{host} está Caído:\n\n{ex}")
+        return
+    id_de_ms[username] = {"msg":msg, "pat":filename, "proc":"Up"}
+    if filesize > zipssize:
+        await msg.edit("**Comprimiendo❗**")
+        files = sevenzip(file,volume=zipssize)
+        client = MoodleClient2(host,user,password,repoid,connector)
+        links = []
+        for file in files:
+            try:
+                upload = await client.LoginUpload(file,lambda size,total,start,filename: uploadfile_progres(size,total,start,filename,msg))
+                    await bot.send_message(usid,f"Enlace:\n**{upload}**")
+                links.append(upload)
+            except Exception as ex:
+                if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
+                else:
+                    await bot.send_message(usid,f"**Error Al Subir**:\n\n{ex}")
+                id_de_ms[username]["proc"] = ""
+                return
+        message = ""
+        for link in links:
+            message+=f"{link}\n"
+        await msg.edit("**Enviando TxT**")
+        with open(filename+".txt","w") as txt:
+            txt.write(message)
+        await bot.send_document(usid,filename+".txt",caption="**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️**")
+
+        id_de_ms[username]["proc"] = ""
+        os.unlink(filename+".txt")
+        return
+    
+    else:
+    client = MoodleClient2(host,user,password,repoid,connector)
+        try:
+            upload = await client.LoginUpload(file,lambda size,total,start,filename: uploadfile_progres(size,total,start,filename,msg))
+            await msg.edit(f"__**{upload}**__")
+            with open(filename+".txt","w") as txt:
+                txt.write(upload)
+            await bot.send_document(usid,filename+".txt",caption="**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️**")
+
+            id_de_ms[username]["proc"] = ""
+            os.unlink(filename+".txt")
+            return
+        except Exception as ex:
+            if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
+            else:
+                await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
+            id_de_ms[username]["proc"] = ""
+            return
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
