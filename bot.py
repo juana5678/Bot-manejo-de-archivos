@@ -64,7 +64,7 @@ procesos = 0 #numero de procesos activos en el bot
 
 
 ###Buttons
-@bot.on_message(filters.comand('button') & filters.private)
+@bot.on_message(filters.command('button') & filters.private)
 def button(bot, message):
     texto = 'Hi, es probando'
     mss = message.text
