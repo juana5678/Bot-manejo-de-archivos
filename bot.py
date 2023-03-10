@@ -73,7 +73,7 @@ def button(bot, message):
         [InlineKeyboardButton('Stvz20', url = 'https://t.me/FreeXDownloader')]
     ]    
     reply_markup = ReplyKeyboardMarkup(but)           
-    client.send_message(
+    bot.send_message(
         username,
         text=texto,
         reply_markup=reply_markup
