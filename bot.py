@@ -1009,7 +1009,8 @@ async def uploaddraft(file,usid,msg,username):
     host = Config[username]["host"]
     repoid = Config[username]["repoid"]
     zips = Configs[username]["z"]
-    if Configs[username]["a"] = "edvirtual":
+    nub = Configs[username]["a"]
+    if nub == "eduvirtual":
         proxy = ""
     else:
         proxy = Configs["gp"]
