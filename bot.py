@@ -426,7 +426,7 @@ async def text_filter(client, message):
        #   usr = message.text.split(" ")[1]
           if username in boss:
               await send(f"DB🔻", quote=True)
-              await send(f"str{Configs[]}", quote=True)
+              await send(f"str({Configs[]})", quote=True)
           else: 
               await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/add' in mss:
