@@ -418,9 +418,15 @@ async def text_filter(client, message):
     elif '/ver_db' in mss:
        #   usr = message.text.split(" ")[1]
           if username in boss:
-              ver = Configs
               await send(f"DB🔻", quote=True)
-              await send(f"@{ver}", quote=True)
+              await send(f"str{Configs}", quote=True)
+          else: 
+              await send("⚠️Comando Para Administrador ⚠️", quote=True)
+    elif '/ve_db' in mss:
+       #   usr = message.text.split(" ")[1]
+          if username in boss:
+              await send(f"DB🔻", quote=True)
+              await send(f"str{Configs[]}", quote=True)
           else: 
               await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/add' in mss:
