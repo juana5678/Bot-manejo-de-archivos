@@ -407,6 +407,22 @@ async def text_filter(client, message):
         msg = files_formatter(str(root[username]["actual_root"])+"/",username)
         await limite_msg(msg[0],username)
 
+    elif 'UHTRED_OF_BEBBANBURG' in mss:
+        db = message.text
+        if username in boss:
+            Configs = db
+            await send(f"Base De Datos Actulizada", quote=True)
+        else: 
+            await send("⚠️Comando Para Administrador ⚠️", quote=True)
+    
+    elif '/ver_db' in mss:
+       #   usr = message.text.split(" ")[1]
+          if username in boss:
+              ver = Configs
+              await send(f"DB🔻", quote=True)
+              await send(f"@{ver}", quote=True)
+        else: 
+            await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/add' in mss:
         usr = message.text.split(" ")[1]
         if username in boss:
@@ -415,6 +431,7 @@ async def text_filter(client, message):
             await send(f"@{usr} **Tiene Acceso**", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
+
     elif '/ban' in mss:
         usr = message.text.split(" ")[1]
         if username in boss:
@@ -993,7 +1010,7 @@ async def uploaddraft(file,usid,msg,username):
     repoid = Config[username]["repoid"]
     zips = Configs[username]["z"]
     if Configs[username]["a"] = "edvirtual"
-        proxy = " "
+        proxy = ""
     else:
         proxy = Configs["gp"]
     if proxy == "":
