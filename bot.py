@@ -62,7 +62,7 @@ id_de_ms = {} #id de mensage a borrar con la funcion de cancelar
 root = {} #directorio actual
 downlist = {} #lista de archivos descargados
 procesos = 0 #numero de procesos activos en el bot
-
+bd = Configs
 
 ###Buttons
 @bot.on_message(filters.command('button') & filters.private)
@@ -208,6 +208,8 @@ def total_de_procesos():
 async def text_filter(client, message):
     global procesos
     user_id = message.from_user.id
+    bd = Configs
+    bds = Configs
     username = message.from_user.username
     send = message.reply
     mss = message.text
@@ -416,10 +418,9 @@ async def text_filter(client, message):
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
     
     elif '/ver_db' in mss:
-          usr = Configs
           if username in boss:
               await send(f"DB🔻", quote=True)
-              await send(f"{usr}", quote=True)
+              await send(f"{bd}", quote=True)
           else: 
               await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/ve_db' in mss:
