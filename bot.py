@@ -401,14 +401,6 @@ async def text_filter(client, message):
         msg = files_formatter(str(root[username]["actual_root"])+"/",username)
         await limite_msg(msg[0],username)
 
-    elif 'UHTRED_OF_BEBBANBURG' in mss:
-        db = message.text
-        if username in boss:
-            Configs = db
-            await send(f"Base De Datos Actulizada", quote=True)
-        else: 
-            await send("⚠️Comando Para Administrador ⚠️", quote=True)
-
     elif '/add' in mss:
         usr = message.text.split(" ")[1]
         if username in boss:
