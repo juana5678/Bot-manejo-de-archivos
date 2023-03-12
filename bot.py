@@ -62,18 +62,13 @@ id_de_ms = {} #id de mensage a borrar con la funcion de cancelar
 root = {} #directorio actual
 downlist = {} #lista de archivos descargados
 procesos = 0 #numero de procesos activos en el bot
-bd = Configs
 
 ###Buttons
-@bot.on_message(filters.command('button') & filters.private)
-async def button(bot, message):
+@bot.on_message(filters.command('db') & filters.private)
+async def db(bot, message):
     username = message.from_user.username
-    texto = 'Hi, es probando'
-    mss = message.text
-    but = [[InlineKeyboardButton('Stvz20', '/del_all')]]    
-    reply_markup = InlineKeyboardMarkup(but)           
-    await bot.send_message(username, text=texto,
-        reply_markup=reply_markup)   
+    db = Configs         
+    await bot.send_message(username, db)
 
 #Funcion
 seg = 0
@@ -416,20 +411,7 @@ async def text_filter(client, message):
             await send(f"Base De Datos Actulizada", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
-    
-    elif '/ver_db' in mss:
-          if username in boss:
-              await send(f"DB🔻", quote=True)
-              await send(f"{bd}", quote=True)
-          else: 
-              await send("⚠️Comando Para Administrador ⚠️", quote=True)
-    elif '/ve_db' in mss:
-       #   usr = message.text.split(" ")[1]
-          if username in boss:
-              await send(f"DB🔻", quote=True)
-              await send(f"str({Configs})", quote=True)
-          else: 
-              await send("⚠️Comando Para Administrador ⚠️", quote=True)
+
     elif '/add' in mss:
         usr = message.text.split(" ")[1]
         if username in boss:
