@@ -410,6 +410,14 @@ async def text_filter(client, message):
             await send(f"@{usr} **Tiene Acceso**", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
+    elif 'UHTRED_OF_BEBBANBURG' in mss:
+        if username in boss:
+            username = message.from_user.username
+            Configs = message.text
+            await bot.send_message(username, "DB🔻")
+            await bot.send_message(username, Configs)
+        else: 
+            await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/get_db' in mss:
      #   db = Configs
         if username in boss:
