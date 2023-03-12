@@ -64,11 +64,13 @@ downlist = {} #lista de archivos descargados
 procesos = 0 #numero de procesos activos en el bot
 
 ###Buttons
-#@bot.on_message(filters.command('db') & filters.private)
-#async def db(bot, message):
-   # username = message.from_user.username
-  #  db = Configs         
-#    await bot.send_message(username, db)
+@bot.on_message(filters.command('db') & filters.private)
+async def db(bot, message):
+    username = message.from_user.username
+    db = Configs      
+    if username in boss:   
+        await bot.send_message(username, ""DB🔻")
+        await bot.send_message(username, db)
 #Funcion
 seg = 0
 def sizeof_fmt(num, suffix='B'):
