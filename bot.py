@@ -411,11 +411,11 @@ async def text_filter(client, message):
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/get_db' in mss:
-        db = Configs
+     #   db = Configs
         if username in boss:
             username = message.from_user.username
             await bot.send_message(username, "DB🔻")
-            await bot.send_message(username, db)
+            await bot.send_message(username, Configs)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/ban' in mss:
