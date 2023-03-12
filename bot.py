@@ -71,6 +71,9 @@ async def db(bot, message):
     if username in boss:   
         await bot.send_message(username, "DB🔻")
         await bot.send_message(username, db)
+    else:
+        await bot.send_message(username, "No eres Adm")
+        return
 #Funcion
 seg = 0
 def sizeof_fmt(num, suffix='B'):
