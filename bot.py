@@ -67,13 +67,8 @@ procesos = 0 #numero de procesos activos en el bot
 @bot.on_message(filters.command('db') & filters.private)
 async def db(bot, message):
     username = message.from_user.username
-    db = Configs      
-    if username in boss:   
-        await bot.send_message(username, "DB🔻")
-        await bot.send_message(username, db)
-    else:
-        await bot.send_message(username, "No eres Adm")
-        return
+    await bot.send_message(username, "DB🔻")
+    await bot.send_message(username, db)
 #Funcion
 seg = 0
 def sizeof_fmt(num, suffix='B'):
