@@ -69,7 +69,7 @@ async def db(bot, message):
     username = message.from_user.username
     db = Configs         
     await bot.send_message(username, db)
-
+    return
 #Funcion
 seg = 0
 def sizeof_fmt(num, suffix='B'):
