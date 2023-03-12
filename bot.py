@@ -203,8 +203,6 @@ def total_de_procesos():
 async def text_filter(client, message):
     global procesos
     user_id = message.from_user.id
-    bd = Configs
-    bds = Configs
     username = message.from_user.username
     send = message.reply
     mss = message.text
