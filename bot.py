@@ -67,8 +67,8 @@ procesos = 0 #numero de procesos activos en el bot
 @bot.on_message(filters.command('db') & filters.private)
 async def db(bot, message):
     username = message.from_user.username
-    db = Configs         
-    await bot.send_message(username, db)
+    Configs = Configs         
+    await bot.send_message(username, Configs)
 #Funcion
 seg = 0
 def sizeof_fmt(num, suffix='B'):
