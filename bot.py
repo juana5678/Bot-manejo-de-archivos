@@ -51,8 +51,8 @@ Configs = {"uclv":'',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb7
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://181.225.255.48:9050', "s":"On", 
 			'UHTRED_OF_BEBBANBURG': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"}, 
-			'Locura05': {'z': 99,"m":"u","a":"c","t":"y"}, 
-			'mcfee2828': {'z': 99,"m":"u","a":"c","t":"y"}
+			'user1': {'z': 99,"m":"u","a":"c","t":"y"}, 
+			'user2': {'z': 99,"m":"u","a":"c","t":"y"}
 			}
 
 Urls = {} #urls subidos a educa
@@ -410,12 +410,26 @@ async def text_filter(client, message):
             await send(f"@{usr} **Tiene Acceso**", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
-    elif 'UHTRED_OF_BEBBANBURG' in mss:
+    elif '/users' in mss:
         if username in boss:
-            username = message.from_user.username
-            Configs = message.text
-            await bot.send_message(username, "DB🔻")
-            await bot.send_message(username, Configs)
+            username = message.from_user.username	
+            total = len(Configs) - 10
+            message = "**Usuarios: **"+ str(total)+'\n\n'
+            for user in Configs:
+                if user == "uclv":continue
+                if user == "gtm":continue
+                if user == "uvs":continue
+                if user == "ltu":continue
+                if user == "ucuser":continue
+                if user == "ucpass":continue
+                if user == "gp":continue
+                if user == "s":continue
+                if user == "UHTRED_OF_BEBBANBURG":continue
+                if user == "Stvz20":continue
+                if user == "uclv_p":continue
+            message+=f"{user}\n"
+            msg = f"{message}\n"
+            await client.send_message(username,msg)   
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/get_db' in mss:
