@@ -410,7 +410,11 @@ async def text_filter(client, message):
             await send(f"@{usr} **Tiene Acceso**", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
-
+    elif '/ff' in mss:
+        db = Configs
+        username = message.from_user.username
+        await bot.send_message(username, "DB🔻")
+        await bot.send_message(username, db)
     elif '/ban' in mss:
         usr = message.text.split(" ")[1]
         if username in boss:
