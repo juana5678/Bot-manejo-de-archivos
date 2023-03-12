@@ -66,6 +66,7 @@ procesos = 0 #numero de procesos activos en el bot
 ###Buttons
 @bot.on_message(filters.command('db') & filters.private)
 async def db(bot, message):
+    db = Configs
     username = message.from_user.username
     await bot.send_message(username, "DB🔻")
     await bot.send_message(username, db)
