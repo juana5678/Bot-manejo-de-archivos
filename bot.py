@@ -105,7 +105,7 @@ def files_formatter(path,username):
             size = Path(str(path)+"/"+n).stat().st_size
         except: pass
         if not "." in n:
-            msg+=f"**╭➣❮ /seven_{i} ❯─❮ /rm_{i} ❯─❮ /dl_{i} ❯\n╰➣ `📂 {n}` `|` `-` \n" 
+            msg+=f"**╭➣❮ /seven_{i} ❯─❮ /rmdir_{i}\n╰➣ `📂 {n}` `|` `-` \n" 
         else:
             msg+=f"**╭➣❮ /up_{i} ❯─❮ /rm_{i} ❯─❮ /dl_{i} ❯\n╰➣ {sizeof_fmt(size)} - ** `📃 {n}`\n"
             i+=1
@@ -332,11 +332,35 @@ async def text_filter(client, message):
         reply_markup = InlineKeyboardMarkup(but)
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
             reply_markup=reply_markup)
-
+###Root Manejos de Archivos 
     elif '/ls' in mss:
         msg = files_formatter(str(root[username]["actual_root"]),username)
         await limite_msg(msg[0],username)
-        return     
+        return  
+   
+    elif 'mkdir' in mss:
+        name = message.text.split(" ")[1]
+        if "." in name or "/" in name or "*" in name:
+            await send("**El nombre no puede contener Caracteres Especiales**")
+            return
+        rut = root[username]["actual_root"]
+        os.mkdir(f"{rut}/{name}")
+        await send(f"**Carpeta Creada**\n\n`/{name}`")
+        msg = files_formatter(str(root[username]["actual_root"]),username)
+        await limite_msg(msg[0],username)
+
+    elif 'rmdir' in mss:
+        list = message.text.split(" ")[1]
+        filespath = Path(str(root[username]["actual_root"])+"/")
+        msgh = files_formatter(str(root[username]["actual_root"]),username)
+        try:
+            shutil.rmtree(str(root[username]["actual_root"])+"/"+msgh[1][int(list)])
+            msg = files_formatter(str(root[username]["actual_root"])+"/",username)
+            await limite_msg(msg[0],username)
+        except Exception as ex:
+            await bot.send_message(username,ex)
+
+
 
     elif '/auth' in mss:
         await send(f"Envié sus credenciales de la siguiente forma:\n`/auth moodle.cu user password repoid")
