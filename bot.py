@@ -1137,6 +1137,7 @@ async def uploadfile(file,usid,msg,username):
                     upload = upload[1]
                     upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
                     upload = str(upload) + '?token=' + token
+                    upload = xdlink.parse(upload)
                 else: 
                     upload = upload[0]
                 if upload == False:
