@@ -84,6 +84,7 @@ async def callback(bot, msg: CallbackQuery):
             text="Seleccione La Nube☁️ a Subir:",
             reply_markup=nubess
         )
+    else:pass
 @bot.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
     if msg.data == "uvs":
@@ -95,7 +96,7 @@ async def callback(bot, msg: CallbackQuery):
             text="Ha Seleccionado la Nube☁️: uvs.ltu\nTamaño de Zips de la Nube☁️: 19 Mb"
           #  reply_markup=nubess
         )
-
+    else:pass
 def get_readable_time(seconds: int) -> str:
     count = 0
     readable_time = ""
