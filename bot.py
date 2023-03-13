@@ -370,7 +370,7 @@ async def text_filter(client, message):
 
     elif '/start' in mss:
       #  uptime = get_readable_time(time() - start)
-        but = [[InlineKeyboardButton('**⚠️ Contactar Dev 👨🏻‍💻**', url = f'https://t.me/Stvz20')],
+        but = [[InlineKeyboardButton('**⚠️ Contactar Dev 👨🏻‍💻**', callback_data="help")],
                   [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
         reply_markup = InlineKeyboardMarkup(but)
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
