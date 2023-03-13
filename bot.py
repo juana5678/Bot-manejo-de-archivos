@@ -584,7 +584,6 @@ async def text_filter(client, message):
         await send_config()
         await send("**Nube ☁️ Personal ☁️ Configurada**")
 
-bot.on_callback_query()
 def help(bot, update):
     helptext = "Tutorial"
     update.message.edit_text(text=helptext, disable_web_page_preview=True)
