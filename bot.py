@@ -74,7 +74,9 @@ nubess = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('☁️UVS.LTU☁️', callback_data="uvs"),
         InlineKeyboardButton('☁️GTM☁️', callback_data="gtm"),
-        InlineKeyboardButton('☁️CMW☁️', callback_data="cmw")
+        InlineKeyboardButton('☁️CMW☁️', callback_data="cmw"
+        ],[
+        InlineKeyboardButton('☁️ Eduvirtual ☁️', callback_data="edu")
         ]]
     )
 
@@ -99,7 +101,7 @@ async def callback(bot, msg: CallbackQuery):
         Configs[username]["a"] = "upgtm"
         Configs[username]["z"] = 7
         await msg.message.edit(
-            text="Ha Seleccionado la Nube☁️: GTM\nTamaño de Zips de la Nube☁️: 7 Mb"
+            text="Ha Seleccionado la Nube☁️: GTM\nTamaño de Zips de la Nube☁️: 7 Mb",
             reply_markup=nubess
         )
     elif msg.data == "cmw":
@@ -107,7 +109,7 @@ async def callback(bot, msg: CallbackQuery):
         Configs[username]["a"] = "upcmw"
         Configs[username]["z"] = 499
         await msg.message.edit(
-            text="Ha Seleccionado la Nube☁️: CMW\nTamaño de Zips de la Nube☁️: 499 Mb"
+            text="Ha Seleccionado la Nube☁️: CMW\nTamaño de Zips de la Nube☁️: 499 Mb",
             reply_markup=nubess
         )
 
