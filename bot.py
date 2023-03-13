@@ -77,9 +77,22 @@ nubess = InlineKeyboardMarkup(
         InlineKeyboardButton('☁️CMW ☁️', callback_data="cmw")],
         [InlineKeyboardButton('☁️Eduvirtual☁️', callback_data="edu"),
         InlineKeyboardButton('☁️Nube Personal☁️', callback_data="personal"),
-        InlineKeyboardButton('☁️Extra☁️', callback_data="extra")
+        InlineKeyboardButton('☁️Extra☁️', callback_data="extra")],
+        [InlineKeyboardButton('<<<===', callback_data="home")
         ]]
     )
+hom = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('☁️ Seleccionar Nube ☁️', callback_data="nubes")],
+        [InlineKeyboardButton('⚙️ Info De Usuario ⚙️', callback_data="infouser"),
+        InlineKeyboardButton('📈 Info Del BoT 📈', callback_data="infobot")],
+        [InlineKeyboardButton('⚠️🆘⛑️ Ayuda ⛑️ 🆘 ⚠️', callback_data="ayuda")
+        ]]
+    )
+atras = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('<<<===', callback_data="atras")
+        ]]
 
 @bot.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
@@ -136,6 +149,34 @@ async def callback(bot, msg: CallbackQuery):
         await msg.message.edit(
             text="Ha Seleccionado la Nube☁️: Extra\nTamaño de Zips de la Nube☁️: 299 Mb",
             reply_markup=nubess
+        )
+    elif msg.data == "home":
+        await msg.message.edit(
+            text="Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️",
+            reply_markup=hom
+        )
+    elif msg.data == "infouser":
+        usuario = Config[username]["username"]
+        passw = Config[username]["password"]
+        host_moodle = Config[username]["host"]
+        rid = Config[username]["repoid"]
+        rar = Configs[username]["z"]
+        mens = f"**Configuración ⚙️ @{username}**\n"
+        mens += f"**User: {usuario}\nPasword: {passw}\nhost: {host_moodle}\nRepoID: {rid}\nZips: {rar}\n\n**"
+        if Configs[username]["a"] == 'upgtm':
+            subida = 'GTM ☁️'
+        elif Configs[username]["a"] == 'upltu':
+              subida = 'uvs.ltu ☁️'
+        elif Configs[username]["a"] == 'upcmw':  
+              subida = 'CMW ☁️' 
+        elif Configs[username]["a"] == 'eduvirtual':
+              subida = 'Eduvirtual ☁️'
+        else:   
+            subida = 'Nube Personal ☁️'
+        mens += f"**Nube En Uso: {subida}**"
+        await msg.message.edit(
+            text=mens,
+            reply_markup=atras
         )
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -423,7 +464,7 @@ async def text_filter(client, message):
         but = [[InlineKeyboardButton('☁️ Selecionar Nube ☁️', callback_data="nubes")],
                   [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
         reply_markup = InlineKeyboardMarkup(but)
-        await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
+        await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️`",
             reply_markup=reply_markup)
 
 ###Root Manejos de Archivos 
