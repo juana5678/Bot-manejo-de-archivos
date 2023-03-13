@@ -70,6 +70,17 @@ async def timer(bot, message):
     username = message.from_user.username
     await bot.send_message(username, uptime)
 
+@bot.on_message(filters.command('jaja') & filters.private)
+async def help(bot, update):
+  #  uptime = get_readable_time(time() - start)
+   # username = message.from_user.username
+    but = [[InlineKeyboardButton('** Help**', callback_data="help")]]
+    reply_markup = InlineKeyboardMarkup(but)
+    await update.reply_text(
+        text="Hola",
+        reply_markup=reply_markup
+    )
+
 def get_readable_time(seconds: int) -> str:
     count = 0
     readable_time = ""
@@ -358,15 +369,7 @@ async def text_filter(client, message):
         reply_markup = InlineKeyboardMarkup(but)
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
             reply_markup=reply_markup)
-
-    elif '/ver' in mss:
-      #  uptime = get_readable_time(time() - start)
-        but = [[InlineKeyboardButton('** Help**', callback_data="help")],
-                  [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
-        reply_markup = InlineKeyboardMarkup(but)
-        await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
-            reply_markup=reply_markup)
-
+         
 ###Root Manejos de Archivos 
     elif '/ls' in mss:
         msg = files_formatter(str(root[username]["actual_root"]),username)
