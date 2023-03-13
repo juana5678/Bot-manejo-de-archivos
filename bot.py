@@ -105,11 +105,12 @@ def files_formatter(path,username):
             size = Path(str(path)+"/"+n).stat().st_size
         except: pass
         if not "." in n:
-            i += 1
             msg+=f"**╭➣❮ /seven_{i} ❯─❮ /rmdir_{i} ❯\n╰➣ `📂 {n}` `|` `-` \n" 
-        else:
             i += 1
+        else:
+        #    i += 1
             msg+=f"**╭➣❮ /up_{i} ❯─❮ /rm_{i} ❯─❮ /dl_{i} ❯\n╰➣ {sizeof_fmt(size)} - ** `📃 {n}`\n"
+            i += 1
     #msg+= f"\n**Eliminar Todo**\n    **/deleteall**"
     return msg , final
 
