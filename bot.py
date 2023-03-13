@@ -360,7 +360,7 @@ async def text_filter(client, message):
 
     elif '/start' in mss:
       #  uptime = get_readable_time(time() - start)
-        but = [[InlineKeyboardButton('☁️ Selecionar Nube ☁️', callback_data="nubes")],
+        but = [[InlineKeyboardButton('☁️ Selecionar Nube ☁️', callback_data="nube")],
                   [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
         reply_markup = InlineKeyboardMarkup(but)
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
@@ -582,14 +582,14 @@ async def text_filter(client, message):
 ###Callbacks
 @bot.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
-    nubes = [[InlineKeyboardButton('☁️UVS.LTU☁️', callback_data="uvs"), InlineKeyboardButton('☁️CMW☁️', callback_data="cmw")],
-              [InlineKeyboardButton('☁️GTM☁️', callback_data="gtm")]]
+    nubes = [[InlineKeyboardButton('☁️UVS.LTU☁️', callback_data="uvs")]]
+                [InlineKeyboardButton('☁️GTM☁️', callback_data="gtm")]]
     reply_markup = InlineKeyboardMarkup(nubes)
     if msg.data == "help":
         await msg.message.edit(
             text="Text"
         )
-    elif msg.data == "nubes":
+    elif msg.data == "nube":
         await msg.message.edit(
             text="**Seleccione La Nube ☁️ a Subir:**",
             reply_markup=reply_markup
