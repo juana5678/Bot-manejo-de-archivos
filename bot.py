@@ -78,7 +78,7 @@ nubess = InlineKeyboardMarkup(
         [InlineKeyboardButton('☁️Eduvirtual☁️', callback_data="edu"),
         InlineKeyboardButton('☁️Nube Personal☁️', callback_data="personal"),
         InlineKeyboardButton('☁️Extra☁️', callback_data="extra")],
-        [InlineKeyboardButton('<<<===', callback_data="home")
+        [InlineKeyboardButton('ᐊᐊᐊᐊᐊ', callback_data="home")
         ]]
     )
 hom = InlineKeyboardMarkup(
@@ -91,7 +91,7 @@ hom = InlineKeyboardMarkup(
     )
 atras = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('<<<===', callback_data="home")
+        InlineKeyboardButton('ᐊᐊᐊᐊᐊ', callback_data="home")
         ]]
     )
 @bot.on_callback_query()
@@ -262,7 +262,7 @@ async def limite_msg(text,username):
     for l in text:
         if len(msg +"\n" + l) > lim_ch:		
             msg_ult = msg
-            await bot.send_message(username,msg)	
+            await bot.send_message(username,msg, reply_markup=hom)	
             msg = ''
         if msg == '':	
             msg+= l
@@ -270,7 +270,7 @@ async def limite_msg(text,username):
             msg+= "\n" +l	
         c += 1
         if len(text) == c and msg_ult != msg:
-            await bot.send_message(username,msg)
+            await bot.send_message(username,msg, reply_markup=hom)
 
 def update_progress_bar(inte,max):
     percentage = inte / max
