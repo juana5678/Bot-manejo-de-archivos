@@ -76,6 +76,7 @@ nubess = InlineKeyboardMarkup(
         InlineKeyboardButton('☁️GTM☁️', callback_data="gtm")
         ]]
     )
+
 @bot.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
     if msg.data == "nubes":
@@ -83,7 +84,9 @@ async def callback(bot, msg: CallbackQuery):
             text="Seleccione La Nube☁️ a Subir:",
             reply_markup=nubess
         )
-    elif msg.data == "uvs":
+@bot.on_callback_query()
+async def callback(bot, msg: CallbackQuery):
+    if msg.data == "uvs":
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "upltu"
         Configs[username]["z"] = 19
