@@ -74,12 +74,16 @@ async def timer(bot, message):
 async def help(bot, update):
   #  uptime = get_readable_time(time() - start)
    # username = message.from_user.username
-    but = [[InlineKeyboardButton('** Help**', callback_data="/help")]]
+    but = [[InlineKeyboardButton('** Help**', callback_data="help")]]
     reply_markup = InlineKeyboardMarkup(but)
     await update.reply_text(
         text="Hola",
         reply_markup=reply_markup
     )
+@bot.on_callback_query()
+async def callback(bot, msg: CallbackQuery)
+    if msg
+
 
 def get_readable_time(seconds: int) -> str:
     count = 0
