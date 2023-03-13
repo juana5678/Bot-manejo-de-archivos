@@ -105,6 +105,7 @@ def files_formatter(path,username):
             size = Path(str(path)+"/"+n).stat().st_size
         except: pass
         if not "." in n:
+            i += 1
             msg+=f"**╭➣❮ /seven_{i} ❯─❮ /rmdir_{i} ❯\n╰➣ `📂 {n}` `|` `-` \n" 
         else:
             i += 1
