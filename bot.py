@@ -72,10 +72,13 @@ async def timer(bot, message):
 
 nubess = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('☁️UVS.LTU☁️', callback_data="uvs"),
-        InlineKeyboardButton('☁️GTM☁️', callback_data="gtm"),
-        InlineKeyboardButton('☁️CMW☁️', callback_data="cmw")],
-        [InlineKeyboardButton('☁️ Eduvirtual ☁️', callback_data="edu")
+        InlineKeyboardButton('☁️ UVS.LTU ☁️', callback_data="uvs"),
+        InlineKeyboardButton('☁️ GTM ☁️', callback_data="gtm"),
+        InlineKeyboardButton('☁️CMW ☁️', callback_data="cmw"
+        ],[
+        InlineKeyboardButton('☁️Eduvirtual☁️', callback_data="edu"),
+        InlineKeyboardButton('☁️Nube Personal☁️', callback_data="personal"),
+        InlineKeyboardButton('☁️Extra☁️', callback_data="extra")
         ]]
     )
 
@@ -111,8 +114,30 @@ async def callback(bot, msg: CallbackQuery):
             text="Ha Seleccionado la Nube☁️: CMW\nTamaño de Zips de la Nube☁️: 499 Mb",
             reply_markup=nubess
         )
-
-
+    elif msg.data == "edu":
+        Configs[username]["m"] = "eduvirtual"
+        Configs[username]["a"] = "eduvirtual"
+        Configs[username]["z"] = 500
+        await msg.message.edit(
+            text="Ha Seleccionado la Nube☁️: Edvirtual\nTamaño de Zips de la Nube☁️: 500 Mb\n\nTenga en cuenta q está configuración es solo si posee una cuenta en la misma o de lo contrario no podrá Utilizarla, use /auth para añadir los datos",
+            reply_markup=nubess
+        )
+    elif msg.data == "personal":
+        Configs[username]["m"] = "personal"
+        Configs[username]["a"] = "personal"
+        Configs[username]["z"] = 100
+        await msg.message.edit(
+            text="Ha Seleccionado la Nube☁️: Subida a Nube Personal\nTamaño de Zips de la Nube☁️: 100 Mb\n\nUse /auth para añadir los datos de su cuenta personal",
+            reply_markup=nubess
+        )
+    elif msg.data == "extra":
+        Configs[username]["m"] = "u"
+        Configs[username]["a"] = "vcl"
+        Configs[username]["z"] = 299
+        await msg.message.edit(
+            text="Ha Seleccionado la Nube☁️: Extra\nTamaño de Zips de la Nube☁️: 299 Mb",
+            reply_markup=nubess
+        )
 def get_readable_time(seconds: int) -> str:
     count = 0
     readable_time = ""
@@ -482,7 +507,7 @@ async def text_filter(client, message):
         mens += f"**User: {usuario}\nPasword: {passw}\nhost: {host_moodle}\nRepoID: {rid}\nZips: {rar}\n\n**"
         if Configs[username]["a"] == 'upgtm':
             subida = 'GTM ☁️'
-        elif Configs[username]["a"] == 'upuvs':
+        elif Configs[username]["a"] == 'upltu':
               subida = 'uvs.ltu ☁️'
         elif Configs[username]["a"] == 'upcmw':  
               subida = 'CMW ☁️' 
