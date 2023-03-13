@@ -105,7 +105,7 @@ def files_formatter(path,username):
             size = Path(str(path)+"/"+n).stat().st_size
         except: pass
         if not "." in n:
-            msg+=f"**╭➣❮ /seven_{i} ❯─❮ /rmdir_{i} ❯\n╰➣ `📂 {n}` `|` `-` \n" 
+            msg+=f"**╭➣❮ /seven_{i} ❯─❮ /rmdir_{i} ❯─❮ /cd_{i} ❯\n╰➣**📂Carpeta:** `{n}`\n\n" 
             i += 1
         else:
         #    i += 1
@@ -341,7 +341,7 @@ async def text_filter(client, message):
         return  
    
     elif '/mkdir' in mss:
-        name = message.text.split(" ")[1]
+        name = message.text.split("_")[1]
         if "." in name or "/" in name or "*" in name:
             await send("**El nombre no puede contener Caracteres Especiales**")
             return
@@ -352,7 +352,7 @@ async def text_filter(client, message):
         await limite_msg(msg[0],username)
 
     elif '/rmdir' in mss:
-        list = message.text.split(" ")[1]
+        list = message.text.split("_")[1]
         filespath = Path(str(root[username]["actual_root"])+"/")
         msgh = files_formatter(str(root[username]["actual_root"]),username)
         try:
@@ -363,7 +363,7 @@ async def text_filter(client, message):
             await bot.send_message(username,ex)
 
     elif 'rm' in mss:
-        list = message.text.split(" ")[1]	
+        list = message.text.split("_")[1]	
         msgh = files_formatter(str(root[username]["actual_root"]),username)
         try:
             unlink(str(root[username]["actual_root"])+"/"+msgh[1][int(list)])
