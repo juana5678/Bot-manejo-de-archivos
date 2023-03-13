@@ -55,7 +55,7 @@ Configs = {"uclv":'',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb7
 			'user1': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'user2': {'z': 99,"m":"u","a":"c","t":"y"}
 			}
-startime = time.time()
+start = time.time()
 Urls = {} #urls subidos a educa
 Urls_draft = {} #urls para borrar de draft
 Config = {} #configuraciones privadas de moodle
@@ -67,7 +67,7 @@ procesos = 0 #numero de procesos activos en el bot
 ###Buttons
 @bot.on_message(filters.command('/up_time') & filters.private)
 async def up_time(bot, message):
-    uptime = get_readable_time(time.time() - startime)
+    uptime = get_readable_time(time.time() - start)
     username = message.from_user.username
     await bot.send_message(username, "uptime: {uptime}")
 
