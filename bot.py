@@ -74,7 +74,7 @@ async def timer(bot, message):
 async def help(bot, update):
   #  uptime = get_readable_time(time() - start)
    # username = message.from_user.username
-    but = [[InlineKeyboardButton('** Help**', callback_data="help")]]
+    but = [[InlineKeyboardButton('** Help**', callback_data="/help")]]
     reply_markup = InlineKeyboardMarkup(but)
     await update.reply_text(
         text="Hola",
@@ -585,7 +585,7 @@ async def text_filter(client, message):
         await send("**Nube ☁️ Personal ☁️ Configurada**")
 
 bot.on_callback_query()
-async def cb_handler(bot, update):
+def help(bot, update):
     helptext = "Tutorial"
     if update.data == "help":
         await update.message.edit_text(
@@ -1172,4 +1172,5 @@ async def uploaddraft(file,usid,msg,username):
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
+bot.on_callback_query("/help", help)
 bot.loop.run_forever()
