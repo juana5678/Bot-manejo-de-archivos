@@ -47,7 +47,7 @@ bot_token = os.environ.get('bot_token')
 Channel_Id = -1001804018431
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
-Configs = {"uclv":'',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e", 
+Configs = {"vcl":'',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e", 
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://181.225.255.48:9050', "s":"On", 
 			'UHTRED_OF_BEBBANBURG': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"}, 
@@ -372,14 +372,7 @@ async def text_filter(client, message):
         reply_markup = InlineKeyboardMarkup(but)
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
             reply_markup=reply_markup)
- 
-    elif '/nube' in mss:
-      #  uptime = get_readable_time(time() - start)
-        but = [[InlineKeyboardButton('☁️ Selecionar Nube ☁️', callback_data="nubes")],
-                  [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
-        reply_markup = InlineKeyboardMarkup(but)
-        await send("Nubes",
-            reply_markup=reply_markup)
+
 ###Root Manejos de Archivos 
     elif '/ls' in mss:
         msg = files_formatter(str(root[username]["actual_root"]),username)
@@ -565,6 +558,13 @@ async def text_filter(client, message):
         Configs[username]["z"] = 19
         await send_config()
         await send("**Nube ☁️ uvs.ltu Configurada**")
+
+    elif '/vcl' in mss:
+        Configs[username]["m"] = "u"
+        Configs[username]["a"] = "vcl"
+        Configs[username]["z"] = 19
+        await send_config()
+        await send("**Nube ☁️ 💪🏻 Configurada**")
 
     elif 'cmw' in mss:
         Configs[username]["m"] = "u"
@@ -896,6 +896,13 @@ async def uploadfile(file,usid,msg,username):
     elif mode == "upcmw":
         moodle = "https://uvs.ucm.cmw.sld.cu"
         token = Configs["uvs"]
+        if proxy == "":
+            connector = aiohttp.TCPConnector()
+        else:
+            connector = aiohttp_socks.ProxyConnector.from_url(f"{proxy}")
+    elif mode == "vcl":
+        moodle = "https://aulauvs.gtm.sld.cu"
+        token = Configs["vcl"]
         if proxy == "":
             connector = aiohttp.TCPConnector()
         else:
