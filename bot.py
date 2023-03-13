@@ -85,13 +85,13 @@ async def callback(bot, msg: CallbackQuery):
             reply_markup=nubess
         )
     elif msg.data == "uvs":
-     #   Configs[username]["m"] = "u"
-       # Configs[username]["a"] = "upltu"
-        #Configs[username]["z"] = 19
-        #await send_config()
+        Configs[username]["m"] = "u"
+        Configs[username]["a"] = "upltu"
+        Configs[username]["z"] = 19
         await msg.message.edit(
             text="Ha Seleccionado la Nube☁️: uvs.ltu\nTamaño de Zips de la Nube☁️: 19 Mb"
         )
+     #   await send_config()
     else:pass
 def get_readable_time(seconds: int) -> str:
     count = 0
