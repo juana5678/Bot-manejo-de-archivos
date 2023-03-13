@@ -74,9 +74,8 @@ nubess = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('☁️ UVS.LTU ☁️', callback_data="uvs"),
         InlineKeyboardButton('☁️ GTM ☁️', callback_data="gtm"),
-        InlineKeyboardButton('☁️CMW ☁️', callback_data="cmw"
-        ],[
-        InlineKeyboardButton('☁️Eduvirtual☁️', callback_data="edu"),
+        InlineKeyboardButton('☁️CMW ☁️', callback_data="cmw"(],
+        [InlineKeyboardButton('☁️Eduvirtual☁️', callback_data="edu"),
         InlineKeyboardButton('☁️Nube Personal☁️', callback_data="personal"),
         InlineKeyboardButton('☁️Extra☁️', callback_data="extra")
         ]]
