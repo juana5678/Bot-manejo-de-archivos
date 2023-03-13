@@ -47,7 +47,7 @@ bot_token = os.environ.get('bot_token')
 Channel_Id = -1001804018431
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
-Configs = {"vcl":'',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e", 
+Configs = {"vcl":'035649148fac062426ee3c5d72a6ec1f',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e", 
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://181.225.255.48:9050', "s":"On", 
 			'UHTRED_OF_BEBBANBURG': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"}, 
@@ -562,7 +562,7 @@ async def text_filter(client, message):
     elif '/vcl' in mss:
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "vcl"
-        Configs[username]["z"] = 19
+        Configs[username]["z"] = 300
         await send_config()
         await send("**Nube ☁️ 💪🏻 Configurada**")
 
@@ -901,7 +901,7 @@ async def uploadfile(file,usid,msg,username):
         else:
             connector = aiohttp_socks.ProxyConnector.from_url(f"{proxy}")
     elif mode == "vcl":
-        moodle = "https://aulauvs.gtm.sld.cu"
+        moodle = "https://www.aula.vcl.sld.cu"
         token = Configs["vcl"]
         if proxy == "":
             connector = aiohttp.TCPConnector()
