@@ -352,7 +352,7 @@ async def text_filter(client, message):
               await send(ex)
 
     elif '/start' in mss:
-        uptime = get_readable_time(time() - start)
+      #  uptime = get_readable_time(time() - start)
         but = [[InlineKeyboardButton('**⚠️ Contactar Dev 👨🏻‍💻**', url = f'https://t.me/Stvz20')],
                   [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
         reply_markup = InlineKeyboardMarkup(but)
@@ -360,7 +360,7 @@ async def text_filter(client, message):
             reply_markup=reply_markup)
 
     elif '/ver' in mss:
-        uptime = get_readable_time(time() - start)
+      #  uptime = get_readable_time(time() - start)
         but = [[InlineKeyboardButton('** Help**', callback_data = "help")],
                   [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
         reply_markup = InlineKeyboardMarkup(but)
