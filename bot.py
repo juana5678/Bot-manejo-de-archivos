@@ -105,7 +105,7 @@ def files_formatter(path,username):
             size = Path(str(path)+"/"+n).stat().st_size
         except: pass
         if not "." in n:
-            msg+=f"**╭➣❮ /seven_{i} ❯─❮ /rmdir_{i}\n╰➣ `📂 {n}` `|` `-` \n" 
+            msg+=f"**╭➣❮ /seven_{i} ❯─❮ /rmdir_{i} ❯\n╰➣ `📂 {n}` `|` `-` \n" 
         else:
             msg+=f"**╭➣❮ /up_{i} ❯─❮ /rm_{i} ❯─❮ /dl_{i} ❯\n╰➣ {sizeof_fmt(size)} - ** `📃 {n}`\n"
             i+=1
@@ -338,7 +338,7 @@ async def text_filter(client, message):
         await limite_msg(msg[0],username)
         return  
    
-    elif 'mkdir' in mss:
+    elif '/mkdir' in mss:
         name = message.text.split(" ")[1]
         if "." in name or "/" in name or "*" in name:
             await send("**El nombre no puede contener Caracteres Especiales**")
@@ -349,7 +349,7 @@ async def text_filter(client, message):
         msg = files_formatter(str(root[username]["actual_root"]),username)
         await limite_msg(msg[0],username)
 
-    elif 'rmdir' in mss:
+    elif '/rmdir' in mss:
         list = message.text.split(" ")[1]
         filespath = Path(str(root[username]["actual_root"])+"/")
         msgh = files_formatter(str(root[username]["actual_root"]),username)
@@ -360,7 +360,15 @@ async def text_filter(client, message):
         except Exception as ex:
             await bot.send_message(username,ex)
 
-
+    elif 'rm' in mss:
+        list = message.text.split(" ")[1]	
+        msgh = files_formatter(str(root[username]["actual_root"]),username)
+        try:
+            unlink(str(root[username]["actual_root"])+"/"+msgh[1][int(list)])
+            msg = files_formatter(str(root[username]["actual_root"])+"/",username)
+            await limite_msg(msg[0],username)
+        except Exception as ex:
+            await bot.send_message(username,ex)
 
     elif '/auth' in mss:
         await send(f"Envié sus credenciales de la siguiente forma:\n`/auth moodle.cu user password repoid")
