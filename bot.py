@@ -1,3 +1,4 @@
+import time
 import shutil
 import asyncio
 import tgcrypto
@@ -54,7 +55,7 @@ Configs = {"uclv":'',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb7
 			'user1': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'user2': {'z': 99,"m":"u","a":"c","t":"y"}
 			}
-
+startime = time.time()
 Urls = {} #urls subidos a educa
 Urls_draft = {} #urls para borrar de draft
 Config = {} #configuraciones privadas de moodle
@@ -64,12 +65,36 @@ downlist = {} #lista de archivos descargados
 procesos = 0 #numero de procesos activos en el bot
 
 ###Buttons
-@bot.on_message(filters.command('db') & filters.private)
-async def db(bot, message):
-    db = Configs
+@bot.on_message(filters.command('/time') & filters.private)
+async def time(bot, message):
+    uptime = get_readable_time(time.time() - startime)
     username = message.from_user.username
-    await bot.send_message(username, "DB🔻")
-    await bot.send_message(username, db)
+    await bot.send_message(username, "uptime: {uptime}")
+
+def get_readable_time(seconds: int) -> str:
+    count = 0
+    readable_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", " days"]
+    while count < 4:
+        count += 1
+        if count < 3:
+            remainder, result = divmod(seconds, 60)
+        else:
+            remainder, result = divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
+    for x in range(len(time_list)):
+        time_list[x] = str(time_list[x]) + time_suffix_list[x]
+    if len(time_list) == 4:
+        readable_time += time_list.pop() + ", "
+    time_list.reverse()
+    readable_time += ": ".join(time_list)
+    return readable_time
+
+
 #Funcion
 seg = 0
 def sizeof_fmt(num, suffix='B'):
