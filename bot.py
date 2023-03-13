@@ -81,9 +81,11 @@ async def help(bot, update):
         reply_markup=reply_markup
     )
 @bot.on_callback_query()
-async def callback(bot, msg: CallbackQuery)
-    if msg
-
+async def callback(bot, msg: CallbackQuery):
+    if msg.data == "help":
+        await msg.message.edit(
+            text="Text"
+        )
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -587,10 +589,6 @@ async def text_filter(client, message):
         Configs[username]["z"] = 100
         await send_config()
         await send("**Nube ☁️ Personal ☁️ Configurada**")
-
-def help(bot, update):
-    helptext = "Tutorial"
-    update.message.edit_text(text=helptext, disable_web_page_preview=True)
 
 #Descarga de Archivos y Enlaces
 @bot.on_message(filters.media & filters.private)
