@@ -92,8 +92,8 @@ async def callback(bot, msg: CallbackQuery):
         Configs[username]["z"] = 19
         await send_config()
         await msg.message.edit(
-            text="Ha Seleccionado la Nube☁️: uvs.ltu\nTamaño de Zips de la Nube☁️: 19 Mb",
-            reply_markup=nubess
+            text="Ha Seleccionado la Nube☁️: uvs.ltu\nTamaño de Zips de la Nube☁️: 19 Mb"
+          #  reply_markup=nubess
         )
 
 def get_readable_time(seconds: int) -> str:
