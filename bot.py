@@ -585,7 +585,7 @@ bot.on_callback_query("/help", help)
 def help(bot, CallbackQuery):
     texth = "Hola"
     username = message.from_user.username
-    await bot.send_message(username, 'algo')
+    bot.send_message(username, 'algo')
     CallbackQuery.edit.message_text(texth)
        
 
