@@ -91,7 +91,7 @@ hom = InlineKeyboardMarkup(
     )
 atras = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('<<<===', callback_data="atras")
+        InlineKeyboardButton('<<<===', callback_data="home")
         ]]
     )
 @bot.on_callback_query()
