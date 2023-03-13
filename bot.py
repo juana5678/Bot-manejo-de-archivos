@@ -275,7 +275,7 @@ async def text_filter(client, message):
                 except:
                     filename = r.content_disposition.filename	
                 fsize = int(r.headers.get("Content-Length"))
-                msg = await send("**Por Favor Espere 🔍**")
+                msg = await send("7**Por Favor Espere 🔍**")
                 procesos += 1
                 await client.send_message(Channel_Id,f'**@{username} Envio un #link :**\n**Url:** {url}\n')
                 f = open(f"{j}{filename}","wb")
@@ -501,7 +501,7 @@ async def text_filter(client, message):
 
     elif '/eduvirtual' in mss:
         Configs[username]["m"] = "eduvirtual"
-        Configs[username]["a"] = "edvirtual"
+        Configs[username]["a"] = "eduvirtual"
         Configs[username]["z"] = 500
         await send_config()
         await send("**Nube ☁️ Eduvirtual ☁️ Configurada**")
