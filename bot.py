@@ -39,6 +39,7 @@ from py7zr import FILTER_COPY
 from zipfile import ZipFile
 from multivolumefile import MultiVolume
 from moodle_client import MoodleClient2
+import xdlink
 
 #BoT Configuration Variables
 api_id = 9910861
