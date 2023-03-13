@@ -80,8 +80,8 @@ async def callback(bot, msg: CallbackQuery):
         )
     if msg.data == "help":
         await msg.message.edit(
-            text="Seleccione La Nube ☁️ a Subir:",
-            reply_markup=1
+            text="Seleccione La Nube☁️ a Subir:",
+            reply_markup=nubess
         )
 
 def get_readable_time(seconds: int) -> str:
