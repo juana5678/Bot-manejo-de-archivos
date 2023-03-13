@@ -94,6 +94,11 @@ atras = InlineKeyboardMarkup(
         InlineKeyboardButton('ᐊᐊᐊᐊᐊ', callback_data="home")
         ]]
     )
+delete = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('🗑️Borrar Todo📂🗑️', callback_data="delet")
+        ]]
+    )
 @bot.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
     username = msg.from_user.username
@@ -178,6 +183,11 @@ async def callback(bot, msg: CallbackQuery):
             text=mens,
             reply_markup=atras
         )
+    elif msg.data == "delet":
+        await msg.message.edit(
+            text="⚠️Todos Los Archivos han Sido Borrados⚠️",
+        )
+
 def get_readable_time(seconds: int) -> str:
     count = 0
     readable_time = ""
@@ -262,7 +272,7 @@ async def limite_msg(text,username):
     for l in text:
         if len(msg +"\n" + l) > lim_ch:		
             msg_ult = msg
-            await bot.send_message(username,msg, reply_markup=hom)	
+            await bot.send_message(username,msg, reply_markup=delete)	
             msg = ''
         if msg == '':	
             msg+= l
@@ -270,7 +280,7 @@ async def limite_msg(text,username):
             msg+= "\n" +l	
         c += 1
         if len(text) == c and msg_ult != msg:
-            await bot.send_message(username,msg, reply_markup=hom)
+            await bot.send_message(username,msg, reply_markup=delete)
 
 def update_progress_bar(inte,max):
     percentage = inte / max
