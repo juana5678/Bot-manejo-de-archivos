@@ -587,11 +587,7 @@ async def text_filter(client, message):
 bot.on_callback_query()
 def help(bot, update):
     helptext = "Tutorial"
-    if update.data == "help":
-        await update.message.edit_text(
-            text=helptext,
-            disable_web_page_preview=True
-        )
+    update.message.edit_text(text=helptext, disable_web_page_preview=True)
 
 #Descarga de Archivos y Enlaces
 @bot.on_message(filters.media & filters.private)
