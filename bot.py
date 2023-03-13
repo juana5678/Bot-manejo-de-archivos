@@ -92,7 +92,7 @@ def files_formatter(path,username):
              dirc.append(str(Path(p).name))
     result.sort()
     dirc.sort()
-    msg = f'**Ruta: **`{str(rut).split("downloads/")[-1]}`\n**/del_all - Para Eliminar Todo el Directorio**\n\n'
+    msg = f'**Ruta: **`{str(rut).split("downloads/")[-1]}`\n\n'
     if result == [] and dirc == [] :
         return msg , final
     for k in dirc:
@@ -105,9 +105,9 @@ def files_formatter(path,username):
             size = Path(str(path)+"/"+n).stat().st_size
         except: pass
         if not "." in n:
-            msg+=f"**╭─❮ /up_{i} ❯─❮ /rn_{i} ❯─❮ /dl_{i} ❯\n╰➣ `{n}` `|` `-` \n" 
+            msg+=f"**╭➣❮ /seven_{i} ❯─❮ /rm_{i} ❯─❮ /dl_{i} ❯\n╰➣ `📂 {n}` `|` `-` \n" 
         else:
-            msg+=f"**╭─❮ /up_{i} ❯─❮ /rn_{i} ❯─❮ /dl_{i} ❯\n╰➣ {sizeof_fmt(size)} - ** `{n}`\n"
+            msg+=f"**╭➣❮ /up_{i} ❯─❮ /rm_{i} ❯─❮ /dl_{i} ❯\n╰➣ {sizeof_fmt(size)} - ** `📃 {n}`\n"
             i+=1
     #msg+= f"\n**Eliminar Todo**\n    **/deleteall**"
     return msg , final
