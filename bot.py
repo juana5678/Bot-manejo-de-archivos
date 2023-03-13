@@ -581,7 +581,7 @@ async def text_filter(client, message):
         await send_config()
         await send("**Nube ☁️ Personal ☁️ Configurada**")
 
-bot.on_callback_query()
+bot.on_callback_query("help", help)
 def help(bot, CallbackQuery):
     texth = "Hola"
     CallbackQuery.edit.message_text(texth)
