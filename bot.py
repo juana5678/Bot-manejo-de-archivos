@@ -681,7 +681,7 @@ async def download_mediafire(url, path, msg, callback=None):
         chunk = await response.content.read(1024)
         if not chunk:
             break
-            chunk_+=len(chunk)
+        chunk_+=len(chunk)
         if callback:
             await callback(chunk_,total,filename,start,msg)
         f.write(chunk)
