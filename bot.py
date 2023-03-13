@@ -361,7 +361,7 @@ async def text_filter(client, message):
 
     elif '/ver' in mss:
       #  uptime = get_readable_time(time() - start)
-        but = [[InlineKeyboardButton('** Help**', callback_data = "help")],
+        but = [[InlineKeyboardButton('** Help**', callback_data="help")],
                   [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
         reply_markup = InlineKeyboardMarkup(but)
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
@@ -581,14 +581,14 @@ async def text_filter(client, message):
         await send_config()
         await send("**Nube ☁️ Personal ☁️ Configurada**")
 
-bot.on_callback_query("/help", help)
-def help(bot, CallbackQuery):
-    texth = "Hola"
-    username = message.from_user.username
-    bot.send_message(username, 'algo')
-    CallbackQuery.edit.message_text(texth)
-       
-
+bot.on_callback_query()
+async def help(bot, update):
+    helptext = "Tutorial"
+    if update.data == :help":
+        await update.message.edit_text(
+            text=helptext,
+            disable_web_page_preview=True
+    )
 
 #Descarga de Archivos y Enlaces
 @bot.on_message(filters.media & filters.private)
