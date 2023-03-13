@@ -79,7 +79,7 @@ nubess = InlineKeyboardMarkup(
 
 @bot.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
-    username = message.from_user.username
+    username = msg.from_user.username
     if msg.data == "nubes":
         await msg.message.edit(
             text="Seleccione La Nube☁️ a Subir:",
