@@ -581,11 +581,12 @@ async def text_filter(client, message):
         await send_config()
         await send("**Nube ☁️ Personal ☁️ Configurada**")
 
-bot.on_callback_query("help", help)
+bot.on_callback_query("/help", help)
 def help(bot, CallbackQuery):
     texth = "Hola"
+    await send(username, 'algo')
     CallbackQuery.edit.message_text(texth)
-            
+       
 
 
 #Descarga de Archivos y Enlaces
