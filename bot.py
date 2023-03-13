@@ -591,7 +591,7 @@ async def help(bot, update):
         await update.message.edit_text(
             text=helptext,
             disable_web_page_preview=True
-    )
+        )
 
 #Descarga de Archivos y Enlaces
 @bot.on_message(filters.media & filters.private)
