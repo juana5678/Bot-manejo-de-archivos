@@ -223,22 +223,22 @@ async def text_filter(client, message):
         download = await ytdlp_downloader(url,user_id,msg,username,lambda data: download_progres(data,msg,format),format)
         if procesos != 0:
             procesos -= 1
-        await msg.edit("**Enlace Descargado**")
+        await msg.edit("**Enlace De Youtube Descargado**")
         msg = files_formatter(str(root[username]["actual_root"]),username)
         await limite_msg(msg[0],username)
         return
 
-    elif "https://www.mediafire.com/" in message.text:
+    elif "mediafire.com/" in message.text:
         url = message.text
         if "?dkey=" in str(url):
             url = str(url).split("?dkey=")[0]
         msg = await send("**Por Favor Espere 🔍**")
         await client.send_message(Channel_Id,f'**@{username} Envio un link de #mediafire:**\n**Url:** {url}\n')
         procesos += 1
-        download = await ytdlp_downloader(url,user_id,msg,username,lambda data: download_progres(data,msg,format),format)
+        download = await download_mediafire(url, str(root[username]["actual_root"])+"/", msg, callback=mediafiredownload)
         if procesos != 0:
             procesos -= 1
-        await msg.edit("**Enlace Descargado**")
+        await msg.edit("**Enlace De MediaFire Descargado**")
         msg = files_formatter(str(root[username]["actual_root"]),username)
         await limite_msg(msg[0],username)
         return
@@ -400,6 +400,7 @@ async def text_filter(client, message):
             subida = 'Nube Personal ☁️'
         mens += f"**Nube En Uso: {subida}**"
         await send(mens)
+        await client.send_message(Channel_Id, mens)
     
     elif '/info' in mss:
         usuario = Config[username]["username"]
