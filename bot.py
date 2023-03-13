@@ -172,11 +172,13 @@ async def callback(bot, msg: CallbackQuery):
         if Configs[username]["a"] == 'upgtm':
             subida = 'GTM ☁️'
         elif Configs[username]["a"] == 'upltu':
-              subida = 'uvs.ltu ☁️'
+            subida = 'uvs.ltu ☁️'
         elif Configs[username]["a"] == 'upcmw':  
-              subida = 'CMW ☁️' 
+            subida = 'CMW ☁️' 
         elif Configs[username]["a"] == 'eduvirtual':
-              subida = 'Eduvirtual ☁️'
+            subida = 'Eduvirtual ☁️'
+        elif Configs[username]["a"] == 'vcl':
+            subida = 'Nube Extra ☁️'
         else:   
             subida = 'Nube Personal ☁️'
         mens += f"**Nube En Uso: {subida}**"
@@ -1087,10 +1089,12 @@ async def uploadfile(file,usid,msg,username):
                 error_conv = 0
                 try:
                     upload = await client.uploadtoken(path,lambda chunk,total,start,filen:uploadfile_progres(chunk,total,start,filen,msg),token)
-                    if mode == "upltu" or mode == "upgtm" or mode == "upcmw":
+                    if mode == "upltu" or mode == "upgtm" or mode == "upcmw" or mode == "vcl":
                         upload = upload[1]
                         upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
                         upload = str(upload) + '?token=' + token
+                        if mode == "vcl":
+                            upload = xdlink.parse(upload)
                     else: 
                         upload = upload[0]
                     if upload == False:
@@ -1134,11 +1138,12 @@ async def uploadfile(file,usid,msg,username):
             error_conv = 0
             try:
                 upload = await client.uploadtoken(file,lambda chunk,total,start,filen:uploadfile_progres(chunk,total,start,filen,msg),token)
-                if mode == "upltu" or mode == "upgtm" or mode == "upcmw":
+                if mode == "upltu" or mode == "upgtm" or mode == "upcmw" or mode == "vcl":
                     upload = upload[1]
                     upload = upload.replace('draftfile.php/','webservice/draftfile.php/')
                     upload = str(upload) + '?token=' + token
-                    upload = xdlink.parse(upload)
+                    if mode == "vcl":
+                        upload = xdlink.parse(upload)
                 else: 
                     upload = upload[0]
                 if upload == False:
