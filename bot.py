@@ -70,7 +70,7 @@ async def timer(bot, message):
     username = message.from_user.username
     await bot.send_message(username, uptime)
 
-@bot.on_message(filters.command('jaja') & filters.private)
+@bot.on_message(filters.command(['help']) & filters.private)
 async def help(bot, update):
   #  uptime = get_readable_time(time() - start)
    # username = message.from_user.username
