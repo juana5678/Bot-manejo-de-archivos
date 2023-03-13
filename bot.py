@@ -70,14 +70,14 @@ async def timer(bot, message):
     username = message.from_user.username
     await bot.send_message(username, uptime)
 
+nubess = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('☁️UVS.LTU☁️', callback_data="uvs"),
+        InlineKeyboardButton('☁️GTM☁️', callback_data="gtm")
+        ]]
+    )
 @bot.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
-    nubess = InlineKeyboardMarkup(
-            [[
-            InlineKeyboardButton('☁️UVS.LTU☁️', callback_data="uvs"),
-            InlineKeyboardButton('☁️GTM☁️', callback_data="gtm")
-            ]]
-        )
     if msg.data == "help":
         await msg.message.edit(
             text="Seleccione La Nube☁️ a Subir:",
