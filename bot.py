@@ -65,8 +65,8 @@ downlist = {} #lista de archivos descargados
 procesos = 0 #numero de procesos activos en el bot
 
 ###Buttons
-@bot.on_message(filters.command('/time') & filters.private)
-async def time(bot, message):
+@bot.on_message(filters.command('/up_time') & filters.private)
+async def up_time(bot, message):
     uptime = get_readable_time(time.time() - startime)
     username = message.from_user.username
     await bot.send_message(username, "uptime: {uptime}")
