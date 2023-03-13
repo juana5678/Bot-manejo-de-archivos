@@ -88,7 +88,7 @@ async def callback(bot, msg: CallbackQuery):
      #   Configs[username]["m"] = "u"
        # Configs[username]["a"] = "upltu"
         #Configs[username]["z"] = 19
-        $await send_config()
+        #await send_config()
         await msg.message.edit(
             text="Ha Seleccionado la Nube☁️: uvs.ltu\nTamaño de Zips de la Nube☁️: 19 Mb"
         )
