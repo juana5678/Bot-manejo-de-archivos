@@ -584,7 +584,7 @@ async def text_filter(client, message):
 bot.on_callback_query()
 def callback_query(client, CallbackQuery):
     texth = "Hola"
-    if CallbackQuery.data = "help"
+    if CallbackQuery.data = "help":
         CallbackQuery.edit.message_text(texth)
             
 
