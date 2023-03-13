@@ -78,7 +78,7 @@ nubess = InlineKeyboardMarkup(
     )
 @bot.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
-    if msg.data == "help":
+    if msg.data == "nubes":
         await msg.message.edit(
             text="Seleccione La Nube☁️ a Subir:",
             reply_markup=nubess
@@ -372,7 +372,14 @@ async def text_filter(client, message):
         reply_markup = InlineKeyboardMarkup(but)
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
             reply_markup=reply_markup)
-         
+ 
+    elif '/nube' in mss:
+      #  uptime = get_readable_time(time() - start)
+        but = [[InlineKeyboardButton('☁️ Selecionar Nube ☁️', callback_data="nubes")],
+                  [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
+        reply_markup = InlineKeyboardMarkup(but)
+        await send("Nubes",
+            reply_markup=reply_markup)
 ###Root Manejos de Archivos 
     elif '/ls' in mss:
         msg = files_formatter(str(root[username]["actual_root"]),username)
