@@ -70,16 +70,6 @@ async def timer(bot, message):
     username = message.from_user.username
     await bot.send_message(username, uptime)
 
-@bot.on_message(filters.command(['help']) & filters.private)
-async def help(bot, update):
-  #  uptime = get_readable_time(time() - start)
-   # username = message.from_user.username
-    but = [[InlineKeyboardButton('** Help**', callback_data="help")]]
-    reply_markup = InlineKeyboardMarkup(but)
-    await update.reply_text(
-        text="Hola",
-        reply_markup=reply_markup
-    )
 @bot.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
     if msg.data == "help":
@@ -370,7 +360,7 @@ async def text_filter(client, message):
 
     elif '/start' in mss:
       #  uptime = get_readable_time(time() - start)
-        but = [[InlineKeyboardButton('**⚠️ Contactar Dev 👨🏻‍💻**', callback_data="help")],
+        but = [[InlineKeyboardButton('☁️ Selecionar Nube ☁️', callback_data="nubes")],
                   [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
         reply_markup = InlineKeyboardMarkup(but)
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️\n\nPara Comenzar, seleccione la nube ☁️ a dónde desea Subir, para ello use los siguientes comandos:` **\n/uvs_ltu - 19 Mb\n/gtm - 7 Mb\n/cmw - 400 Mb** `\n\nLuego reenvié un archivo de Telgram, enlaces de descaga Directa, enlaces de Youtube, Twich con capacidad de seleccionar calida así como enlace mega y mediafire, entre otras páginas`",
@@ -589,6 +579,21 @@ async def text_filter(client, message):
         Configs[username]["z"] = 100
         await send_config()
         await send("**Nube ☁️ Personal ☁️ Configurada**")
+###Callbacks
+@bot.on_callback_query()
+async def callback(bot, msg: CallbackQuery):
+    nubes = [[InlineKeyboardButton('☁️UVS.LTU☁️', callback_data="uvs"), InlineKeyboardButton('☁️CMW☁️', callback_data="cmw")],
+              [InlineKeyboardButton('☁️GTM☁️', callback_data="gtm")]]
+    reply_markup = InlineKeyboardMarkup(nubes)
+    if msg.data == "help":
+        await msg.message.edit(
+            text="Text"
+        )
+    elif msg.data == "nubes":
+        await msg.message.edit(
+            text="**Seleccione La Nube ☁️ a Subir:**",
+            reply_markup=reply_markup
+        )
 
 #Descarga de Archivos y Enlaces
 @bot.on_message(filters.media & filters.private)
@@ -1169,5 +1174,5 @@ async def uploaddraft(file,usid,msg,username):
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
-bot.on_callback_query("/help", help)
+print("Iniciado")
 bot.loop.run_forever()
