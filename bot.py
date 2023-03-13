@@ -86,18 +86,18 @@ async def callback(bot, msg: CallbackQuery):
             reply_markup=nubess
         )
     elif msg.data == "uvs":
-        Configs[username]["m"] = "u"
-        Configs[username]["a"] = "upltu"
-        Configs[username]["z"] = 19
+      #  Configs[username]["m"] = "u"
+        #Configs[username]["a"] = "upltu"
+       # Configs[username]["z"] = 19
         await msg.message.edit(
             text="Ha Seleccionado la Nube☁️: uvs.ltu\nTamaño de Zips de la Nube☁️: 19 Mb",
             reply_markup=nubess
         )
 
     elif msg.data == "gtm":
-        Configs[username]["m"] = "u"
-        Configs[username]["a"] = "upgtm"
-        Configs[username]["z"] = 7
+      #  Configs[username]["m"] = "u"
+     #   Configs[username]["a"] = "upgtm"
+      #  Configs[username]["z"] = 7
         await msg.message.edit(
             text="Ha Seleccionado la Nube☁️: GTM\nTamaño de Zips de la Nube☁️: 7 Mb"
         )
