@@ -591,8 +591,7 @@ async def callback(bot, msg: CallbackQuery):
         )
     elif msg.data == "nubes":
         await msg.message.edit(
-            text="**Seleccione La Nube ☁️ a Subir:**",
-            reply_markup=reply_markup
+            text="**Seleccione La Nube ☁️ a Subir:**"
         )
 
 #Descarga de Archivos y Enlaces
