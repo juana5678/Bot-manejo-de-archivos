@@ -79,7 +79,7 @@ nubess = InlineKeyboardMarkup(
 
 @bot.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
-    username = msg.from_user.username
+    username = message.from_user.username
     if msg.data == "nubes":
         await msg.message.edit(
             text="Seleccione La Nube☁️ a Subir:",
@@ -90,9 +90,17 @@ async def callback(bot, msg: CallbackQuery):
         Configs[username]["a"] = "upltu"
         Configs[username]["z"] = 19
         await msg.message.edit(
-            text="Ha Seleccionado la Nube☁️: uvs.ltu\nTamaño de Zips de la Nube☁️: 19 Mb"
+            text="Ha Seleccionado la Nube☁️: uvs.ltu\nTamaño de Zips de la Nube☁️: 19 Mb",
+            reply_markup=nubess
         )
-     #   await send_config()
+    elif msg.data == "gtm":
+        Configs[username]["m"] = "u"
+        Configs[username]["a"] = "upltu"
+        Configs[username]["z"] = 19
+        await msg.message.edit(
+            text="Ha Seleccionado la Nube☁️: GTM\nTamaño de Zips de la Nube☁️: 7 Mb",
+            reply_markup=nubess
+        )
     else:pass
 def get_readable_time(seconds: int) -> str:
     count = 0
