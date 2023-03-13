@@ -585,7 +585,7 @@ async def text_filter(client, message):
         await send("**Nube ☁️ Personal ☁️ Configurada**")
 
 bot.on_callback_query()
-async def help(bot, update):
+async def cb_handler(bot, update):
     helptext = "Tutorial"
     if update.data == "help":
         await update.message.edit_text(
