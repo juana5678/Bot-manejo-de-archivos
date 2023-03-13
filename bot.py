@@ -460,12 +460,8 @@ async def text_filter(client, message):
               await send(ex)
 
     elif '/start' in mss:
-      #  uptime = get_readable_time(time() - start)
-        but = [[InlineKeyboardButton('☁️ Selecionar Nube ☁️', callback_data="nubes")],
-                  [InlineKeyboardButton('**Únete al Canal**', url = f'https://t.me/UploadFastBoTFree')]]
-        reply_markup = InlineKeyboardMarkup(but)
         await bot.send_photo(username,"logo.jpg",caption="`Hola 👋🏻 a Stvz20_Upload, Bienvenido a este sistema de Descargas, estamos simpre para tí, y ayudarte a descagar cualquier archivo multimedia que desees☺️`",
-            reply_markup=reply_markup)
+            reply_markup=hom)
 
 ###Root Manejos de Archivos 
     elif '/ls' in mss:
