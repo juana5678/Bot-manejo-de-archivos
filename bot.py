@@ -184,8 +184,10 @@ async def callback(bot, msg: CallbackQuery):
             reply_markup=atras
         )
     elif msg.data == "delet":
+        shutil.rmtree("downloads/"+username+"/")
+        root[username]["actual_root"] = "downloads/"+username
         await msg.message.edit(
-            text="⚠️Todos Los Archivos han Sido Borrados⚠️",
+            text="⚠️🗑️ Archivos Borrados 🗑️⚠️",
         )
 
 def get_readable_time(seconds: int) -> str:
