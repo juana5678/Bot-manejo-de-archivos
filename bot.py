@@ -48,13 +48,16 @@ bot_token = os.environ.get('bot_token')
 Channel_Id = -1001804018431
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
-Configs = {"vcl":'035649148fac062426ee3c5d72a6ec1f',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e", 
+Configs = {"vcl":'c2a9bf7ddc1b7cbf73dd7ea2668b53d6',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e", 
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://181.225.255.48:9050', "s":"On", 
 			'UHTRED_OF_BEBBANBURG': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"}, 
 			'user1': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'user2': {'z': 99,"m":"u","a":"c","t":"y"}
 			}
+
+#035649148fac062426ee3c5d72a6ec1f
+#https://aula.scu.sld.cu/login/token.php?service=moodle_mobile_app&username=lusi02&password=Stvz02**https://aula.scu.sld.cu/login/token.php?service=moodle_mobile_app&username=stvz02&password=Stvz02**
 start = time()
 Urls = {} #urls subidos a educa
 Urls_draft = {} #urls para borrar de draft
@@ -659,7 +662,7 @@ async def text_filter(client, message):
 
     elif '/uvs_ltu' in mss:
         Configs[username]["m"] = "u"
-        Configs[username]["a"] = "upltu"
+        Configs[username]["a"] = "upstu"
         Configs[username]["z"] = 19
         await send_config()
         await send("**Nube ☁️ uvs.ltu Configurada**")
@@ -1006,7 +1009,8 @@ async def uploadfile(file,usid,msg,username):
         else:
             connector = aiohttp_socks.ProxyConnector.from_url(f"{proxy}")
     elif mode == "vcl":
-        moodle = "https://www.aula.vcl.sld.cu"
+      #  moodle = "https://www.aula.vcl.sld.cu"
+        moodle = "https://aula.scu.sld.cu"
         token = Configs["vcl"]
         if proxy == "":
             connector = aiohttp.TCPConnector()
