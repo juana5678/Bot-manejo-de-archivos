@@ -46,6 +46,7 @@ api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
 bot_token = os.environ.get('bot_token')
 Channel_Id = -1001804018431
+msg_id = 5
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
 Configs = {"vcl":'c2a9bf7ddc1b7cbf73dd7ea2668b53d6',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e", 
@@ -66,6 +67,11 @@ id_de_ms = {} #id de mensage a borrar con la funcion de cancelar
 root = {} #directorio actual
 downlist = {} #lista de archivos descargados
 procesos = 0 #numero de procesos activos en el bot
+
+##Base De Datos
+db = bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(config,indent=4))
+save_db = bot.get_messages(Channel_Id,message_ids=msg_id)
+###############
 
 ###Buttons
 @bot.on_message(filters.command('timer') & filters.private)
@@ -482,6 +488,12 @@ async def text_filter(client, message):
             reply_markup=hom)
 
 ###Root Manejos de Archivos 
+    elif 'añadir' in mss:
+        await db
+        usd = message.text.split(" ")[1]
+        db[usd] = {'z': 99,"m":"u","a":"upltu","t":"y"}  
+        await save_db
+        await send("Tiene Acceso"+usd) 
     elif '/ls' in mss:
         msg = files_formatter(str(root[username]["actual_root"]),username)
         await limite_msg(msg[0],username)
@@ -590,6 +602,7 @@ async def text_filter(client, message):
             Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
             await send_config()
             await send(f"@{usr} **Tiene Acceso**", quote=True)
+            await bot.send_message(username, "**Tienes Acceso Mamawebo!!**")
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/users' in mss:
@@ -628,6 +641,7 @@ async def text_filter(client, message):
             del Configs[usr]
             await send_config()
             await send(f"@{usr} **Ya no tiene acceso**", quote=True)
+            await send_message(username, "**Ya no tienes Acceso**")
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/proxy' in mss:
