@@ -985,8 +985,13 @@ async def downloadmessage_tg(chunk,filesize,filename,start,message):
 
 ####Subida
 async def uploadfile(file,usid,msg,username):
-    proxy = Configs["gp"]
     mode = Configs[username]["a"]
+    if mode == "vcl":
+        proxy = ""
+    else:
+        proxy = Configs["gp"]  
+ #   proxy = Configs["gp"]
+   # mode = Configs[username]["a"]
     usernamew = ''
     passwordw = ''
 	
