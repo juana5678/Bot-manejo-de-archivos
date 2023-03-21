@@ -368,10 +368,10 @@ async def text_filter(client, message):
         msgf = await bot.get_messages(Channel_Id,message_ids=3)
 	Configs.update(loads(msgf.text))
     except:await send_config()
-   # if acceso(username) == False:
-     #   await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
-     #   return
-   # else:pass
+    if acceso(username) == False:
+        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
+        return
+    else:pass
 #    if not username in conf:
   #     await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
   #  else:pass
