@@ -52,9 +52,7 @@ boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
 Configs = {"vcl":'c2a9bf7ddc1b7cbf73dd7ea2668b53d6',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e", 
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://181.225.255.48:9050', "s":"On", 
 			'UHTRED_OF_BEBBANBURG': {'z': 99,"m":"u","a":"c","t":"y"}, 
-			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"}, 
-			'user1': {'z': 99,"m":"u","a":"c","t":"y"}, 
-			'user2': {'z': 99,"m":"u","a":"c","t":"y"}
+			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"}
 			}
 
 #035649148fac062426ee3c5d72a6ec1f
@@ -364,17 +362,19 @@ async def text_filter(client, message):
     username = message.from_user.username
     send = message.reply
     mss = message.text
-    msgss = bot.get_messages(Channel_Id,message_ids=msg_id)
-    conf = loads(msgss.text)
-    try:await get_messages()
+  #  msgss = bot.get_messages(Channel_Id,message_ids=msg_id)
+   # conf = loads(msgss.text)
+    try:
+        msgf = await bot.get_messages(Channel_Id,message_ids=3)
+	Configs.update(loads(msgf.text))
     except:await send_config()
    # if acceso(username) == False:
      #   await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
      #   return
    # else:pass
-    if not username in conf:
-       await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
-    else:pass
+#    if not username in conf:
+  #     await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
+  #  else:pass
     if "youtu.be/" in message.text or "twitch.tv/" in message.text or "youtube.com/" in message.text or "xvideos.com" in message.text or "xnxx.com" in message.text:
         list = message.text.split(" ")
         url = list[0]
