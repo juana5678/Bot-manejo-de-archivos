@@ -45,8 +45,8 @@ import xdlink
 api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
 bot_token = os.environ.get('bot_token')
-Channel_Id = -1001804018431
-msg_id = 5951
+Channel_Id = -1001944454354
+msg_id = 2
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
 Configs = {"vcl":'c2a9bf7ddc1b7cbf73dd7ea2668b53d6',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e", 
@@ -488,10 +488,10 @@ async def text_filter(client, message):
 
 ###Root Manejos de Archivos 
     elif 'añadir' in mss:
-        db = await bot.get_messages(Channel_Id,message_ids=msg_id)
+        msgs = await bot.get_messages(Channel_Id,message_ids=msg_id)
         usd = message.text.split(" ")[1]
-        config = loads(db.text)
-        db[usd] = {'z': 99,"m":"u","a":"upltu","t":"y"}  
+        config = loads(msgs.text)
+        config[usd] = {'z': 99,"m":"u","a":"upltu","t":"y"}  
         await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(config,indent=4))
         await send("Tiene Acceso"+usd) 
 
