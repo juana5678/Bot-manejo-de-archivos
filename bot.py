@@ -313,10 +313,8 @@ def iprox(proxy):
     return str.translate(proxy[::2], tr)
 
 #Acceso de Uso al BoT
-async def acceso(username):
- #    msgs = await bot.get_messages(Channel_Id,message_ids=msg_id)
- #    Configs = loads(msgs.text)
-     if username in Configs or username in boss:
+def acceso(username):
+    if username in Configs or username in boss:
          if exists('downloads/'+str(username)+'/'):pass
          else:os.makedirs('downloads/'+str(username)+'/')	
          try:Urls[username]
