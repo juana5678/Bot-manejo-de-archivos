@@ -118,6 +118,7 @@ async def callback(bot, msg: CallbackQuery):
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "upltu"
         Configs[username]["z"] = 19
+        await send_config()
         await msg.message.edit(
             text="Ha Seleccionado la Nube☁️: uvs.ltu\nTamaño de Zips de la Nube☁️: 19 Mb",
             reply_markup=nubess
@@ -126,6 +127,7 @@ async def callback(bot, msg: CallbackQuery):
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "upgtm"
         Configs[username]["z"] = 7
+        await send_config()
         await msg.message.edit(
             text="Ha Seleccionado la Nube☁️: GTM\nTamaño de Zips de la Nube☁️: 7 Mb",
             reply_markup=nubess
@@ -133,7 +135,8 @@ async def callback(bot, msg: CallbackQuery):
     elif msg.data == "cmw":
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "upcmw"
-        Configs[username]["z"] = 499
+        Configs[username]["z"] = 10
+        await send_config()
         await msg.message.edit(
             text="Ha Seleccionado la Nube☁️: CMW\nTamaño de Zips de la Nube☁️: 499 Mb",
             reply_markup=nubess
@@ -142,6 +145,7 @@ async def callback(bot, msg: CallbackQuery):
         Configs[username]["m"] = "eduvirtual"
         Configs[username]["a"] = "eduvirtual"
         Configs[username]["z"] = 500
+        await send_config()
         await msg.message.edit(
             text="Ha Seleccionado la Nube☁️: Edvirtual\nTamaño de Zips de la Nube☁️: 500 Mb\n\nTenga en cuenta q está configuración es solo si posee una cuenta en la misma o de lo contrario no podrá Utilizarla, use /auth para añadir los datos",
             reply_markup=nubess
@@ -150,6 +154,7 @@ async def callback(bot, msg: CallbackQuery):
         Configs[username]["m"] = "personal"
         Configs[username]["a"] = "personal"
         Configs[username]["z"] = 100
+        await send_config()
         await msg.message.edit(
             text="Ha Seleccionado la Nube☁️: Subida a Nube Personal\nTamaño de Zips de la Nube☁️: 100 Mb\n\nUse /auth para añadir los datos de su cuenta personal",
             reply_markup=nubess
@@ -580,7 +585,7 @@ async def text_filter(client, message):
         Configs[username]["z"] = sip
         await send_config()
       #  await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
-        await send(f"**Tamaño de Zips Configurados a:{sip}**")    
+        await send(f"**Tamaño de Zips Configurados a: {sip} Mb**")    
 
     elif '/del_all'in mss:
         shutil.rmtree("downloads/"+username+"/")
@@ -591,11 +596,13 @@ async def text_filter(client, message):
     elif '/add' in mss:
         usr = message.text.split(" ")[1]
         if username in boss:
-            Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
-        #    await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
-            await send_config()
-            await send(f"@{usr} **Tiene Acceso**", quote=True)
-            await bot.send_message(usr, "**Tienes Acceso Mamawebo!!**")
+            if username in Configs:
+                send("Ya el Usuario Existe en la base de Datos")
+            else:
+                Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
+                await send_config()
+                await send(f"@{usr} **Tiene Acceso**", quote=True)
+                await bot.send_message(usr, "**Tienes Acceso Mamawebo!!**")
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/users' in mss:
@@ -615,7 +622,7 @@ async def text_filter(client, message):
                 if user == "UHTRED_OF_BEBBANBURG":continue
                 if user == "Stvz20":continue
                 if user == "uclv_p":continue
-            message+=f"{user}\n"
+                message+=f"{user}\n"
             msg = f"{message}\n"
             await client.send_message(username,msg)   
         else: 
@@ -668,50 +675,7 @@ async def text_filter(client, message):
         else:
             await client.send_message(username,"`No hay Tareas para Cancelar...`")
             return
-
-    elif '/uvs_ltu' in mss:
-        Configs[username]["m"] = "u"
-        Configs[username]["a"] = "upstu"
-        Configs[username]["z"] = 19
-        await send_config()
-      #  await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
-        await send("**Nube ☁️ uvs.ltu Configurada**")
-
-    elif '/vcl' in mss:
-        Configs[username]["m"] = "u"
-        Configs[username]["a"] = "vcl"
-        Configs[username]["z"] = 300
-        await send_config()
-      #  await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
-        await send("**Nube ☁️ 💪🏻 Configurada**")
-
-    elif 'cmw' in mss:
-        Configs[username]["m"] = "u"
-        Configs[username]["a"] = "upcmw"
-        Configs[username]["z"] = 7
-        await send_config()
-        await send("**Nube ☁️ CMW ☁️ Configurada**")
-
-    elif 'gtm' in mss:
-        Configs[username]["m"] = "u"
-        Configs[username]["a"] = "upgtm"
-        Configs[username]["z"] = 7
-        await send_config()
-        await send("**Nube ☁️ GTM ☁️ Configurada**")
-
-    elif '/eduvirtual' in mss:
-        Configs[username]["m"] = "eduvirtual"
-        Configs[username]["a"] = "eduvirtual"
-        Configs[username]["z"] = 500
-        await send_config()
-        await send("**Nube ☁️ Eduvirtual ☁️ Configurada**")
-
-    elif '/nube_personal' in mss:
-        Configs[username]["m"] = "personal"
-        Configs[username]["a"] = "personal"
-        Configs[username]["z"] = 100
-        await send_config()
-        await send("**Nube ☁️ Personal ☁️ Configurada**")
+ 
 ###Callbacks
 @bot.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
@@ -736,7 +700,7 @@ async def delete_draft_y_down_media(client: Client, message: Message):
     try:await get_messages()
     except:await send_config()
     if acceso(username) == False:
-        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+        await send("**⛔ No Tienes Acceso**")
         return
     else:pass
     comp = comprobar_solo_un_proceso(username) 
