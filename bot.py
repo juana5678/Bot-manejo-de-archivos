@@ -365,7 +365,7 @@ async def text_filter(client, message):
   #  msgss = bot.get_messages(Channel_Id,message_ids=msg_id)
    # conf = loads(msgss.text)
    # try:
-    msgf = await bot.get_messages(Channel_Id,message_ids=
+    msgf = await bot.get_messages(Channel_Id,message_ids=msg_id)
     Configs = loads(msgf.text)
   #  except:
     await send_config()
