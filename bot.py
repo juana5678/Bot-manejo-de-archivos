@@ -485,14 +485,6 @@ async def text_filter(client, message):
             reply_markup=hom)
 
 ###Root Manejos de Archivos 
-    elif 'añadir' in mss:
-        msgs = await bot.get_messages(Channel_Id,message_ids=msg_id)
-        usd = message.text.split(" ")[1]
-        config = loads(msgs.text)
-        config[usd] = {'z': 99,"m":"u","a":"upltu","t":"y"}  
-        await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(config,indent=4))
-        await send("Tiene Acceso"+usd) 
-
     elif '/ls' in mss:
         msg = files_formatter(str(root[username]["actual_root"]),username)
         await limite_msg(msg[0],username)
@@ -600,9 +592,9 @@ async def text_filter(client, message):
         usr = message.text.split(" ")[1]
         if username in boss:
             Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
-            await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
+        #    await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
             await send_config()
-         #   await send(f"@{usr} **Tiene Acceso**", quote=True)
+            await send(f"@{usr} **Tiene Acceso**", quote=True)
             await bot.send_message(usr, "**Tienes Acceso Mamawebo!!**")
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
