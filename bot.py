@@ -596,8 +596,8 @@ async def text_filter(client, message):
     elif '/add' in mss:
         usr = message.text.split(" ")[1]
         if username in boss:
-            if username in Configs:
-                send("Ya el Usuario Existe en la base de Datos")
+            if usr in Configs:
+                await send("Ya el Usuario Existe en la base de Datos")
             else:
                 Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
                 await send_config()
@@ -642,7 +642,7 @@ async def text_filter(client, message):
             await send_config()
          #   await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
             await send(f"@{usr} **Ya no tiene acceso**", quote=True)
-            await send_message(usr, "**Ya no tienes Acceso**")
+            await bot.send_message(usr, "**Ya no tienes Acceso**")
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/proxy' in mss:
