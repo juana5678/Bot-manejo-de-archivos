@@ -364,6 +364,8 @@ async def text_filter(client, message):
     username = message.from_user.username
     send = message.reply
     mss = message.text
+    msgss = bot.get_messages(Channel_Id,message_ids=msg_id)
+    conf = loads(msgss.text)
     try:await get_messages()
     except:await send_config()
    # if acceso(username) == False:
@@ -606,6 +608,8 @@ async def text_filter(client, message):
         usr = message.text.split(" ")[1]
         if username in boss:
             Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
+            conf[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
+            await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(conf,indent=4))
             await send_config()
             await send(f"@{usr} **Tiene Acceso**", quote=True)
             await bot.send_message(username, "**Tienes Acceso Mamawebo!!**")
