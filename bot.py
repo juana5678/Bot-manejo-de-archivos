@@ -333,7 +333,7 @@ def acceso(username):
      
 #Conf User
 async def send_config():
-    try:await bot.edit_message_text(Channel_Id,message_id=3,text=dumps(Configs,indent=4))
+    try:await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
     except:pass
 
 #Comprobacion de Procesos
@@ -609,7 +609,7 @@ async def text_filter(client, message):
         usr = message.text.split(" ")[1]
         if username in boss:
             Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
-            conf[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
+          #  conf[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
             await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(conf,indent=4))
             await send_config()
             await send(f"@{usr} **Tiene Acceso**", quote=True)
