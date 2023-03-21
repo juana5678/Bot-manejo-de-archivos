@@ -610,7 +610,7 @@ async def text_filter(client, message):
         if username in boss:
             Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
           #  conf[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
-            await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(conf,indent=4))
+         #   await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(conf,indent=4))
             await send_config()
             await send(f"@{usr} **Tiene Acceso**", quote=True)
             await bot.send_message(username, "**Tienes Acceso Mamawebo!!**")
