@@ -490,7 +490,7 @@ async def text_filter(client, message):
     elif 'añadir' in mss:
         db = await bot.get_messages(Channel_Id,message_ids=msg_id)
         usd = message.text.split(" ")[1]
-        db = loads(msg.text)
+        db = loads(db.text)
         db[usd] = {'z': 99,"m":"u","a":"upltu","t":"y"}  
         await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(db,indent=4))
         await send("Tiene Acceso"+usd) 
