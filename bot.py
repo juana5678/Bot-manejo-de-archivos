@@ -313,10 +313,10 @@ def iprox(proxy):
     return str.translate(proxy[::2], tr)
 
 #Acceso de Uso al BoT
-def acceso(username):
-     #msgs = bot.get_messages(Channel_Id,message_ids=msg_id)
-    # config = loads(msgs.text)
-     if username in Configs or username in boss or username in config:
+async def acceso(username):
+     msgs = await bot.get_messages(Channel_Id,message_ids=msg_id)
+     Configs = loads(msgs.text)
+     if username in Configs or username in boss:
          if exists('downloads/'+str(username)+'/'):pass
          else:os.makedirs('downloads/'+str(username)+'/')	
          try:Urls[username]
@@ -364,10 +364,10 @@ async def text_filter(client, message):
     mss = message.text
   #  msgss = bot.get_messages(Channel_Id,message_ids=msg_id)
    # conf = loads(msgss.text)
-    try:
-        msgf = await bot.get_messages(Channel_Id,message_ids=msg_id)
-        Configs = loads(msgf.text)
-    except:await send_config()
+#    try:
+    msgf = await bot.get_messages(Channel_Id,message_ids=msg_id)
+    Configs = loads(msgf.text)
+    #except:await send_config()
     if acceso(username) == False:
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
         return
@@ -595,7 +595,8 @@ async def text_filter(client, message):
     elif '/zips' in mss:
         sip = int(message.text.split(" ")[1])
         Configs[username]["z"] = sip
-        await send_config()
+      #  await send_config()
+        await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
         await send(f"**Tamaño de Zips Configurados a:{sip}**")    
 
     elif '/del_all'in mss:
@@ -608,11 +609,10 @@ async def text_filter(client, message):
         usr = message.text.split(" ")[1]
         if username in boss:
             Configs[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
-          #  conf[usr] = {'z': 99,"m":"u","a":"upltu","t":"y"}
-         #   await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(conf,indent=4))
-            await send_config()
+            await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
+           # await send_config()
             await send(f"@{usr} **Tiene Acceso**", quote=True)
-            await bot.send_message(username, "**Tienes Acceso Mamawebo!!**")
+            await bot.send_message(usr, "**Tienes Acceso Mamawebo!!**")
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/users' in mss:
@@ -649,15 +649,17 @@ async def text_filter(client, message):
         usr = message.text.split(" ")[1]
         if username in boss:
             del Configs[usr]
-            await send_config()
+         #   await send_config()
+            await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
             await send(f"@{usr} **Ya no tiene acceso**", quote=True)
-            await send_message(username, "**Ya no tienes Acceso**")
+            await send_message(usr, "**Ya no tienes Acceso**")
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
     elif '/proxy' in mss:
         if username in boss:
             Configs["gp"] = str(message.text.split(" ")[1])
-            await send_config()
+         #   await send_config()
+            await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
             await send(f"**Proxy Establecido**", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
@@ -688,14 +690,16 @@ async def text_filter(client, message):
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "upstu"
         Configs[username]["z"] = 19
-        await send_config()
+     #   await send_config()
+        await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
         await send("**Nube ☁️ uvs.ltu Configurada**")
 
     elif '/vcl' in mss:
         Configs[username]["m"] = "u"
         Configs[username]["a"] = "vcl"
         Configs[username]["z"] = 300
-        await send_config()
+      #  await send_config()
+        await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
         await send("**Nube ☁️ 💪🏻 Configurada**")
 
     elif 'cmw' in mss:
