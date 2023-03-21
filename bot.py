@@ -362,11 +362,7 @@ async def text_filter(client, message):
     username = message.from_user.username
     send = message.reply
     mss = message.text
-  #  msgss = bot.get_messages(Channel_Id,message_ids=msg_id)
-   # conf = loads(msgss.text)
-#    try:
-    msgf = await bot.get_messages(Channel_Id,message_ids=msg_id)
-    try: Configs.update(loads(msgf.text))
+    try:await get_messages()
     except:await send_config()
     if acceso(username) == False:
         await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
@@ -747,8 +743,8 @@ async def delete_draft_y_down_media(client: Client, message: Message):
     global procesos
     username = message.from_user.username
     send = message.reply
-    msgf = await bot.get_messages(Channel_Id,message_ids=msg_id)
-    Configs.loads(msgf.text)
+    try:await get_messages()
+    except:await send_config()
     if acceso(username) == False:
         await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
         return
