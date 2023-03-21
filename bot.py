@@ -750,8 +750,8 @@ async def delete_draft_y_down_media(client: Client, message: Message):
     global procesos
     username = message.from_user.username
     send = message.reply
-    try:await get_messages()
-    except:await send_config()
+    msgf = await bot.get_messages(Channel_Id,message_ids=msg_id)
+    Configs = loads(msgf.text)
     if acceso(username) == False:
         await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
         return
@@ -1013,6 +1013,8 @@ async def downloadmessage_tg(chunk,filesize,filename,start,message):
 
 ####Subida
 async def uploadfile(file,usid,msg,username):
+    msgf = await bot.get_messages(Channel_Id,message_ids=msg_id)
+    Configs = loads(msgf.text)
     mode = Configs[username]["a"]
     if mode == "vcl":
         proxy = ""
@@ -1260,6 +1262,8 @@ class Progress(BufferedReader):
         return super(Progress, self).read(size)
 ###Subida x Login
 async def uploaddraft(file,usid,msg,username):
+    msgf = await bot.get_messages(Channel_Id,message_ids=msg_id)
+    Configs = loads(msgf.text)
     user = Config[username]["username"]
     password = Config[username]["password"]
     host = Config[username]["host"]
