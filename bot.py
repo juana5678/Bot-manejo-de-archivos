@@ -316,7 +316,7 @@ def iprox(proxy):
 
 #Acceso de Uso al BoT
 def acceso(username):
-     msgs = await bot.get_messages(Channel_Id,message_ids=msg_id)
+     msgs = bot.get_messages(Channel_Id,message_ids=msg_id)
      config = loads(msgs.text)
      if username in Configs or username in boss or username in config:
          if exists('downloads/'+str(username)+'/'):pass
