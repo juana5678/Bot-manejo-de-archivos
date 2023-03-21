@@ -316,8 +316,8 @@ def iprox(proxy):
 
 #Acceso de Uso al BoT
 def acceso(username):
-     msgs = bot.get_messages(Channel_Id,message_ids=msg_id)
-     config = loads(msgs.text)
+     #msgs = bot.get_messages(Channel_Id,message_ids=msg_id)
+    # config = loads(msgs.text)
      if username in Configs or username in boss or username in config:
          if exists('downloads/'+str(username)+'/'):pass
          else:os.makedirs('downloads/'+str(username)+'/')	
@@ -366,9 +366,12 @@ async def text_filter(client, message):
     mss = message.text
     try:await get_messages()
     except:await send_config()
-    if acceso(username) == False:
-        await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
-        return
+   # if acceso(username) == False:
+     #   await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
+     #   return
+   # else:pass
+    if not username in conf:
+       await send("**⚠️🔺No Tienes Contrato Activo en Este BoT🔺⚠️\nContacta al Administrador: @Stvz20**")
     else:pass
     if "youtu.be/" in message.text or "twitch.tv/" in message.text or "youtube.com/" in message.text or "xvideos.com" in message.text or "xnxx.com" in message.text:
         list = message.text.split(" ")
