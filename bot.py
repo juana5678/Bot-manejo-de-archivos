@@ -607,10 +607,9 @@ async def text_filter(client, message):
         await send(mens)
 
     elif '/zips' in mss:
-        sip = int(message.text.split(" ")[1])
+        sip = float(message.text.split(" ")[1])
         Configs[username]["z"] = sip
         await send_config()
-      #  await bot.edit_message_text(Channel_Id,message_id=msg_id,text=dumps(Configs,indent=4))
         await send(f"**Tamaño de Zips Configurados a: {sip} Mb**")    
 
     elif '/del_all'in mss:
@@ -968,15 +967,11 @@ async def downloadmessage_tg(chunk,filesize,filename,start,message):
 
 ####Subida
 async def uploadfile(file,usid,msg,username):
-  #  msgf = await bot.get_messages(Channel_Id,message_ids=msg_id)
-  #  Configs = loads(msgf.text)
     mode = Configs[username]["a"]
     if mode == "vcl":
         proxy = ""
     else:
         proxy = Configs["gp"]  
- #   proxy = Configs["gp"]
-   # mode = Configs[username]["a"]
     usernamew = ''
     passwordw = ''
 	
