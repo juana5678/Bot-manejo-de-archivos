@@ -1114,7 +1114,6 @@ async def uploadfile(file,usid,msg,username):
                 f.write(message)				
             await msg.edit("**Enviando TxT📃**")           				
             await bot.send_document(usid,filename+".txt",caption=f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️**")
-            await msg.delete()
             id_de_ms[username]["proc"] = "" 
         else:
             await msg.edit("**Error Al Subir**")
@@ -1163,7 +1162,6 @@ async def uploadfile(file,usid,msg,username):
                 f.write(message)
             await msg.edit("**Enviando TxT📃**")				
             await bot.send_document(usid,filename+".txt",caption=f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️**")
-            await msg.delete()
             id_de_ms[username]["proc"] = ""
         else:
             await msg.edit("**Error Al Subir**")
@@ -1269,7 +1267,6 @@ async def uploaddraft(file,usid,msg,username):
         with open(filename+".txt","w") as txt:
             txt.write(message)
         await bot.send_document(usid,filename+".txt",caption="**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️**")
-
         id_de_ms[username]["proc"] = ""
         os.unlink(filename+".txt")
         return
