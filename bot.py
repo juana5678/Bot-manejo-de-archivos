@@ -1052,7 +1052,7 @@ async def uploadfile(file,usid,msg,username):
     await msg.edit("`Comprobando Server`")
     filename = Path(file).name
     filesize = Path(file).stat().st_size
-    zipssize = 1024*1024*int(zips)
+    zipssize = 1024*1024*float(zips)
     logerrors = 0
     error_conv = 0
     logslinks = []
