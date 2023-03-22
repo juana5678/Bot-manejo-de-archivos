@@ -72,7 +72,12 @@ procesos = 0 #numero de procesos activos en el bot
 async def timer(bot, message):
     uptime = get_readable_time(time() - start)
     username = message.from_user.username
-    await bot.send_message(username, uptime)
+    msg =  await bot.send_message(username, uptime)
+    global seg
+    if seg != localtime().tm_sec:
+        try: await message.edit(msg)
+        except:pass
+    seg = localtime().tm_sec
 
 nubess = InlineKeyboardMarkup(
         [[
@@ -318,7 +323,8 @@ def iprox(proxy):
 def acceso(username):
     if username in Configs or username in boss:
         if exists('downloads/'+str(username)+'/'):pass
-        else:os.makedirs('downloads/'+str(username)+'/')	
+        else:os.makedirs('downloads/'+str(username)+'/')
+       # else:os.makedirs(str(username)+'/')	
         try:Urls[username]
         except:Urls[username] = []
         try:Config[username]
