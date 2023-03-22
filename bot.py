@@ -1029,7 +1029,7 @@ async def uploadfile(file,usid,msg,username):
         connector = aiohttp.TCPConnector()
         token = Configs["uclv_p"]	
 	
-    zips = Configs[username]["z"]
+    zips = float(Configs[username]["z"])
 
     if mode == "upuclv" or mode == "upperfil" or mode == "uptoken":
         if int(zips) > 399:
@@ -1052,7 +1052,8 @@ async def uploadfile(file,usid,msg,username):
     await msg.edit("`Comprobando Server`")
     filename = Path(file).name
     filesize = Path(file).stat().st_size
-    zipssize = 1024*1024*float(zips)
+  #  zipssize = 1024*1024*int(zips)
+    zipssize = float(zips)
     logerrors = 0
     error_conv = 0
     logslinks = []
