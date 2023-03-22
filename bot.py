@@ -607,7 +607,7 @@ async def text_filter(client, message):
         await send(mens)
 
     elif '/zips' in mss:
-        sip = float(message.text.split(" ")[1])
+        sip = int(message.text.split(" ")[1])
         Configs[username]["z"] = sip
         await send_config()
         await send(f"**Tamaño de Zips Configurados a: {sip} Mb**")    
@@ -1029,7 +1029,7 @@ async def uploadfile(file,usid,msg,username):
         connector = aiohttp.TCPConnector()
         token = Configs["uclv_p"]	
 	
-    zips = float(Configs[username]["z"])
+    zips = Configs[username]["z"]
 
     if mode == "upuclv" or mode == "upperfil" or mode == "uptoken":
         if int(zips) > 399:
@@ -1052,8 +1052,7 @@ async def uploadfile(file,usid,msg,username):
     await msg.edit("`Comprobando Server`")
     filename = Path(file).name
     filesize = Path(file).stat().st_size
-  #  zipssize = 1024*1024*int(zips)
-    zipssize = float(zips)
+    zipssize = 1024*1024*int(zips)
     logerrors = 0
     error_conv = 0
     logslinks = []
