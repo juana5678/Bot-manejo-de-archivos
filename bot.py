@@ -1275,7 +1275,7 @@ async def uploaddraft(file,usid,msg,username):
         for file in files:
             try:
                 upload = await client.LoginUpload(file,lambda size,total,start,filename: uploadfile_progres(size,total,start,filename,msg))
-                await bot.send_message(usid,f"Enlace:\n**{upload}**")
+                await bot.send_message(usid,f"`{upload}`")
                 links.append(upload)
             except Exception as ex:
                 if "[400 MESSAGE_ID_INVALID]" in str(ex): pass
@@ -1298,7 +1298,7 @@ async def uploaddraft(file,usid,msg,username):
         client = MoodleClient2(host,user,password,repoid,connector)
         try:
             upload = await client.LoginUpload(file,lambda size,total,start,filename: uploadfile_progres(size,total,start,filename,msg))
-            await msg.edit(f"__**{upload}**__")
+            await msg.edit(f"__`{upload}`__")
             with open(filename+".txt","w") as txt:
                 txt.write(upload)
             await bot.send_document(usid,filename+".txt",caption=f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️\n@Stvz_Upload_bot**")
