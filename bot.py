@@ -53,7 +53,7 @@ Configs = {"vcl":'035649148fac062426ee3c5d72a6ec1f',"gtm":"cc9c6b9c0523b17c7f002
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://181.225.255.48:9050', "s":"On", 
 			'UHTRED_OF_BEBBANBURG': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"},
-                        'eduv': {"user": "miltongg", "pase": "1234567i"}
+                        'eduv': {"user": "miltongg", "pasw": "1234567i"}
 			}
 start = time()
 Urls = {} #urls subidos a educa
