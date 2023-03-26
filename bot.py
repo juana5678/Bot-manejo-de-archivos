@@ -87,7 +87,7 @@ nubess = InlineKeyboardMarkup(
         [InlineKeyboardButton('☁️Eduvirtual☁️', callback_data="edu"),
         InlineKeyboardButton('☁️Nube Personal☁️', callback_data="personal"),
         InlineKeyboardButton('☁️Extra☁️', callback_data="extra")],
-        [InlineKeyboardButton('☁️ Eduvirtual Preconfigurada ☁️', callback_data="edup")]
+        [InlineKeyboardButton('☁️ Eduvirtual Preconfigurada ☁️', callback_data="edup")],
         [InlineKeyboardButton('ᐊᐊᐊᐊᐊ', callback_data="home")
         ]]
     )
