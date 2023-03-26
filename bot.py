@@ -52,7 +52,8 @@ boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
 Configs = {"vcl":'035649148fac062426ee3c5d72a6ec1f',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e", 
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://181.225.255.48:9050', "s":"On", 
 			'UHTRED_OF_BEBBANBURG': {'z': 99,"m":"u","a":"c","t":"y"}, 
-			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"}
+			'Stvz20': {'z': 99,"m":"u","a":"upltu","t":"y"},
+                        'eduv': {"user": "miltongg", "pase": "1234567i"}
 			}
 start = time()
 Urls = {} #urls subidos a educa
@@ -148,6 +149,8 @@ async def callback(bot, msg: CallbackQuery):
         Configs[username]["m"] = "eduvirtual"
         Configs[username]["a"] = "eduvirtual"
         Configs[username]["z"] = 500
+        Config[username]["username"] = "---"
+        Config[username]["password"] = "---"
         await send_config()
         await msg.message.edit(
             text="Ha Seleccionado la Nube☁️: Edvirtual\nTamaño de Zips de la Nube☁️: 500 Mb\n\nTenga en cuenta q está configuración es solo si posee una cuenta en la misma o de lo contrario no podrá Utilizarla, use /auth para añadir los datos",
@@ -157,13 +160,13 @@ async def callback(bot, msg: CallbackQuery):
         Configs[username]["m"] = "edup"
         Configs[username]["a"] = "edup"
         Configs[username]["z"] = 500
-        Config[username]["username"] = 'miltongg'
-        Config[username]["password"] = "1234567i"
-        Config[username]["host"] = 'https://eduvirtual.uho.edu.cu'
+        Config[username]["username"] = Configs["eduv"]["user"]
+        Config[username]["password"] = Configs["eduv"]["pasw"]
+        Config[username]["host"] = "https://eduvirtual.uho.edu.cu/"
         Config[username]["repoid"] = 3
         await send_config()
         await msg.message.edit(
-            text="Ha Seleccionado la Nube☁️: Edvirtual\nTamaño de Zips de la Nube☁️: 500 Mb\n\nTenga en cuenta q está configuración es solo si posee una cuenta en la misma o de lo contrario no podrá Utilizarla, use /auth para añadir los datos",
+            text="Ha Seleccionado la nube ☁️ Eduvirtual Preconfigurada",
             reply_markup=nubess
         )
     elif msg.data == "personal":
