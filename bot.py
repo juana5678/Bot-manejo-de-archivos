@@ -158,7 +158,7 @@ async def callback(bot, msg: CallbackQuery):
         Configs[username]["a"] = "edup"
         Configs[username]["z"] = 500
         Config[username]["username"] = 'miltongg'
-        Config[username]["password"] = 1234567i
+        Config[username]["password"] = "1234567i"
         Config[username]["host"] = 'https://eduvirtual.uho.edu.cu'
         Config[username]["repoid"] = 3
         await send_config()
