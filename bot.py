@@ -87,6 +87,7 @@ nubess = InlineKeyboardMarkup(
         [InlineKeyboardButton('☁️Eduvirtual☁️', callback_data="edu"),
         InlineKeyboardButton('☁️Nube Personal☁️', callback_data="personal"),
         InlineKeyboardButton('☁️Extra☁️', callback_data="extra")],
+        [InlineKeyboardButton('☁️ Eduvirtual Preconfigurada ☁️', callback_data="edup")]
         [InlineKeyboardButton('ᐊᐊᐊᐊᐊ', callback_data="home")
         ]]
     )
@@ -152,6 +153,19 @@ async def callback(bot, msg: CallbackQuery):
             text="Ha Seleccionado la Nube☁️: Edvirtual\nTamaño de Zips de la Nube☁️: 500 Mb\n\nTenga en cuenta q está configuración es solo si posee una cuenta en la misma o de lo contrario no podrá Utilizarla, use /auth para añadir los datos",
             reply_markup=nubess
         )
+    elif msg.data == "edup":
+        Configs[username]["m"] = "edup"
+        Configs[username]["a"] = "edup"
+        Configs[username]["z"] = 500
+        Config[username]["username"] = 'miltongg'
+        Config[username]["password"] = 1234567i
+        Config[username]["host"] = 'https://eduvirtual.uho.edu.cu'
+        Config[username]["repoid"] = 3
+        await send_config()
+        await msg.message.edit(
+            text="Ha Seleccionado la Nube☁️: Edvirtual\nTamaño de Zips de la Nube☁️: 500 Mb\n\nTenga en cuenta q está configuración es solo si posee una cuenta en la misma o de lo contrario no podrá Utilizarla, use /auth para añadir los datos",
+            reply_markup=nubess
+        )
     elif msg.data == "personal":
         Configs[username]["m"] = "personal"
         Configs[username]["a"] = "personal"
@@ -195,10 +209,16 @@ async def callback(bot, msg: CallbackQuery):
         else:   
             subida = 'Nube Personal ☁️'
         mens += f"**Nube En Uso: {subida}**"
-        await msg.message.edit(
-            text=mens,
-            reply_markup=atras
-        )
+        if Configs[username]["a"] == 'edup':
+            await msg.message.edit(
+                text='Estas usando una nube ☁️ a la que no puedes ver sus credenciales',
+                reply_markup=atras
+            )
+        else:
+            await msg.message.edit(
+                text=mens,
+                reply_markup=atras
+            )
     elif msg.data == "delet":
         shutil.rmtree("downloads/"+username+"/")
         root[username]["actual_root"] = "downloads/"+username
@@ -1113,7 +1133,7 @@ async def uploadfile(file,usid,msg,username):
                     lin+=li+"\n"
                 f.write(message)				
             await msg.edit("**Enviando TxT📃**")           				
-            await bot.send_document(usid,filename+".txt",caption=f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️**")
+            await bot.send_document(usid,filename+".txt",caption=f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️\n@Stvz_Upload_bot**")
             id_de_ms[username]["proc"] = "" 
         else:
             await msg.edit("**Error Al Subir**")
@@ -1161,7 +1181,7 @@ async def uploadfile(file,usid,msg,username):
                     lin+=li+"\n"
                 f.write(message)
             await msg.edit("**Enviando TxT📃**")				
-            await bot.send_document(usid,filename+".txt",caption=f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️**")
+            await bot.send_document(usid,filename+".txt",caption=f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️\n@Stvz_Upload_bot**")
             id_de_ms[username]["proc"] = ""
         else:
             await msg.edit("**Error Al Subir**")
@@ -1218,7 +1238,7 @@ async def uploaddraft(file,usid,msg,username):
     repoid = Config[username]["repoid"]
     zips = Configs[username]["z"]
     nub = Configs[username]["a"]
-    if nub == "eduvirtual":
+    if nub == "eduvirtual" or "edup":
         proxy = ""
     else:
         proxy = Configs["gp"]
@@ -1266,7 +1286,7 @@ async def uploaddraft(file,usid,msg,username):
         await msg.edit("**Enviando TxT**")
         with open(filename+".txt","w") as txt:
             txt.write(message)
-        await bot.send_document(usid,filename+".txt",caption="**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️**")
+        await bot.send_document(usid,filename+".txt",caption=f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️\n@Stvz_Upload_bot**")
         id_de_ms[username]["proc"] = ""
         os.unlink(filename+".txt")
         return
@@ -1278,7 +1298,7 @@ async def uploaddraft(file,usid,msg,username):
             await msg.edit(f"__**{upload}**__")
             with open(filename+".txt","w") as txt:
                 txt.write(upload)
-            await bot.send_document(usid,filename+".txt",caption="**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️**")
+            await bot.send_document(usid,filename+".txt",caption=f"**Archivo Subido🔺\nNombre: {filename}\nTamaño: {sizeof_fmt(filesize)}\n\nGracias Por Utilizar Nuestros Servicios ❤️\n@Stvz_Upload_bot**")
             id_de_ms[username]["proc"] = ""
             os.unlink(filename+".txt")
             return
