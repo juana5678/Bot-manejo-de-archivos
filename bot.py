@@ -627,7 +627,10 @@ async def text_filter(client, message):
         else:   
             subida = 'Nube Personal ☁️'
         mens += f"**Nube En Uso: {subida}**"
-        await send(mens)
+        if Configs[username]["a"] == 'edup':
+            await send('Estas usando una nube ☁️ a la que no puedes ver sus credenciales')
+        else:
+            await send(mens)
 
     elif '/zips' in mss:
         sip = int(message.text.split(" ")[1])
@@ -668,7 +671,7 @@ async def text_filter(client, message):
                 if user == "Stvz20":continue
                 if user == "uclv_p":continue
                 message+=f"{user}\n"
-            msg = f"{message}\n"
+            msg = f"@{message}\n"
             await client.send_message(username,msg)   
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
