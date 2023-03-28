@@ -608,7 +608,7 @@ async def text_filter(client, message):
         await send(mens)
         await client.send_message(Channel_Id, mens)
 
-    elif '/auth_nex' in mss:
+    elif '/nex_auth' in mss:
         await send(f"Envié sus credenciales de la siguiente forma:\n`/auth_nex nexcloud.cu user password")
         cuenta = message.text
         host = message.text.split(" ")[1]
@@ -730,6 +730,12 @@ async def text_filter(client, message):
             await send(f"**Proxy Establecido**", quote=True)
         else: 
             await send("⚠️Comando Para Administrador ⚠️", quote=True)
+    elif '/cloud' in mss:
+        Configs[username]["m"] = "nexcloud"
+        Configs[username]["a"] = "nexcloud"
+        Configs[username]["z"] = 99
+        await send_config()
+        await send("✅ nextcloud config")
 
     elif '/cancel' in mss:
         if id_de_ms[username]["proc"] == "Up":
@@ -1457,22 +1463,6 @@ async def proccess(filex,msg,username):
             else:
                 await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
                 return
-
-@bot.on_message(filters.command("cloud", prefixes="/")& filters.private)
-async def cloud(client: Client, message: Message):
-    username = message.from_user.username
-    send = message.reply
-    try:await get_messages()
-    except:await send_config()
-    if comprobacion_de_user(username) == False:
-        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
-        return
-    else:pass
-    Configs[username]["m"] = "nexcloud"
-    Configs[username]["a"] = "nexcloud"
-    Configs[username]["z"] = 99
-    await send_config()
-    await send("clouad configurada✅")
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
