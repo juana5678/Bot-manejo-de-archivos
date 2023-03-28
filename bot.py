@@ -41,7 +41,7 @@ from multivolumefile import MultiVolume
 from moodle_client import MoodleClient2
 import xdlink
 from client_nex import Client as moodle
-from MoodleClient import MoodleClient
+import NexCloudClient
 
 
 #BoT Configuration Variables
