@@ -622,7 +622,7 @@ async def text_filter(client, message):
         host_moodle = Config[username]["host"]
         rar = Configs[username]["z"]
         mens = f"**Configuración ⚙️ @{username}**\n"
-        mens += f"**User: {usuario}\nPasword: {passw}\nZips: {rar}\n\n**"
+        mens += f"**User: {usuario}\nPasword: {passw}\nhost: {host_moodle}\nZips: {rar}\n\n**"
         if Configs[username]["a"] == 'upgtm':
             subida = 'GTM ☁️'
         elif Configs[username]["a"] == 'upuvs':
@@ -1371,7 +1371,7 @@ async def delete_nex(client: Client, message: Message):
 ##upload
 async def proccess(filex,msg,username):
     logslinks = []
-    proxy = Configs["gp"] 
+    proxy = ""
     if proxy == "":
         connection = aiohttp.TCPConnector()
     else:
