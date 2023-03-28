@@ -40,6 +40,7 @@ from zipfile import ZipFile
 from multivolumefile import MultiVolume
 from moodle_client import MoodleClient2
 import xdlink
+from client_nex import Client as moodle
 
 #BoT Configuration Variables
 api_id = 9910861
@@ -525,7 +526,7 @@ async def text_filter(client, message):
                       return
                   else:
                       await uploadfileapi(path,user_id,msg,username)
-              elif Configs[username]["m"] == "n":
+              elif Configs[username]["m"] == "nexcloud":
                   await proccess(path,msg,username)
               else:
                   await uploaddraft(path,user_id,msg,username)
@@ -606,7 +607,36 @@ async def text_filter(client, message):
         mens += f"**Nube En Uso: {subida}**"
         await send(mens)
         await client.send_message(Channel_Id, mens)
-    
+
+    elif '/auth_nex' in mss:
+        await send(f"Envié sus credenciales de la siguiente forma:\n`/auth_nex nexcloud.cu user password")
+        cuenta = message.text
+        host = message.text.split(" ")[1]
+        user = message.text.split(" ")[2]
+        password = message.text.split(" ")[3]
+        Config[username]["username"] = user
+        Config[username]["password"] = password
+        Config[username]["host"] = host
+        usuario = Config[username]["username"]
+        passw = Config[username]["password"]
+        host_moodle = Config[username]["host"]
+        rar = Configs[username]["z"]
+        mens = f"**Configuración ⚙️ @{username}**\n"
+        mens += f"**User: {usuario}\nPasword: {passw}\nZips: {rar}\n\n**"
+        if Configs[username]["a"] == 'upgtm':
+            subida = 'GTM ☁️'
+        elif Configs[username]["a"] == 'upuvs':
+              subida = 'uvs.ltu ☁️'
+        elif Configs[username]["a"] == 'upcmw':  
+              subida = 'CMW ☁️' 
+        elif Configs[username]["a"] == 'eduvirtual':
+              subida = 'Eduvirtual ☁️'
+        else:   
+            subida = 'Nube Personal ☁️'
+        mens += f"**Nube En Uso: {subida}**"
+        await send(mens)
+        await client.send_message(Channel_Id, mens)
+
     elif '/info' in mss:
         usuario = Config[username]["username"]
         passw = Config[username]["password"]
@@ -1313,6 +1343,136 @@ async def uploaddraft(file,usid,msg,username):
                 await bot.send_message(usid,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒔𝒖𝒃𝒊𝒓:\n\n{ex}")
             id_de_ms[username]["proc"] = ""
             return
+#Subida a Nexcloud
+
+@bot.on_message(filters.command("nex_delete", prefixes="/")& filters.private)
+async def delete_nex(client: Client, message: Message):
+    username = message.from_user.username
+    send = message.reply
+    try:await get_messages()
+    except:await send_config()
+    if comprobacion_de_user(username) == False:
+        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+        return
+    else:pass
+    url = message.text.split(" ")[1]
+    f = await send("𝑩𝒐𝒓𝒓𝒂𝒏𝒅𝒐 ...")
+    a = await delete_nube(url,username)
+    if a != "error":
+        await f.edit("𝑨𝒓𝒄𝒉𝒊𝒗𝒐 𝑩𝒐𝒓𝒓𝒂𝒅𝒐")
+    else:
+        await f.edit("! 𝑬𝒓𝒓𝒐𝒓")
+##upload
+async def proccess(filex,msg,username):
+    logslinks = []
+    proxy = Configs["gp"] 
+    if proxy == "":
+        connection = aiohttp.TCPConnector()
+    else:
+        connection = aiohttp_socks.ProxyConnector.from_url(f"{proxy}")
+    session = aiohttp.ClientSession(connector=connection)
+
+    async with ClientSession(connector=connection) as s:
+        user = Config[username]["username"]
+        passw = Config[username]["password"]
+        host = Config[username]["host"]
+        zips = Configs[username]["z"]
+        file = filex
+        filesize = Path(file).stat().st_size
+        zipssize = 1024*1024*int(zips)
+        filename = str(file).replace(f'downloads/{username}/','')
+
+        if filesize-1048>zipssize:
+            parts = round(filesize / zipssize)
+            await msg.edit(f"📦 𝑪𝒐𝒎𝒑𝒓𝒊𝒎𝒊𝒆𝒏𝒅𝒐")
+            files = sevenzip(file,volume=zipssize)
+            client = moodle(user, passw, host)
+            await msg.edit("𝑰𝒏𝒊𝒄𝒊𝒂𝒏𝒅𝒐 𝑳𝒐𝒈𝒊𝒏")
+            loged = await client.login(s)
+            if loged:
+                for file in files:
+                    await msg.edit(f"📤𝑺𝒖𝒃𝒊𝒆𝒏𝒅𝒐  `{str(file).replace(f'downloads/{username}/','')}...`")
+                    g = await client.upload_file(file,s)
+                    if g != "error":
+                        try:
+                            ww = str(file).replace(f'downloads/{username}/','')
+                            e = await client.direct_link(ww,g,s)
+                            await bot.send_message(username,f"**{e}**") 
+                            logslinks.append(e)
+                        except Exception as ex:
+                            await bot.send_message(username,f"**{g}**")
+                            logslinks.append(g)
+                            await bot.send_message(username,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒄𝒐𝒏𝒗𝒆𝒓𝒕𝒊𝒓:\n\n{ex}")
+                            return
+                    else:
+                        await msg.edit("𝑬𝒓𝒓𝒐𝒓 𝒆𝒏 𝒆𝒍 𝒍𝒐𝒈𝒖𝒆𝒐")
+                        return
+            if len(logslinks) == len(files):
+                await msg.edit("✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆")
+                with open(filename+".txt","w") as f:
+                    message = ""
+                    for li in logslinks:
+                        message+=li+"\n"
+                    f.write(message)
+                await bot.send_document(username,filename+".txt")
+                os.unlink(filename+".txt")
+                return
+            else:
+                    await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
+                    return
+
+        else:
+            client = moodle(user, passw, host)
+            await msg.edit("𝑰𝒏𝒊𝒄𝒊𝒂𝒏𝒅𝒐 𝑳𝒐𝒈𝒊𝒏")
+            loged = await client.login(s)
+            if loged:
+                await msg.edit(f"📤𝑺𝒖𝒃𝒊𝒆𝒏𝒅𝒐  `{str(file).replace(f'downloads/{username}/','')}...`")
+                g = await client.upload_file(file,s)
+                if g != "error":
+                    try:
+                        ww = str(file).replace(f'downloads/{username}/','')
+                        e = await client.direct_link(ww,g,s)
+                        await bot.send_message(username,f"**{e}**") 
+                        logslinks.append(e)
+                    except Exception as ex:
+                        await bot.send_message(username,f"**{g}**")
+                        logslinks.append(g)
+                        await bot.send_message(username,f"𝑬𝒓𝒓𝒐𝒓 𝒂𝒍 𝒄𝒐𝒏𝒗𝒆𝒓𝒕𝒊𝒓:\n\n{ex}")
+                        return
+                else:
+                    await msg.edit("𝑬𝒓𝒓𝒐𝒓 𝒆𝒏 𝒆𝒍 𝒍𝒐𝒈𝒖𝒆𝒐")
+                    return
+            if len(logslinks) == 1:
+                await msg.edit("✅ 𝑭𝒊𝒏𝒂𝒍𝒊𝒛𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆")
+                with open(filename+".txt","w") as f:
+                    message = ""
+                    lin = ""
+                    for li in logslinks:
+                        message+=li+"\n"
+                        lin+=li+"\n"
+                    f.write(message)
+                await bot.send_document(username,filename+".txt")
+                os.unlink(filename+".txt")
+                return
+            else:
+                await msg.edit("𝑯𝒂 𝒇𝒂𝒍𝒍𝒂𝒅𝒐 𝒍𝒂 𝒔𝒖𝒃𝒊𝒅𝒂")
+                return
+
+@bot.on_message(filters.command("cloud", prefixes="/")& filters.private)
+async def cloud(client: Client, message: Message):
+    username = message.from_user.username
+    send = message.reply
+    try:await get_messages()
+    except:await send_config()
+    if comprobacion_de_user(username) == False:
+        await send("⛔ 𝑵𝒐 𝒕𝒊𝒆𝒏𝒆 𝒂𝒄𝒄𝒆𝒔𝒐")
+        return
+    else:pass
+    Configs[username]["m"] = "nexcloud"
+    Configs[username]["a"] = "nexcloud"
+    Configs[username]["z"] = 99
+    await send_config()
+    await send("clouad configurada✅")
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
