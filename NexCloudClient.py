@@ -51,15 +51,18 @@ class NexCloudClient(object):
             
     def login(self):
         loginurl = self.path + 'index.php/login'
-        resp = self.session.get(loginurl,proxies=self.proxy,verify=False)
+        resp = self.session.get(loginurl,verify=False)
         soup = BeautifulSoup(resp.text,'html.parser')
         requesttoken = soup.find('head')['data-requesttoken']
         print('requesttoken: ',requesttoken)
         timezone = 'America/Mexico_City'
         timezone_offset = '-5'
         payload = {'user':self.user,'password':self.password,'timezone':timezone,'timezone_offset':timezone_offset,'requesttoken':requesttoken};
-        resp = self.session.post(loginurl, data=payload,proxies=self.proxy)
-        print('Login Exito!!')
+        resp = self.session.post(loginurl, data=payload)
+        if "erróneos" in resp.text:
+            print("error en el login")
+        else:
+            print('Login Exito!!')
         soup = BeautifulSoup(resp.text,'html.parser')
         title = soup.find('div',attrs={'id':'settings'})
         if title:
@@ -133,7 +136,7 @@ class NexCloudClient(object):
             requesttoken = soup.find('head')['data-requesttoken']
             print('Mira el token mmwvo: ',requesttoken)
             url = self.path + 'apps/files/ajax/getstoragestats?dir=/'
-            resp1 = self.session.get(url,headers={'requesttoken':requesttoken},proxies=self.proxy)
+            resp1 = self.session.get(url,headers={'requesttoken':requesttoken})
             print('==========resp1===========: ',resp1)
             resp1 = resp1.json()
             print('resp1json: ',resp1)
@@ -155,7 +158,7 @@ class NexCloudClient(object):
             requesttoken = soup.find('head')['data-requesttoken']
             f  = open(file,'rb')
             upload_file = {'file':(file,f,'application/octet-stream')}
-            resp = self.session.put(uploadUrl,data=f,headers={'requesttoken':requesttoken},proxies=self.proxy)
+            resp = self.session.put(uploadUrl,data=f,headers={'requesttoken':requesttoken},)
             f.close()
             retData = {'upload':False,'name':filepath}
             if resp.status_code == 201:
