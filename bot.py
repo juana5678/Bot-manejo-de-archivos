@@ -543,6 +543,7 @@ async def text_filter(client, message):
     elif '/space' in mss:
         try:
             msgs = await send('🔍 Buscando Información')
+            await msgs.edit("Espere")
             user = Config[username]["username"]
             passw = Config[username]["password"]
             host = Config[username]["host"]
@@ -560,6 +561,7 @@ async def text_filter(client, message):
                 msg+= f'>> 𝕋𝕠𝕥𝕒𝕝: 2000 mb'
                 await msgs.edit(msg)
         except Exception as ex:
+            await msgs.edit("error")
             print(str(ex))
             return
 
