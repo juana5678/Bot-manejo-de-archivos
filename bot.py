@@ -47,7 +47,7 @@ import NexCloudClient
 #BoT Configuration Variables
 api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
-bot_token = os.environ.get('bot_token')
+bot_token = os.environ.get('6078841667:AAE-QoqI-9En2LBBGu4y3bo2V464KNf2guE')
 Channel_Id = -1001944454354
 msg_id = 3
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
