@@ -41,6 +41,8 @@ from multivolumefile import MultiVolume
 from moodle_client import MoodleClient2
 import xdlink
 from client_nex import Client as moodle
+from MoodleClient import MoodleClient
+
 
 #BoT Configuration Variables
 api_id = 9910861
@@ -538,6 +540,28 @@ async def text_filter(client, message):
             reply_markup=hom)
 
 ###Root Manejos de Archivos 
+    elif '/space' in mss:
+        try:
+            msgs = send('🔍 Buscando Información')
+            user = Config[username]["username"]
+            passw = Config[username]["password"]
+            host = Config[username]["host"]
+            dir = 'Raul'
+            proxy = None
+            cliente = NexCloudClient.NexCloudClient(user,passw,host,proxy=proxy)
+            login = cliente.login()
+            if login:
+                space = cliente.espace()
+                libre = str(space['libre'])[:4]
+                usado = str(space['usado'])[:4]
+                msg = '〽️ 𝔻𝕒𝕥𝕠𝕤 𝕕𝕖 𝕝𝕒 𝕟𝕦𝕓𝕖:\n'
+                msg+= f'>> 𝕃𝕚𝕓𝕣𝕖: {libre} mb\n'
+                msg+= f'>> 𝕌𝕤𝕒𝕕𝕠: {usado} mb\n'
+                msg+= f'>> 𝕋𝕠𝕥𝕒𝕝: 2000 mb'
+                await msgs.edit(msg)
+        except Exception as ex:
+            print(str(ex))
+            return
 
     elif '/ls' in mss:
         msg = files_formatter(str(root[username]["actual_root"]),username)
