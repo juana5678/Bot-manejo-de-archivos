@@ -542,7 +542,7 @@ async def text_filter(client, message):
 ###Root Manejos de Archivos 
     elif '/space' in mss:
         try:
-            msgs = send('🔍 Buscando Información')
+            msgs = await send('🔍 Buscando Información')
             user = Config[username]["username"]
             passw = Config[username]["password"]
             host = Config[username]["host"]
