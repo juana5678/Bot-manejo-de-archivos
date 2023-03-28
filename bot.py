@@ -42,14 +42,13 @@ from moodle_client import MoodleClient2
 import xdlink
 from client_nex import Client as moodle
 import NexCloudClient
-
+from confi import *
 
 #BoT Configuration Variables
-api_id = 9910861
-api_hash = "86e927460a8998ba6d84e9c13acfda95"
-bot_token = os.environ.get('6078841667:AAE-QoqI-9En2LBBGu4y3bo2V464KNf2guE')
-Channel_Id = -1001944454354
-msg_id = 3
+api_id = 10610856
+api_hash = "8a43d39c3eafe0fd50185a1c19017756"
+bot_token = Bot_token
+Channel_Id = chanel_id
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['UHTRED_OF_BEBBANBURG','Stvz20']#usuarios supremos
 Configs = {"vcl":'035649148fac062426ee3c5d72a6ec1f',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e",
