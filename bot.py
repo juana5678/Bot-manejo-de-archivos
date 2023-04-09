@@ -45,10 +45,10 @@ import NexCloudClient
 
 
 #BoT Configuration Variables
-api_id = 9652234
-api_hash = "e532d52554115eed48f82f7dcb10b171"
+api_id = 10181262
+api_hash = "f52b5a057b73b9974eaa7403e04907f0"
 bot_token = os.environ.get('6078841667:AAE-QoqI-9En2LBBGu4y3bo2V464KNf2guE')
-Channel_Id = -1001658562769
+Channel_Id = -668690046
 msg_id = 3
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['Freebootcar','poner otro admin']#usuarios supremos
