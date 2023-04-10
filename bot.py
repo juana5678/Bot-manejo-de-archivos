@@ -51,10 +51,10 @@ bot_token = os.environ.get('5947045568:AAE0mfkt85dPRAYIKGBEFdHd4qG4U3Y4bAA')
 Channel_Id = -668690046
 msg_id = 3
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
-boss = ['Freebootcar','poner otro admin']#usuarios supremos
+boss = ['JAGB2021','poner otro admin']#usuarios supremos
 Configs = {"vcl":'035649148fac062426ee3c5d72a6ec1f',"gtm":"cc9c6b9c0523b17c7f00202993ceac1c","uvs":"4ce7bf57fb75c046a9fbdd30900ea7c9","ltu":"a816210ff41853b689c154bad264da8e",
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":'socks5://181.225.255.48:9050', "s":"On", 
-			'Freebootcar': {'z': 99,"m":"u","a":"c","t":"y"}, 
+			'JAGB2021': {'z': 99,"m":"u","a":"c","t":"y"}, 
 			'Poner otro user': {'z': 99,"m":"u","a":"upltu","t":"y"}
 			}
 start = time()
